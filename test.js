@@ -430,6 +430,25 @@ function getDependencies(depends) {
     return ret;
 }
 
+function initializeClickPopup() {
+     paper.on('cell:pointerdblclick', function (evt, x, y) {
+         var shape = graph.getCell(evt.model.id);
+
+         dm.resourceNodes.forEach(function(node) {
+             if (node.shape === shape) {
+                 //console.log(JSON.stringify(node.source));
+
+                 $('#jsonModal').modal({});
+                 $('#json').val(JSON.stringify(node.source));
+                 
+             }
+         });
+     });   
+}
+
+initializeClickPopup();
+
+
 /*
 var el1 = new joint.shapes.custom.ElementLink({
     position: { x: 80, y: 80 }, size: { width: 170, height: 100 },

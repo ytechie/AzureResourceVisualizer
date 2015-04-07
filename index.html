@@ -1,11 +1,32 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="node_modules/jointjs/dist/joint.css" />
+	    <link rel="stylesheet" href="node_modules/jointjs/dist/joint.css"/>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<div id="paper" class="paper"/>
 
 		<script src="node_modules/jointjs/dist/joint.js"></script>
-		<script src="test.js"></script>
+	    <script src="test.js"></script>
+	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+        <div class="modal fade" id="jsonModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="json"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 	</body>
 </html>

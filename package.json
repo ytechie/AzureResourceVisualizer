@@ -1,0 +1,27 @@
+{
+  "name": "AzureResourceVisualizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ytechie/AzureResourceVisualizer"
+  },
+  "keywords": [
+    "azure",
+    "arm",
+    "resource"
+  ],
+  "author": "Jason Young",
+  "license": "Apache-2",
+  "bugs": {
+    "url": "https://github.com/ytechie/AzureResourceVisualizer/issues"
+  },
+  "homepage": "https://github.com/ytechie/AzureResourceVisualizer",
+  "dependencies": {
+    "jointjs": "^0.8.0"
+  }
+}

@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "VisualAzure", "http://localhost:3946", "{33811135-FFB9-43F7-83D1-586CF54F5DE0}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AzureResourceVisualizer", "http://localhost:23420", "{F96BA0A2-885C-4826-9509-6B6B38FC0962}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_3946"
-		Debug.AspNetCompiler.PhysicalPath = "..\VisualAzure\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3946\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_23420"
+		Debug.AspNetCompiler.PhysicalPath = "..\AzureResourceVisualizer\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_23420\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_3946"
-		Release.AspNetCompiler.PhysicalPath = "..\VisualAzure\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3946\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_23420"
+		Release.AspNetCompiler.PhysicalPath = "..\AzureResourceVisualizer\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_23420\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\VisualAzure\"
+		SlnRelativePath = "..\AzureResourceVisualizer\"
 	EndProjectSection
 EndProject
 Global
@@ -29,8 +29,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{33811135-FFB9-43F7-83D1-586CF54F5DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33811135-FFB9-43F7-83D1-586CF54F5DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96BA0A2-885C-4826-9509-6B6B38FC0962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96BA0A2-885C-4826-9509-6B6B38FC0962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

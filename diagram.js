@@ -19,6 +19,9 @@ joint.shapes.custom.ElementLabelLink = joint.shapes.basic.Rect.extend({
 
 var template = new Template(arm);
 
+var cells = [];
+var links = [];
+
 function createNodes() {
 //Create the nodes
     template.getAllResources().forEach(function(resource) {
@@ -37,7 +40,7 @@ function createNodes() {
 
         template.associateNodeWithResource(shape, resource);
 
-        graph.addCell(shape);
+        cells.push(shape);
     });
 }
 
@@ -59,7 +62,7 @@ function createLinks() {
                 }
             });
 
-            graph.addCell(l);
+            links.push(l);
         });
     });
 }
@@ -90,30 +93,29 @@ function layoutNodes() {
     g.setDefaultEdgeLabel(function () { return {}; });
 
 
-    var elements = graph.getElements();
-    elements.forEach(function(element) {
-        g.setNode(element.id, { width: element.attributes.size.width, height: element.attributes.size.height });
+    cells.forEach(function(cell) {
+        g.setNode(cell.id, { width: cell.attributes.size.width, height: cell.attributes.size.height });
     });
 
-    var links = graph.getLinks();
     links.forEach(function(link) {
         g.setEdge(link.attributes.source.id, link.attributes.target.id);
     });
 
     dagre.layout(g);
 
-    g.nodes().forEach(function(node) {
-        var cell = graph.getCell(node);
+    g.nodes().forEach(function (node) {
+        var cell = _.findWhere(cells, { id: node });
+
+        //var cell = graph.getCell(node);
         cell.attributes.position.x = g.node(node).x;
         cell.attributes.position.y = g.node(node).y;
     });
-    
+
+    graph.addCells(cells);
+    graph.addCells(links);
 }
 
 createNodes();
-
-initializeClickPopup();
 createLinks();
 layoutNodes();
-graph.resetCells(graph.getElements());
-createLinks(); //re-add links after resetting
+initializeClickPopup();

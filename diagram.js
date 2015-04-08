@@ -79,6 +79,8 @@ function initializeClickPopup() {
 }
 
 function layoutNodes() {
+    //https://github.com/cpettitt/dagre/wiki#configuring-the-layout
+
     var g = new dagre.graphlib.Graph();
 
     // Set an object for the graph label

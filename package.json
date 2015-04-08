@@ -22,6 +22,5 @@
   },
   "homepage": "https://github.com/ytechie/AzureResourceVisualizer",
   "dependencies": {
-    "jointjs": "^0.8.0"
   }
 }

@@ -78,6 +78,40 @@ function initializeClickPopup() {
      });   
 }
 
+function layoutNodes() {
+    var g = new dagre.graphlib.Graph();
+
+    // Set an object for the graph label
+    g.setGraph({});
+
+    // Default to assigning a new object as a label for each new edge.
+    g.setDefaultEdgeLabel(function () { return {}; });
+
+
+    var elements = graph.getElements();
+    elements.forEach(function(element) {
+        g.setNode(element.id, { width: element.attributes.size.width, height: element.attributes.size.height });
+    });
+
+    var links = graph.getLinks();
+    links.forEach(function(link) {
+        g.setEdge(link.attributes.source.id, link.attributes.target.id);
+    });
+
+    dagre.layout(g);
+
+    g.nodes().forEach(function(node) {
+        var cell = graph.getCell(node);
+        cell.attributes.position.x = g.node(node).x;
+        cell.attributes.position.y = g.node(node).y;
+    });
+    
+}
+
 createNodes();
-createLinks();
+
 initializeClickPopup();
+createLinks();
+layoutNodes();
+graph.resetCells(graph.getElements());
+createLinks(); //re-add links after resetting

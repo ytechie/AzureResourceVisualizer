@@ -1,0 +1,39 @@
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+	//width: 300px
+  }
+
+.toolbox {
+	.itemContainer {
+		float: left;
+		background-color:white;
+		white-space: normal;
+		border-width: 1px;
+		text-align: center;
+		
+		.icon {
+			height: 75px;
+			width: 75px;
+			margin: auto;
+			display: block;
+		}
+		
+		.label {
+			padding-left: 10px;
+			padding-right: 10px;
+			color: black;
+		}
+	}	
+	
+	border-right: 1px solid black;
+}

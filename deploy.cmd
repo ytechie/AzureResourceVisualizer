@@ -65,36 +65,13 @@ IF NOT DEFINED MSBUILD_PATH (
 :: Deployment
 :: ----------
 
-echo Handling .NET Web Application deployment. Starting %TIME%
-
-:: 1. Restore NuGet packages
-IF /I "MySpa.sln" NEQ "" (  
-  echo Restoring Nuget Packages: Starting %TIME%
-  call :ExecuteCmd "%NUGET_EXE%" restore "%DEPLOYMENT_SOURCE%\MySpa.sln"
-  IF !ERRORLEVEL! NEQ 0 goto error
-  echo Restoring Nuget Packages: Finished %TIME%
-)
-
-:: 2. Build to the temporary path
-echo Building VS Solution: Starting %TIME%  
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\MySpa.Web\MySpa.Web.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="%DEPLOYMENT_SOURCE%\build";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
-) ELSE (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\MySpa.Web\MySpa.Web.csproj" /nologo /verbosity:m /t:Build /p:AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release /p:SolutionDir="%DEPLOYMENT_SOURCE%\.\\" %SCM_BUILD_ARGS%
-)
-echo Building VS Solution: Finished %TIME%
-
+:: Restore NPM packages
+echo Installing npm packages: Starting %TIME%
+call npm install --production
+echo Installing npm packages: Finished %TIME%
 IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 3. Restore NPM packages
-IF /I "packages.json" NEQ "" (  
-  echo Installing npm packages: Starting %TIME%
-  call npm install --production
-  echo Installing npm packages: Finished %TIME%
-  IF !ERRORLEVEL! NEQ 0 goto error
-)
-
-:: 4. Restore Gulp packages and run Gulp tasks
+:: Restore Gulp packages and run Gulp tasks
 IF /I "gulpfile.js" NEQ "" (  
   echo Installing Gulp dependencies: Starting %TIME%
   call npm install gulp
@@ -106,10 +83,10 @@ IF /I "gulpfile.js" NEQ "" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-:: 3. KuduSync
+:: KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
   echo Running Kudu Sync: Starting %TIME%
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\build" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\dist" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   echo Running Kudu Sync: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
 )

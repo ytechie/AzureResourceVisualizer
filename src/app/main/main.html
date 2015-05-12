@@ -14,15 +14,19 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar col-md-2 toolbox">
+        <div class="sidebar col-md-4 toolbox">
            <h2>Toolbox</h2>
            <div ng-repeat="toolboxItem in toolboxItems" class="itemContainer">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.icon}}" />
                <p class="label">{{toolboxItem.name}}</p>
            </div>
+           <br />
            <h2>Properties</h2>
+           <textarea id="nodeProperties">
+             
+           </textarea>
         </div>
-        <div class="col-md-offset-2 col-md-10 main">
+        <div class="col-md-offset-4 col-md-8 main">
             <div id="paper" class="paper" style="height: 1000px; width: 800px;"/>
         </div>
     </div>

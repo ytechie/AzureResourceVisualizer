@@ -11,11 +11,17 @@
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
 	//width: 300px
+	
+	#nodeProperties {
+		height: 400px;
+		width: 100%;
+	}
   }
 
 .toolbox {
 	.itemContainer {
-		float: left;
+		//float: left;
+		display: inline-block;
 		background-color:white;
 		white-space: normal;
 		border-width: 1px;

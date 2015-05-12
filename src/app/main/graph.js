@@ -71,12 +71,11 @@ function createLinks() {
 }
 
 function displayResource(resource) {
-    $('#jsonModal').modal({});
-    $('#json').val(JSON.stringify(resource));
+    $('#nodeProperties').val(JSON.stringify(resource, null, 2));
 }
 
 function initializeClickPopup() {
-     paper.on('cell:pointerdblclick', function (evt, x, y) {
+     paper.on('cell:pointerdown', function (evt, x, y) {
          var node = graph.getCell(evt.model.id);
          var resource = template.getResourceForNode(node);
 

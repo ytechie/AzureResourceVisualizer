@@ -67,6 +67,7 @@ IF NOT DEFINED MSBUILD_PATH (
 
 :: Restore NPM packages
 echo Installing npm packages: Starting %TIME%
+call npm install gulp-util
 call npm install --production
 echo Installing npm packages: Finished %TIME%
 IF !ERRORLEVEL! NEQ 0 goto error

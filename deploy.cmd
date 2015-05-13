@@ -67,9 +67,15 @@ IF NOT DEFINED MSBUILD_PATH (
 
 :: Restore NPM packages
 echo Installing npm packages: Starting %TIME%
-call npm install gulp-util
+call npm install npm
 call npm install --production
 echo Installing npm packages: Finished %TIME%
+IF !ERRORLEVEL! NEQ 0 goto error
+
+:: Restore Bower packages
+echo Installing bower packages: Starting %TIME%
+call :ExecuteCmd "%DEPLOYMENT_SOURCE%\node_modules\.bin\bower install"
+echo Installing bower packages: Finished %TIME%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Restore Gulp packages and run Gulp tasks

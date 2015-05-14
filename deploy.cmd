@@ -65,8 +65,12 @@ IF NOT DEFINED MSBUILD_PATH (
 :: Deployment
 :: ----------
 
+:: Cleanup node_modules if it exists 
+call rmdir node_modules /s/q
+
 :: Restore NPM packages
 echo Installing npm packages: Starting %TIME%
+:: Update NPM
 call npm install npm
 call npm install --production
 echo Installing npm packages: Finished %TIME%

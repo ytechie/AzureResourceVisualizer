@@ -74,18 +74,16 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Restore Bower packages
 echo Installing bower packages: Starting %TIME%
-call :ExecuteCmd "%DEPLOYMENT_SOURCE%\bower install"
+call :ExecuteCmd npm install bower -g
+call :ExecuteCmd bower install
 echo Installing bower packages: Finished %TIME%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: Restore Gulp packages and run Gulp tasks
 IF /I "gulpfile.js" NEQ "" (  
-  echo Installing Gulp dependencies: Starting %TIME%
-  call npm install gulp
-  echo Installing Gulp dependencies: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
   echo Running Gulp deployment: Starting %TIME%
-  call :ExecuteCmd "%DEPLOYMENT_SOURCE%\gulp"
+  call :ExecuteCmd node_modules\.bin\gulp
   echo Running Gulp deployment: Finished %TIME%
   IF !ERRORLEVEL! NEQ 0 goto error
 )

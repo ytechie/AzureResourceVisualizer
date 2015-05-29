@@ -23,11 +23,7 @@ The sample JSON is actually pasted into the code, so you'll need to scroll down 
 
 ## Installation
 
-1. Run `npm install` to get the dependencies
-
-Or, just deploy to Azure:
-
-<a href="https://azuredeploy.net/" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+Currently broken.
 
 ## License
 

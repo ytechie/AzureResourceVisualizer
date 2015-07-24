@@ -23,12 +23,25 @@ The sample JSON is actually pasted into the code, so you'll need to scroll down 
 
 ## Installation
 
-Currently broken.
-
 	npm install
-	npm install -g gulp bower tsd
+	npm install -g gulp bower tsd typescript
 	bower install
 	tsd install
+
+## Running
+
+Start the TypeScript watcher to transpile *.ts to *.js:
+
+	tsc -w
+
+Build the website to serve it locally:
+
+	gulp serve
+
+### Troubleshooting
+
+**Problem:** Old Typescript version installed. (use `tsc-v` to check)
+**Solution:** Delete TypeScript from the `C:\Program Files (x86)\Microsoft SDKs\TypeScript`
 
 ## License
 

@@ -25,6 +25,11 @@ The sample JSON is actually pasted into the code, so you'll need to scroll down 
 
 Currently broken.
 
+	npm install
+	npm install -g gulp bower tsd
+	bower install
+	tsd install
+
 ## License
 
 Microsoft Developer Experience & Evangelism

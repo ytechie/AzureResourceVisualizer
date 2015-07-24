@@ -196,3 +196,16 @@ FakesAssemblies/
 *.opt
 
 /dist/*
+
+*.js.map
+
+/typings/*
+
+# Files gen'd from .ts files
+src/app/main/ArmTemplate.js
+src/app/main/Resource.js
+src/app/main/ToolboxResource.js
+src/app/main/ResourceShape.js
+src/app/main/main.controller.js
+src/app/main/ResourceShapeLink.js
+src/app/main/graph.js

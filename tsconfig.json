@@ -1,0 +1,18 @@
+{
+"compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false
+},
+"files": [
+    "src/app/main/ArmTemplate.ts",
+    "src/app/main/Resource.ts",
+    "src/app/main/ToolboxResource.ts",
+    "src/app/main/ResourceShape.ts",
+    "src/app/main/graph.ts",
+    "src/app/main/main.controller.ts",
+    "src/app/main/ResourceShapeLink.ts"
+]}

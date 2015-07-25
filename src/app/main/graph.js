@@ -6,11 +6,14 @@
 var Graph = (function () {
     function Graph(template, toolboxItems) {
         this.resourceShapes = new Array();
+        this.resourceShapeLinks = new Array();
         this.template = template;
         this.toolboxItems = toolboxItems;
         this.initJointJs();
         this.createNodes();
         this.createLinks();
+        this.autoSetShapePositions();
+        this.displayNodesAndLinks();
         this.initializeClickPopup();
     }
     Graph.prototype.initJointJs = function () {
@@ -22,11 +25,22 @@ var Graph = (function () {
         this.template.resources.forEach(function (resource) {
             var toolboxItem = _this.getToolboxItemForResource(resource);
             var shape = new ResourceShape(resource, toolboxItem);
-            _this.addShape(shape);
+            shape.position(80, 80);
+            shape.resize(170, 100);
             _this.resourceShapes.push(shape);
         });
     };
+    Graph.prototype.displayNodesAndLinks = function () {
+        var _this = this;
+        this.resourceShapes.forEach(function (shape) {
+            _this.addShape(shape);
+        });
+        this.resourceShapeLinks.forEach(function (shapeLink) {
+            _this.addShapeLink(shapeLink);
+        });
+    };
     Graph.prototype.createLinks = function () {
+        var _this = this;
         var self = this;
         this.template.resources.forEach(function (resource) {
             var dependencies = self.template.getDependencies(resource);
@@ -41,15 +55,15 @@ var Graph = (function () {
                         '.marker-target': { fill: 'yellow', d: 'M 10 0 L 0 5 L 10 10 z' }
                     }
                 });
-                self.graph.addCell(l);
+                _this.resourceShapeLinks.push(l);
             });
         });
     };
     Graph.prototype.addShape = function (shape) {
-        shape.position(80, 80);
-        shape.resize(170, 100);
-        shape.attributes.rect = { fill: '#E67E22', stroke: '#D35400', 'stroke-width': 5 };
         this.graph.addCell(shape);
+    };
+    Graph.prototype.addShapeLink = function (link) {
+        this.graph.addCell(link);
     };
     Graph.prototype.getToolboxItemForResource = function (resource) {
         var foundItem = null;
@@ -79,6 +93,23 @@ var Graph = (function () {
     Graph.prototype.displayResource = function (resource) {
         $('#nodeProperties').val(JSON.stringify(resource, null, 2));
     };
+    Graph.prototype.autoSetShapePositions = function () {
+        var self = this;
+        var g = new dagre.graphlib.Graph();
+        g.setGraph({});
+        g.setDefaultEdgeLabel(function () { return {}; });
+        this.resourceShapes.forEach(function (shape) {
+            g.setNode(shape.id, { width: shape.attributes.size.width, height: shape.attributes.size.height });
+        });
+        this.resourceShapeLinks.forEach(function (shapeLink) {
+            g.setEdge(shapeLink.attributes.source.id, shapeLink.attributes.target.id);
+        });
+        dagre.layout(g);
+        g.nodes().forEach(function (node) {
+            var shape = _.findWhere(self.resourceShapes, { id: node });
+            shape.attributes.position.x = g.node(node).x;
+            shape.attributes.position.y = g.node(node).y;
+        });
+    };
     return Graph;
 })();
-//# sourceMappingURL=graph.js.map

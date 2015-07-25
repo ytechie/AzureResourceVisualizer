@@ -16,6 +16,10 @@ class ResourceShape extends joint.shapes.basic.Rect {
        } else {
            this.titleText = this.sourceResource.type;
        } 
+       
+       this.attributes.attrs.rect.fill = '#E67E22';
+       this.attributes.attrs.rect.stroke = '#D35400';
+       this.attributes.attrs.rect['stroke-width'] = 5;
     }
     
     set titleText(titleText:string) {

@@ -11,4 +11,3 @@ angular.module('vis')
     var templateData = arm;
     $scope.graph = new Graph(new ArmTemplate(templateData), toolboxItems);
 });
-//# sourceMappingURL=main.controller.js.map

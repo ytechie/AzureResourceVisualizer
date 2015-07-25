@@ -11,6 +11,7 @@ class Graph {
     private template: ArmTemplate;
     private toolboxItems: ToolboxResource[];
     private resourceShapes: ResourceShape[] = new Array<ResourceShape>();
+    private resourceShapeLinks: ResourceShapeLink[] = new Array<ResourceShapeLink>();
     
     constructor(template:ArmTemplate, toolboxItems:ToolboxResource[]) {
         this.template = template;
@@ -19,6 +20,8 @@ class Graph {
         this.initJointJs();
         this.createNodes();
         this.createLinks();
+        this.autoSetShapePositions();
+        this.displayNodesAndLinks();
         this.initializeClickPopup();
     }
     
@@ -32,8 +35,20 @@ class Graph {
             var toolboxItem: ToolboxResource = this.getToolboxItemForResource(resource);
            
             var shape = new ResourceShape(resource, toolboxItem);
-            this.addShape(shape); //delete this eventually
+            shape.position(80, 80);
+            shape.resize(170, 100);
+            
             this.resourceShapes.push(shape);
+        });
+    }
+    
+    private displayNodesAndLinks() {
+        this.resourceShapes.forEach(shape => {
+            this.addShape(shape); 
+        });
+        
+        this.resourceShapeLinks.forEach(shapeLink => {
+           this.addShapeLink(shapeLink); 
         });
     }
     
@@ -56,20 +71,17 @@ class Graph {
                     }
                 });
     
-                //links.push(l);
-                self.graph.addCell(l);
+                this.resourceShapeLinks.push(l);
             });
         });
     }
     
     private addShape(shape:ResourceShape) {
-        
-        //var shape = new joint.shapes.basic.Rect();
-        shape.position(80, 80);
-        shape.resize(170, 100);
-        shape.attributes.rect = { fill: '#E67E22', stroke: '#D35400', 'stroke-width': 5 };
-        
         this.graph.addCell(shape);
+    }
+    
+    private addShapeLink(link:ResourceShapeLink) {
+        this.graph.addCell(link);
     }
     
     private getToolboxItemForResource(resource:Resource): ToolboxResource {
@@ -108,4 +120,33 @@ class Graph {
         $('#nodeProperties').val(JSON.stringify(resource, null, 2));
     }
     
+    private autoSetShapePositions() {
+        var self = this;
+    //https://github.com/cpettitt/dagre/wiki#configuring-the-layout
+   
+        var g = new dagre.graphlib.Graph();
+
+        // Set an object for the graph label
+        g.setGraph({});
+
+        // Default to assigning a new object as a label for each new edge.
+        g.setDefaultEdgeLabel(function () { return {}; });
+
+        this.resourceShapes.forEach(shape => {
+           g.setNode(shape.id, { width: shape.attributes.size.width, height: shape.attributes.size.height });
+        });
+
+        this.resourceShapeLinks.forEach(shapeLink => {
+            g.setEdge(shapeLink.attributes.source.id, shapeLink.attributes.target.id);
+        });
+
+        dagre.layout(g);
+
+        g.nodes().forEach(function (node) {
+            var shape = _.findWhere(self.resourceShapes, { id: node });
+
+            shape.attributes.position.x = g.node(node).x;
+            shape.attributes.position.y = g.node(node).y;
+        });
+    }
 }

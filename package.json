@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "bower": "^1.4.1",
-    "gulp": "~3.8.10",
+    "gulp": "~3.x.x",
     "gulp-typescript": "^2.8.0"
   },
   "scripts": {

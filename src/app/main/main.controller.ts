@@ -25,16 +25,24 @@ angular.module('vis')
     $scope.downloadArmTemplate = function() {
       var data = JSON.stringify(templateData, null, 2);
       
-      //Crazy code to download the resulting JSON file
-      //http://bgrins.github.io/devtools-snippets/#console-save
-      var blob = new Blob([data], {type: 'text/json'}),
-            e    = document.createEvent('MouseEvents'),
-            a    = document.createElement('a')
-
-        a.download = 'armTemplate.json';
-        a.href = window.URL.createObjectURL(blob);
-        a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
-        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        a.dispatchEvent(e);
+      downloadJsonInBrowser(data, 'armTemplate.json');
     }
   });
+  
+  function downloadJsonInBrowser(json:string, fileName:string) {
+    var data = JSON.stringify(json, null, 2);
+    
+    //Crazy code to download the resulting JSON file
+    //http://bgrins.github.io/devtools-snippets/#console-save
+    var blob = new Blob([data], {type: 'text/json'}),
+          e    = document.createEvent('MouseEvents'),
+          a    = document.createElement('a')
+    
+      //A typescript guru could probably figure out how to get rid of these errors
+    
+      a.download = 'armTemplate.json';
+      a.href = window.URL.createObjectURL(blob);
+      a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+      e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      a.dispatchEvent(e);
+  }

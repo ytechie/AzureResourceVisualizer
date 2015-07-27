@@ -30,10 +30,6 @@ The sample JSON is actually pasted into the code, so you'll need to scroll down 
 
 ## Running
 
-Start the TypeScript watcher to transpile *.ts to *.js:
-
-	tsc -w
-
 Build the website to serve it locally:
 
 	gulp serve

@@ -1,5 +1,7 @@
 /// <reference path="ToolboxResource.ts" />
 /// <reference path="graph.ts" />
+/// <reference path="sampleARM.ts" />
+/// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 'use strict';
 angular.module('vis')

@@ -3,7 +3,6 @@
 /// <reference path="sampleARM.ts" />
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
-'use strict';
 angular.module('vis')
   .controller('MainCtrl', function ($scope) {
       
@@ -20,14 +19,6 @@ angular.module('vis')
     
     $scope.toolboxItems = toolboxItems;
     
-    //this is the problem. Can't pass in "arm" because it's the wrong type
     var templateData = <ArmTemplateInterface>arm;
     $scope.graph = new Graph(new ArmTemplate(templateData), toolboxItems);
-    
-    
-    //init();
-    //createNodes(toolboxItems);
-    //createLinks();
-    //layoutNodes();
-    //initializeClickPopup(); 
   });

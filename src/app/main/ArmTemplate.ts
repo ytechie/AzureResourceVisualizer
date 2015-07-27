@@ -17,12 +17,6 @@ class ArmTemplate {
         get resources(): Resource[] {
                 return this.templateData.resources;
         }
-    
-        /*
-        getResourceByName(resourceName:string) {
-                
-        }
-        */
         
         getDependencies(resource:Resource) {
                 var dependencyNames = this.getDependencyNames(resource.dependsOn);

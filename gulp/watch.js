@@ -22,6 +22,10 @@ module.exports = function(options) {
         gulp.start('inject');
       }
     });
+    
+    gulp.watch(options.src + '/app/**/*.ts', function(event) {
+      gulp.start('typescript');
+    });
 
     gulp.watch(options.src + '/app/**/*.js', function(event) {
       if(isOnlyChange(event)) {

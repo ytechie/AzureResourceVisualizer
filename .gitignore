@@ -209,3 +209,4 @@ src/app/main/ResourceShape.js
 src/app/main/main.controller.js
 src/app/main/ResourceShapeLink.js
 src/app/main/graph.js
+src/app/main/sampleARM.js

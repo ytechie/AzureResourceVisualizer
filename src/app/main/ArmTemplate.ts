@@ -1,7 +1,9 @@
 /// <reference path="Resource.ts" />
+/// <reference path="Parameter.ts" />
 
 interface ArmTemplateInterface {
         contentVersion: string;
+        //Note: The parameter elements are keyed by their name
 	parameters: Parameter[];
 	resources: Resource[];
         variables: any;

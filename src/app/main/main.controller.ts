@@ -33,6 +33,7 @@ angular.module('vis')
       var modalInstance = $modal.open({
       templateUrl: '/app/templateParameterEditor/TemplateProperties.html',
       controller: 'TemplatePropertiesCtrl',
+      size: 'lg',
       
       //These items get passed to the chiid controller
       resolve: {

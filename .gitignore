@@ -214,3 +214,9 @@ src/app/main/sampleARM.js
 src/app/templateParameterEditor/TemplateProperties.js
 
 src/app/main/Parameter.js
+
+src/app/templateParameterEditor/ParameterModelItem.js
+
+src/app/templateParameterEditor/templateParameterEditor.controller.js
+
+src/app/templateParameterEditor/TemplateParameterManager.js

@@ -4,7 +4,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 angular.module('vis')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $modal) {
       
     var toolboxItems:Array<ToolboxResource> = [
       new ToolboxResource(
@@ -19,13 +19,28 @@ angular.module('vis')
     
     $scope.toolboxItems = toolboxItems;
     
-    var templateData = <ArmTemplateInterface>arm;
-    $scope.graph = new Graph(new ArmTemplate(templateData), toolboxItems);
+    $scope.templateData = <ArmTemplateInterface>arm;
+    $scope.graph = new Graph(new ArmTemplate($scope.templateData), toolboxItems);
     
     $scope.downloadArmTemplate = function() {
-      var data = JSON.stringify(templateData, null, 2);
+      var data = JSON.stringify($scope.templateData, null, 2);
       
       downloadJsonInBrowser(data, 'armTemplate.json');
+    }
+    
+    $scope.openTemplateProperties = function() {
+      //Documentation: http://angular-ui.github.io/bootstrap/#/modal
+      var modalInstance = $modal.open({
+      templateUrl: '/app/templateParameterEditor/TemplateProperties.html',
+      controller: 'TemplatePropertiesCtrl',
+      
+      //These items get passed to the chiid controller
+      resolve: {
+        templateData: function () {
+          return $scope.templateData;
+        }
+      }
+    });
     }
   });
   

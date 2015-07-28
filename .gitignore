@@ -210,3 +210,7 @@ src/app/main/main.controller.js
 src/app/main/ResourceShapeLink.js
 src/app/main/graph.js
 src/app/main/sampleARM.js
+
+src/app/templateParameterEditor/TemplateProperties.js
+
+src/app/main/Parameter.js

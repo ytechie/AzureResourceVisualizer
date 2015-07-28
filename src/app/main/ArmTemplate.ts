@@ -2,8 +2,9 @@
 
 interface ArmTemplateInterface {
         contentVersion: string;
-	parameters: any[];
+	parameters: Parameter[];
 	resources: Resource[];
+        variables: any;
 }
 
 class ArmTemplate {

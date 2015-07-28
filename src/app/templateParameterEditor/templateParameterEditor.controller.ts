@@ -34,6 +34,16 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
     $modalInstance.dismiss('cancel');
   };
   
+  $scope.addParameter = function() {
+    var newModelItem = new ParameterModelItem();
+    parameterModel.push(newModelItem);
+  }
+  
+  $scope.deleteParameter = function(parameter) {
+    var index = parameterModel.indexOf(parameter);
+    parameterModel.splice(index, 1);
+  }
+  
   function synchronizeModelToTemplate(modelParameters:ParameterModelItem[],
     templateParameterManager:TemplateParameterManager) {
       

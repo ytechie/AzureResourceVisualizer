@@ -12,14 +12,6 @@ class Expression {
 }
 
 class ExpressionParser {
-	private parameters:Parameter[];
-	private variables:any;
-	
-	constructor(parameters:Parameter[], variables:any) {
-		this.parameters = parameters;
-		this.variables = variables;
-	}
-	
 	parse(expressionText:string):Expression {
 		var buffer = '';
 		var expression:Expression = new Expression();

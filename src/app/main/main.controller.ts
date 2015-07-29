@@ -45,12 +45,10 @@ angular.module('vis')
     }
   });
   
-  function downloadJsonInBrowser(json:string, fileName:string) {
-    var data = JSON.stringify(json, null, 2);
-    
+  function downloadJsonInBrowser(json:string, fileName:string) {  
     //Crazy code to download the resulting JSON file
     //http://bgrins.github.io/devtools-snippets/#console-save
-    var blob = new Blob([data], {type: 'text/json'}),
+    var blob = new Blob([json], {type: 'text/json'}),
           e    = document.createEvent('MouseEvents'),
           a    = document.createElement('a')
     

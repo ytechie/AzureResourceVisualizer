@@ -220,3 +220,7 @@ src/app/templateParameterEditor/ParameterModelItem.js
 src/app/templateParameterEditor/templateParameterEditor.controller.js
 
 src/app/templateParameterEditor/TemplateParameterManager.js
+
+src/app/main/ExpressionParser.js
+
+src/app/main/ExpressionParser.spec.js

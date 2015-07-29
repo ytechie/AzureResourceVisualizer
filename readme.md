@@ -24,7 +24,7 @@ The sample JSON is actually pasted into the code, so you'll need to scroll down 
 ## Installation
 
 	npm install
-	npm install -g gulp bower tsd typescript
+	npm install -g gulp bower tsd typescript mocha chai
 	bower install
 	tsd install
 

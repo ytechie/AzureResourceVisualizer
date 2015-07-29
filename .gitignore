@@ -224,3 +224,4 @@ src/app/templateParameterEditor/TemplateParameterManager.js
 src/app/main/ExpressionParser.js
 
 src/app/main/ExpressionParser.spec.js
+src/app/main/ExpressionEvaluator.js

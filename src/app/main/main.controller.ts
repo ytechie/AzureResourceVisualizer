@@ -28,6 +28,21 @@ angular.module('vis')
       downloadJsonInBrowser(data, 'armTemplate.json');
     }
     
+    $scope.loadArmQuickstartTemplate = function() {
+      var modalInstance = $modal.open({
+      templateUrl: '/app/quickstartLoadDialog/QuickstartLoadDialog.html',
+      controller: 'QuickstartLoadDialog',
+      //size: 'lg',
+      
+      //These items get passed to the chiid controller
+      //resolve: {
+        //templateData: function () {
+        //  return $scope.templateData;
+        //}
+      //}
+      });
+    };
+    
     $scope.openTemplateProperties = function() {
       //Documentation: http://angular-ui.github.io/bootstrap/#/modal
       var modalInstance = $modal.open({
@@ -41,22 +56,22 @@ angular.module('vis')
           return $scope.templateData;
         }
       }
-    });
+      });
+    };
+  
+    function downloadJsonInBrowser(json:string, fileName:string) {  
+      //Crazy code to download the resulting JSON file
+      //http://bgrins.github.io/devtools-snippets/#console-save
+      var blob = new Blob([json], {type: 'text/json'}),
+            e    = document.createEvent('MouseEvents'),
+            a    = document.createElement('a')
+      
+        //A typescript guru could probably figure out how to get rid of these errors
+      
+        a.download = 'armTemplate.json';
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
     }
   });
-  
-  function downloadJsonInBrowser(json:string, fileName:string) {  
-    //Crazy code to download the resulting JSON file
-    //http://bgrins.github.io/devtools-snippets/#console-save
-    var blob = new Blob([json], {type: 'text/json'}),
-          e    = document.createEvent('MouseEvents'),
-          a    = document.createElement('a')
-    
-      //A typescript guru could probably figure out how to get rid of these errors
-    
-      a.download = 'armTemplate.json';
-      a.href = window.URL.createObjectURL(blob);
-      a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
-      e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-      a.dispatchEvent(e);
-  }

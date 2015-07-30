@@ -7,6 +7,12 @@ class Resource {
 	dependsOn: string | string[];
 	
 	get id(): string {
-		return this.name;
+		var id = this.type + '/';
+		
+		if(this.name.charAt(0) === '[') {
+			id += this.name.substring(1, this.name.length - 2);
+		} else {
+			id += this.name;
+		}
 	}
 }

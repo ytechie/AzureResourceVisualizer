@@ -1,5 +1,6 @@
 /// <reference path="Resource.ts" />
 /// <reference path="Parameter.ts" />
+/// <reference path="ExpressionEvaluator.ts" />
 
 interface ArmTemplateInterface {
         contentVersion: string;
@@ -53,16 +54,14 @@ class ArmTemplate {
                 } else if(depends) {
                     var dependsString = <string>depends;
                     
-                    if (dependsString.indexOf('[concat(') !== -1) {
-                        //We need to parse apart this wonderful string
-                        //[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]
-        
-                        var parts = dependsString.split("'");
-        
-                        //var type = parts[1].substring(0, parts[1].length - 1);
-                        var name = parts[3];
-                                                
-                        ret.push("[parameters('" + name + "')]");
+                    if (dependsString.indexOf('[') === 0) {
+                        var parser = new ExpressionParser();
+                        
+                        var expression = parser.parse(dependsString.substring(1, dependsString.length - 2));
+                        var ee = new ExpressionEvaluator(null);
+                        var dependsOnId = ee.resolveDependsOnId(expression);
+                        
+                        //crap, we need to return id, not a name
                     }
                 }
 		

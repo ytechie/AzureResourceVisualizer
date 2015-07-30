@@ -28,7 +28,7 @@ class ArmTemplate {
                 
                 dependencyNames.forEach(dependencyName => {
                         this.templateData.resources.forEach(resource => {
-                                if(resource.name === dependencyName) {
+                                if(resource.name === dependencyName || Resource.getResourceId(resource) === dependencyName) {
                                         dependencies.push(resource);
                                 }     
                         });
@@ -61,7 +61,7 @@ class ArmTemplate {
                         var ee = new ExpressionEvaluator(null);
                         var dependsOnId = ee.resolveDependsOnId(expression);
                         
-                        //crap, we need to return id, not a name
+                        ret.push(dependsOnId);
                     }
                 }
 		

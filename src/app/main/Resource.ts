@@ -6,13 +6,15 @@ class Resource {
 	properties: any;
 	dependsOn: string | string[];
 	
-	get id(): string {
-		var id = this.type + '/';
+	static getResourceId(resource:Resource) {
+		var id = resource.type + '/';
 		
-		if(this.name.charAt(0) === '[') {
-			id += this.name.substring(1, this.name.length - 2);
+		if(resource.name.charAt(0) === '[') {
+			id += resource.name.substring(1, resource.name.length - 1);
 		} else {
-			id += this.name;
+			id += resource.name;
 		}
+		
+		return id;
 	}
 }

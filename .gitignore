@@ -200,28 +200,3 @@ FakesAssemblies/
 *.js.map
 
 /typings/*
-
-# Files gen'd from .ts files
-src/app/main/ArmTemplate.js
-src/app/main/Resource.js
-src/app/main/ToolboxResource.js
-src/app/main/ResourceShape.js
-src/app/main/main.controller.js
-src/app/main/ResourceShapeLink.js
-src/app/main/graph.js
-src/app/main/sampleARM.js
-
-src/app/templateParameterEditor/TemplateProperties.js
-
-src/app/main/Parameter.js
-
-src/app/templateParameterEditor/ParameterModelItem.js
-
-src/app/templateParameterEditor/templateParameterEditor.controller.js
-
-src/app/templateParameterEditor/TemplateParameterManager.js
-
-src/app/main/ExpressionParser.js
-
-src/app/main/ExpressionParser.spec.js
-src/app/main/ExpressionEvaluator.js

@@ -4,9 +4,10 @@
 
 class GithubTemplateReader{
 	private GithubApiRoot:string = 'https://api.github.com/'
+	private GithubTemplateRoot:string = this.GithubApiRoot + 'repos/Azure/azure-quickstart-templates/contents/';
 	
 	getTemplateCategories($http:angular.IHttpProvider, callback: (categories:TemplateCategory[]) => void) {
-		var reqUrl = this.GithubApiRoot + 'repos/Azure/azure-quickstart-templates/contents/'
+		var reqUrl = this.GithubTemplateRoot;
 		
 		$http.get(reqUrl)
 			.success(function(data:any[], status, headers, config) {
@@ -30,10 +31,31 @@ class GithubTemplateReader{
 				throw new Error('Error in GitHub template reader getting data from GitHub ' + data);
 			});
 	}
+	
+	getTemplateMetadata($http:angular.IHttpProvider, categoryData:TemplateCategory, callback: (metadata:TemplateMetadataInterface) => void) {
+		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'metadata.json')
+			.success(function(data:any, status, headers, config) {
+				if(data.encoding !== "base64") {
+					throw new Error("Github template reader was expecting base64 encoded file");
+				}
+				
+				var fileContents = atob(data.content);
+				var metadata = <TemplateMetadataInterface>JSON.parse(fileContents);
+				callback(metadata);
+			});
+	}
 }
 
 class TemplateCategory {
 	name:string;
 	url:string;
 	html_url:string;
+}
+
+interface TemplateMetadataInterface {
+	itemDisplayName:string;
+	description:string;
+	summary:string;
+	githubUsername:string;
+	dateUpdated:string;
 }

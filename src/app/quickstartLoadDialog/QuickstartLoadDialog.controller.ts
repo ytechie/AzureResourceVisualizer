@@ -9,12 +9,22 @@ angular.module('vis').controller('QuickstartLoadDialog', function ($scope, $moda
 	function categoriesReceived(categories:TemplateCategory[]):void {
 		$scope.categories = categories;	
 	}
+	
+	$scope.categorySelected = function() {
+		var category = <TemplateCategory>$scope.selectedCategory
+		
+		github.getTemplateMetadata($http, category, metadata => {
+			$scope.templateMetadata = metadata;
+		});
+		
+	}
 
 	$scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');
   	};
 	  
 	$scope.open = function () {
+		
 		alert('this feature is coming soon!');
 	}
 });

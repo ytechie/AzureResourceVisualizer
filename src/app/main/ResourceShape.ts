@@ -7,11 +7,13 @@ class ResourceShape extends joint.shapes.basic.Rect {
     PNGRef: string;
     
     sourceResource:Resource;
+    sourceToolboxItem:ToolboxResource;
     
     constructor(resource:Resource, toolboxItem:ToolboxResource) {
         super();
         
         this.sourceResource = resource;
+        this.sourceToolboxItem = toolboxItem;
                 
        if(toolboxItem) {
             this.titleText = toolboxItem.friendlyName;

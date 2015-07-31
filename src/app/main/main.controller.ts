@@ -68,6 +68,14 @@ angular.module('vis')
       }
       });
     };
+    
+    $scope.toolboxItemClick = function(toolboxItem:ToolboxResource) {
+      var graph = <Graph>$scope.graph;
+      var resource = new Resource();
+      var shape = new ResourceShape(resource, toolboxItem);
+      
+      graph.addNewShape(shape);
+    }
   
     function downloadJsonInBrowser(json:string, fileName:string) {  
       //Crazy code to download the resulting JSON file

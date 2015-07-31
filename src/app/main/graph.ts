@@ -173,4 +173,16 @@ class Graph {
             shape.attributes.position.y = g.node(node).y + 50;
         });
     }
+    
+    addNewShape(shape:ResourceShape) {
+        shape.position(60, 60);
+        shape.resize(110, 80);
+        
+        shape.sourceResource.type = shape.sourceToolboxItem.resourceType;
+       
+        this.resourceShapes.push(shape);
+        this.addShape(shape);
+        
+        this.template.resources.push(shape.sourceResource);
+    }
 }

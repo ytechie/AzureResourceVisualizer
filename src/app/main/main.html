@@ -20,10 +20,10 @@
           <button class="btn btn-default" ng-click="openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button>
           
            <h4>Toolbox</h4>
-           <div ng-repeat="toolboxItem in toolboxItems" class="itemContainer">
+           <a ng-repeat="toolboxItem in toolboxItems" class="itemContainer" ng-click="toolboxItemClick(toolboxItem)">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.iconName}}" />
                <p class="label">{{toolboxItem.friendlyName}}</p>
-           </div>
+           </a>
            <br />
            <span ng-show="selectedResource">
              <h4>Selected Node Properties</h4>

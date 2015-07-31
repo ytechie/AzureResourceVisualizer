@@ -36,7 +36,7 @@ class Graph {
     
     private reset() {
         this.resourceShapes = new Array<ResourceShape>();
-        this.resourceShapeLinks = new Array<ResoureShapeLink>();
+        this.resourceShapeLinks = new Array<ResourceShapeLink>();
         
         this.graph.clear();
     }
@@ -67,7 +67,8 @@ class Graph {
            this.addShapeLink(shapeLink); 
         });
         
-        this.paper.fitToContent();
+        var bbox = this.paper.getContentBBox();
+        this.paper.fitToContent(bbox.width, bbox.height + 400);
     }
     
     private createLinks() {

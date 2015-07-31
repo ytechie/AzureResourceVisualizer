@@ -14,9 +14,23 @@ angular.module('vis')
     graph.applyTemplate(new ArmTemplate($scope.templateData));
     $scope.graph = graph;
     
-    graph.resourceSelected = function(resource:Resource) {
-      $scope.selectedResource = JSON.stringify(resource, null, 2);
-      $scope.$apply();
+    graph.resourceSelected = function(resource:Resource, modal:boolean) {
+      if(modal) {        
+        var modalInstance = $modal.open({
+          templateUrl: '/app/resourceEditorDialog/ResourceEditor.html',
+          controller: 'ResourceEditorController',
+          
+          //These items get passed to the chiid controller
+          resolve: {
+            resource: function () {
+              return resource;
+            }
+          }
+        });
+      } else {
+        $scope.selectedResource = JSON.stringify(resource, null, 2);
+        $scope.$apply();
+      }
     }
     
     $scope.downloadArmTemplate = function() {
@@ -36,7 +50,7 @@ angular.module('vis')
         var graph = <Graph>$scope.graph;
         graph.applyTemplate(new ArmTemplate(newTemplate));
         $scope.graph = graph;
-      }
+      });
     };
     
     $scope.openTemplateProperties = function() {

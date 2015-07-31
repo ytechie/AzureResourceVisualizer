@@ -14,7 +14,7 @@ class Graph {
     private resourceShapes: ResourceShape[] = new Array<ResourceShape>();
     private resourceShapeLinks: ResourceShapeLink[] = new Array<ResourceShapeLink>();
     
-    resourceSelected: (resource:Resource) => void;
+    resourceSelected: (resource:Resource, modal:boolean) => void;
     
     constructor(toolboxItems:ToolboxResource[]) {
         this.toolboxItems = toolboxItems;
@@ -128,13 +128,18 @@ class Graph {
         var self = this;
         this.paper.on('cell:pointerdown', function (evt, x, y) {
             var shape:ResourceShape = evt.model;
-            self.displayResource(shape.sourceResource);
+            self.displayResource(shape.sourceResource, false);
+        });
+        
+        this.paper.on('cell:pointerdblclick', function(cellView:any, evt:any, x:any, y:any) {
+            var shape:ResourceShape = cellView.model;
+            self.displayResource(shape.sourceResource, true);
         });
     }
     
-    private displayResource(resource:Resource) {
+    private displayResource(resource:Resource, modal:boolean) {
         if(this.resourceSelected) {
-            this.resourceSelected(resource);
+            this.resourceSelected(resource, modal);
         }
     }
     

@@ -14,6 +14,11 @@ angular.module('vis')
     graph.applyTemplate(new ArmTemplate($scope.templateData));
     $scope.graph = graph;
     
+    graph.resourceSelected = function(resource:Resource) {
+      $scope.selectedResource = JSON.stringify(resource, null, 2);
+      $scope.$apply();
+    }
+    
     $scope.downloadArmTemplate = function() {
       var data = JSON.stringify($scope.templateData, null, 2);
       

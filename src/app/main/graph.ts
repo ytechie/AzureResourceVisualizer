@@ -14,6 +14,7 @@ class Graph {
     private resourceShapes: ResourceShape[] = new Array<ResourceShape>();
     private resourceShapeLinks: ResourceShapeLink[] = new Array<ResourceShapeLink>();
     
+    resourceSelected: (resource:Resource) => void;
     
     constructor(toolboxItems:ToolboxResource[]) {
         this.toolboxItems = toolboxItems;
@@ -131,8 +132,10 @@ class Graph {
         });
     }
     
-    private displayResource(resource) {
-        $('#nodeProperties').val(JSON.stringify(resource, null, 2));
+    private displayResource(resource:Resource) {
+        if(this.resourceSelected) {
+            this.resourceSelected(resource);
+        }
     }
     
     private autoSetShapePositions() {

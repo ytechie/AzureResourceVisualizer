@@ -15,21 +15,22 @@
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar col-md-4 toolbox">
-          <button ng-click="downloadArmTemplate()">Download ARM Template</button><br />
-          <button ng-click="loadArmQuickstartTemplate()">Load ARM Quickstart Template (experimental)</button>
+          <button class="btn btn-default" ng-click="loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;">Load ARM Quickstart Template</button><br />
+          <button class="btn btn-default" ng-click="downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
+          <button class="btn btn-default" ng-click="openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button>
           
-           <h2>Toolbox</h2>
+           <h4>Toolbox</h4>
            <div ng-repeat="toolboxItem in toolboxItems" class="itemContainer">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.iconName}}" />
                <p class="label">{{toolboxItem.friendlyName}}</p>
            </div>
            <br />
-           <h2>Properties</h2>
-           <textarea id="nodeProperties">
-             
-           </textarea>
-           
-           <button class="btn btn-default" ng-click="openTemplateProperties()">Open Template Properties</button>
+           <span ng-show="selectedResource">
+             <h4>Selected Node Properties</h4>
+             <textarea id="nodeProperties">
+               {{selectedResource}}
+             </textarea>
+           </span>
         </div>
         <div class="col-md-offset-4 col-md-8 main">
             <div id="paper" class="paper" style="height: 1000px; width: 800px;"/>

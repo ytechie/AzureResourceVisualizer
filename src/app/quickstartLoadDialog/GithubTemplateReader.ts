@@ -55,7 +55,14 @@ class GithubTemplateReader{
 					throw new Error("Github template reader was expecting base64 encoded file");
 				}
 				
-				var fileContents = atob(data.content);
+				var base64 = data.content;
+				var byteOrderMark = "77u/";
+				if(base64.substring(0, byteOrderMark.length) === byteOrderMark) {
+					base64 = base64.substring(byteOrderMark.length, base64.length);
+				}
+				
+				var fileContents = atob(base64);
+				
 				var armTemplate:ArmTemplateInterface = null;
 				var parseError:string;
 				try

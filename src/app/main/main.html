@@ -27,8 +27,8 @@
            <br />
            <span ng-show="selectedResource">
              <h4>Selected Node Properties</h4>
-             <textarea id="nodeProperties" readonly>
-               {{selectedResource}}
+             <textarea ng-model="selectedResource" readonly
+               style="width: 100%; height: 200px; max-height: 200px; resize: none;">
              </textarea>
            </span>
         </div>

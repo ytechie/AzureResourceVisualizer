@@ -20,19 +20,19 @@
 
 .toolbox {
 	.itemContainer {
-		//float: left;
 		display: inline-block;
-		background-color:white;
 		white-space: normal;
 		border-width: 1px;
-		text-align: center;
+		text-align: left;
 		cursor: pointer;
+		width: 200px;
+		margin: 3px;
+		text-decoration: none;
 		
 		.icon {
-			height: 75px;
-			width: 75px;
+			height: 30px;
+			width: 30px;
 			margin: auto;
-			display: block;
 		}
 		
 		.label {

@@ -22,7 +22,7 @@
            <h4>Toolbox</h4>
            <a ng-repeat="toolboxItem in toolboxItems" class="itemContainer" ng-click="toolboxItemClick(toolboxItem)">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.iconName}}" />
-               <p class="label">{{toolboxItem.friendlyName}}</p>
+               <span class="label">{{toolboxItem.friendlyName}}</span>
            </a>
            <br />
            <span ng-show="selectedResource">

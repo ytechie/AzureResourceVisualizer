@@ -25,7 +25,11 @@ angular.module('vis').controller('QuickstartLoadDialog', function ($scope, $moda
 	$scope.open = function () {
 		var category = <TemplateCategory>$scope.selectedCategory;
 		
-		github.getTemplate($http, category, (armTemplate) => {
+		github.getTemplate($http, category, (armTemplate, parseError) => {
+			if(parseError) {
+				alert('Error parsing template: ' + parseError);
+				return;
+			}
 			$modalInstance.close(armTemplate);
 		});
 	}

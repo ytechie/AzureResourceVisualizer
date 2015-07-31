@@ -47,7 +47,8 @@ class GithubTemplateReader{
 			});
 	}
 	
-	getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory, callback: (armTemplate:ArmTemplateInterface) => void) {
+	getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory,
+		callback: (armTemplate:ArmTemplateInterface, parseError:string) => void) {
 		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
 			.success(function(data:any, status, headers, config) {
 				if(data.encoding !== "base64") {
@@ -55,8 +56,16 @@ class GithubTemplateReader{
 				}
 				
 				var fileContents = atob(data.content);
-				var armTemplate = <ArmTemplateInterface>JSON.parse(fileContents);
-				callback(armTemplate);
+				var armTemplate:ArmTemplateInterface = null;
+				var parseError:string;
+				try
+				{
+					armTemplate = JSON.parse(fileContents);
+				}
+				catch(err) {
+					parseError = err.toString();
+				}
+				callback(armTemplate, parseError);
 			});
 	}
 }

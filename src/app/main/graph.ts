@@ -52,7 +52,7 @@ class Graph {
            
             var shape = new ResourceShape(resource, toolboxItem);
             shape.position(60, 60);
-            shape.resize(100, 80);
+            shape.resize(110, 80);
            
             this.resourceShapes.push(shape);
         });

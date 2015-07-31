@@ -6,6 +6,10 @@
         "Virtual Machine",
         'Microsoft.Compute/virtualMachines' ),
       new ToolboxResource(
+        "Unidentified feature object.png",
+        "VM Extension",
+        'Microsoft.Compute/virtualMachines/extensions' ),
+      new ToolboxResource(
         "Availability Set.png",
         "Availability Set",
         'Microsoft.Compute/availabilitySets' ),
@@ -46,7 +50,19 @@
         "Workflow",
         'Microsoft.Logic/workflows' ),
       new ToolboxResource(
+        "Unidentified feature object.png",
+        "Deployment",
+        'Microsoft.Resources/deployments' ),
+      new ToolboxResource(
         "Web App (was Websites).png",
         "Server Farm",
-        'Microsoft.Web/serverfarms' )
+        'Microsoft.Web/serverfarms' ),
+      new ToolboxResource(
+        "Cloud Service.png",
+        "Hosting Env",
+        'Microsoft.Web/hostingEnvironments' ),
+      new ToolboxResource(
+        "Key Vault.png",
+        "Key Vault",
+        'Microsoft.KeyVault/vaults' )
     ];  

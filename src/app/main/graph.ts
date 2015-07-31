@@ -15,16 +15,29 @@ class Graph {
     private resourceShapeLinks: ResourceShapeLink[] = new Array<ResourceShapeLink>();
     
     
-    constructor(template:ArmTemplate, toolboxItems:ToolboxResource[]) {
-        this.template = template;
+    constructor(toolboxItems:ToolboxResource[]) {
         this.toolboxItems = toolboxItems;
         
         this.initJointJs();
+    }
+    
+    applyTemplate(template:ArmTemplate) {
+        this.reset();
+        
+        this.template = template;
+        
         this.createNodes();
         this.createLinks();
         this.autoSetShapePositions();
         this.displayNodesAndLinks();
         this.initializeClickPopup();
+    }
+    
+    private reset() {
+        this.resourceShapes = new Array<ResourceShape>();
+        this.resourceShapeLinks = new Array<ResoureShapeLink>();
+        
+        this.graph.clear();
     }
     
     private initJointJs() {

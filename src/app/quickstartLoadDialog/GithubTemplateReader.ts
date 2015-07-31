@@ -1,3 +1,5 @@
+/// <reference path="../main/ArmTemplate.ts" />
+
 /// <reference path="../../../typings/tsd.d.ts" />
 
 ///repos/:owner/:repo/contents/:path 
@@ -42,6 +44,19 @@ class GithubTemplateReader{
 				var fileContents = atob(data.content);
 				var metadata = <TemplateMetadataInterface>JSON.parse(fileContents);
 				callback(metadata);
+			});
+	}
+	
+	getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory, callback: (armTemplate:ArmTemplateInterface) => void) {
+		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
+			.success(function(data:any, status, headers, config) {
+				if(data.encoding !== "base64") {
+					throw new Error("Github template reader was expecting base64 encoded file");
+				}
+				
+				var fileContents = atob(data.content);
+				var armTemplate = <ArmTemplateInterface>JSON.parse(fileContents);
+				callback(armTemplate);
 			});
 	}
 }

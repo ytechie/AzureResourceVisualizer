@@ -10,7 +10,9 @@ angular.module('vis')
     $scope.toolboxItems = toolboxItems;
     
     $scope.templateData = <ArmTemplateInterface>arm;
-    $scope.graph = new Graph(new ArmTemplate($scope.templateData), toolboxItems);
+    var graph = new Graph(toolboxItems);
+    graph.applyTemplate(new ArmTemplate($scope.templateData));
+    $scope.graph = graph;
     
     $scope.downloadArmTemplate = function() {
       var data = JSON.stringify($scope.templateData, null, 2);
@@ -20,17 +22,16 @@ angular.module('vis')
     
     $scope.loadArmQuickstartTemplate = function() {
       var modalInstance = $modal.open({
-      templateUrl: '/app/quickstartLoadDialog/QuickstartLoadDialog.html',
-      controller: 'QuickstartLoadDialog',
-      //size: 'lg',
-      
-      //These items get passed to the chiid controller
-      //resolve: {
-        //templateData: function () {
-        //  return $scope.templateData;
-        //}
-      //}
+        templateUrl: '/app/quickstartLoadDialog/QuickstartLoadDialog.html',
+        controller: 'QuickstartLoadDialog'
       });
+            
+      modalInstance.result.then(function(newTemplate:ArmTemplateInterface) {
+        $scope.templateData = newTemplate;
+        var graph = <Graph>$scope.graph;
+        graph.applyTemplate(new ArmTemplate(newTemplate));
+        $scope.graph = graph;
+      }
     };
     
     $scope.openTemplateProperties = function() {

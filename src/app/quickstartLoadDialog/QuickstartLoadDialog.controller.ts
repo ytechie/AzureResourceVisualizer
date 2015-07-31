@@ -16,7 +16,6 @@ angular.module('vis').controller('QuickstartLoadDialog', function ($scope, $moda
 		github.getTemplateMetadata($http, category, metadata => {
 			$scope.templateMetadata = metadata;
 		});
-		
 	}
 
 	$scope.cancel = function () {
@@ -24,7 +23,10 @@ angular.module('vis').controller('QuickstartLoadDialog', function ($scope, $moda
   	};
 	  
 	$scope.open = function () {
+		var category = <TemplateCategory>$scope.selectedCategory;
 		
-		alert('this feature is coming soon!');
+		github.getTemplate($http, category, (armTemplate) => {
+			$modalInstance.close(armTemplate);
+		});
 	}
 });

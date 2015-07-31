@@ -31,5 +31,4 @@ angular.module('vis').controller('ResourceEditorController', function ($scope, $
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-	
-}
+});

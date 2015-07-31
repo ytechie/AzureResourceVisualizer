@@ -66,6 +66,8 @@ class Graph {
         this.resourceShapeLinks.forEach(shapeLink => {
            this.addShapeLink(shapeLink); 
         });
+        
+        this.paper.fitToContent();
     }
     
     private createLinks() {

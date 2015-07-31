@@ -81,8 +81,8 @@ class Graph {
                     source: { id: sourceNode.id },
                     target: { id: destNode.id },
                     attrs: {
-                        '.connection': { 'stroke-width': 5, stroke: '#34495E' },
-                        '.marker-target': { fill: 'yellow', d: 'M 10 0 L 0 5 L 10 10 z' }
+                        '.connection': { 'stroke-width': 3, stroke: '#34495E' },
+                        '.marker-target': { fill: 'black', d: 'M 10 0 L 0 5 L 10 10 z' }
                     }
                 });
     

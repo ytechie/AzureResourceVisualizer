@@ -20,14 +20,15 @@ class ResourceShape extends joint.shapes.basic.Rect {
             this.PNGRef = "/assets/toolbox-icons/" + toolboxItem.iconName;
             this.attributes.attrs.image['xlink:href'] = this.PNGRef;
             
-            this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':50, 'x-alignment' :'middle', 'text': toolboxItem.friendlyName};
+            this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':50,
+                'x-alignment' :'middle', 'text': toolboxItem.friendlyName, 'fill': '#000000'};
        } else {
            this.titleText = this.sourceResource.type;
        }  
        
-       this.attributes.attrs.rect.fill = '#E67E22';
-       this.attributes.attrs.rect.stroke = '#D35400';
-       this.attributes.attrs.rect['stroke-width'] = 5;
+       this.attributes.attrs.rect.fill = '#FFFFFF';
+       this.attributes.attrs.rect.stroke = '#0079D6';
+       this.attributes.attrs.rect['stroke-width'] = 2;
           
     }
     

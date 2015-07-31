@@ -3,7 +3,7 @@
  var toolboxItems:Array<ToolboxResource> = [
       new ToolboxResource(
         "Virtual machine.png",
-        "Virtual Machine",
+        "Virtual Mach",
         'Microsoft.Compute/virtualMachines' ),
       new ToolboxResource(
         "Azure load balancer.png",
@@ -11,7 +11,7 @@
         'Microsoft.Network/loadBalancers' ),
       new ToolboxResource(
         "Unidentified feature object.png",
-        "Availability Set",
+        "Avail. Set",
         'Microsoft.Compute/availabilitySets' ),
       new ToolboxResource(
         "Virtual Network.png",
@@ -27,6 +27,6 @@
         'Microsoft.Network/publicIPAddresses' ),
       new ToolboxResource(
         "Storage (Azure).png",
-        "Storage Account",
+        "Storage Acct",
         'Microsoft.Storage/storageAccounts' )
     ];  

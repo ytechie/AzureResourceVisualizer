@@ -4,6 +4,7 @@
 /// <reference path="ToolboxResource.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
+
 class Graph {
     private graph: joint.dia.Graph;
     private paper: joint.dia.Paper;
@@ -12,6 +13,7 @@ class Graph {
     private toolboxItems: ToolboxResource[];
     private resourceShapes: ResourceShape[] = new Array<ResourceShape>();
     private resourceShapeLinks: ResourceShapeLink[] = new Array<ResourceShapeLink>();
+    
     
     constructor(template:ArmTemplate, toolboxItems:ToolboxResource[]) {
         this.template = template;
@@ -35,9 +37,9 @@ class Graph {
             var toolboxItem: ToolboxResource = this.getToolboxItemForResource(resource);
            
             var shape = new ResourceShape(resource, toolboxItem);
-            shape.position(80, 80);
-            shape.resize(170, 100);
-            
+            shape.position(60, 60);
+            shape.resize(100, 80);
+           
             this.resourceShapes.push(shape);
         });
     }
@@ -140,13 +142,14 @@ class Graph {
             g.setEdge(shapeLink.attributes.source.id, shapeLink.attributes.target.id);
         });
 
+        
         dagre.layout(g);
 
         g.nodes().forEach(function (node) {
             var shape = _.findWhere(self.resourceShapes, { id: node });
 
             shape.attributes.position.x = g.node(node).x;
-            shape.attributes.position.y = g.node(node).y;
+            shape.attributes.position.y = g.node(node).y + 50;
         });
     }
 }

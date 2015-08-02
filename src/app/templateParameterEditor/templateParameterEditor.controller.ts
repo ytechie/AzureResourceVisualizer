@@ -1,9 +1,12 @@
 /// <reference path="TemplateParameterManager.ts" />
 /// <reference path="ParameterModelItem.ts" />
+/// <reference path="ParameterValueManager.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 
 angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $modalInstance, templateData:ArmTemplateInterface) {
+
   var templateParameterManager = new TemplateParameterManager(templateData);
+  var paramValues = new ParameterValuesTemplate.DeploymentParameters();
 
   var parameterModel = new Array<ParameterModelItem>();
   
@@ -14,7 +17,8 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
       name: parameterName,
       type: parameterData.type,
       defaultValue: parameterData.defaultValue,
-      allowedValues: parameterData.allowedValues
+      allowedValues: parameterData.allowedValues,
+      value: '' // get from values JSON, but we will need to create the UI to load a params json file first
     });
   });
   
@@ -27,12 +31,20 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
     
     synchronizeModelToTemplate(parameterModel, templateParameterManager);
     
+    //$scope.parameterValues = ParameterValueManager.loadParamValues(parameterModel);
+    
     $modalInstance.close();
   };
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+  
+  $scope.genParamValues = function(){
+    var paramValuesJSON = ParameterValueManager.generateJSON($scope.parameterModel);
+    //alert('generated');
+    //console.log(paramValuesJSON);
+  }
   
   $scope.addParameter = function() {
     var newModelItem = new ParameterModelItem();
@@ -80,4 +92,20 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
       }
     });
   }
+  
+  function downloadParamJsonInBrowser(json:string, fileName:string) {  
+      //Crazy code to download the resulting JSON file
+      //http://bgrins.github.io/devtools-snippets/#console-save
+      var blob = new Blob([json], {type: 'text/json'}),
+            e    = document.createEvent('MouseEvents'),
+            a    = document.createElement('a')
+      
+        //A typescript guru could probably figure out how to get rid of these errors
+      
+        a.download = fileName;
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
+    }
 });

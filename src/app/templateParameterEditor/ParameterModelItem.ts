@@ -3,4 +3,5 @@ class ParameterModelItem {
 	type:string;
 	defaultValue:string;
 	allowedValues:string[];
+	value: string;
 }

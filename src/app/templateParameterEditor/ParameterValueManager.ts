@@ -12,7 +12,7 @@ module ParameterValueManager{
 			template.parameters[param.name] = new paramValues.Parameter(param.value);
 		})
 		
-		var json = JSON.stringify(template);
+		var json = JSON.stringify(template, null, 2);
 		
 		 var blob = new Blob([json], {type: 'text/json'}),
             e    = document.createEvent('MouseEvents'),

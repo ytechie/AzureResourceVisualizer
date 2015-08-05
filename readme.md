@@ -10,7 +10,7 @@ JSON is amazing, and not just because we share a name. However, I think visually
 
 ![Azure Resource Manager Diagram](arm-diagram.jpg)
 
-Here is a quick YouTube screencast I put together to give you an overview of the project:
+Here is a quick [YouTube screencast](https://www.youtube.com/watch?v=5xP1-IrtNMU) I put together to give you an overview of the project.
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/5xP1-IrtNMU?rel=0" frameborder="0" allowfullscreen></iframe>
 

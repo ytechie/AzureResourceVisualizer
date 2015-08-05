@@ -10,16 +10,13 @@ JSON is amazing, and not just because we share a name. However, I think visually
 
 ![Azure Resource Manager Diagram](arm-diagram.jpg)
 
-## Status
+Here is a quick YouTube screencast I put together to give you an overview of the project:
 
-This code is terrible. Really terrible actually. It's pretty embarrassing, and is just meant as a proof of concept. I was obsessed with seeing this work that I ignored everything I have ever learned.
-
-The sample JSON is actually pasted into the code, so you'll need to scroll down to the bottom to see what I'm doing. Basically, I iterate the resources and create nodes, and then I iterate the dependencies to determine the relationships.
+<iframe width="640" height="480" src="https://www.youtube.com/embed/5xP1-IrtNMU?rel=0" frameborder="0" allowfullscreen></iframe>
 
 ## Future
 
-* Still trying to figure out if there is a better way to read and understand the dependencies. There is a custom syntax in there.
-* There should be no reason why you can't edit a node by clicking on it. Also no reason why you couldn't get the modified JSON back out.
+We're using a [public Trello board](https://trello.com/b/41RiUCGs/azure-resource-visualizer) for managing the features and roadmap.
 
 ## Installation
 

@@ -20,6 +20,7 @@ class Graph {
         this.toolboxItems = toolboxItems;
         
         this.initJointJs();
+        this.initializeClickPopup();
     }
     
     applyTemplate(template:ArmTemplate) {
@@ -31,7 +32,6 @@ class Graph {
         this.createLinks();
         this.autoSetShapePositions();
         this.displayNodesAndLinks();
-        this.initializeClickPopup();
     }
     
     private reset() {

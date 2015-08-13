@@ -39,6 +39,20 @@ angular.module('vis')
       downloadJsonInBrowser(data, 'armTemplate.json');
     }
     
+    $scope.openExistingTemplate = function() {
+      var modalInstance = $modal.open({
+        templateUrl: '/app/openExistingTemplateDialog/OpenDialog.html',
+        controller: 'OpenDialog.controller'
+      });
+            
+      modalInstance.result.then(function(newTemplate:ArmTemplateInterface) {
+        $scope.templateData = newTemplate;
+        var graph = <Graph>$scope.graph;
+        graph.applyTemplate(new ArmTemplate(newTemplate));
+        $scope.graph = graph;
+      });
+    };
+    
     $scope.loadArmQuickstartTemplate = function() {
       var modalInstance = $modal.open({
         templateUrl: '/app/quickstartLoadDialog/QuickstartLoadDialog.html',

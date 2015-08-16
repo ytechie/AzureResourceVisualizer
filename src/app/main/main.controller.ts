@@ -22,9 +22,21 @@ angular.module('vis')
           
           //These items get passed to the chiid controller
           resolve: {
+            arm: function() {
+              return <ArmTemplateInterface>$scope.templateData;
+            },
             resource: function () {
               return resource;
             }
+          }
+        });
+        modalInstance.result.then(function(resultResource:any) {
+          if(resultResource && resultResource.deleteFlag) {
+            let templateInterface = <ArmTemplateInterface>$scope.templateData;
+            let template = new ArmTemplate(templateInterface);
+            
+            template.deleteResource(<Resource>resultResource);
+            graph.removeResourceShape(<Resource>resultResource);
           }
         });
       } else {

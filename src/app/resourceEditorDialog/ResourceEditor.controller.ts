@@ -1,8 +1,9 @@
 /// <reference path="../main/Resource.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
-angular.module('vis').controller('ResourceEditorController', function ($scope, $modalInstance, resource:Resource) {
-	$scope.resource = resource;
+angular.module('vis').controller('ResourceEditorController', function ($scope, $modalInstance, arm:ArmTemplateInterface, resource:Resource) {
+	$scope.arm = arm;
+  $scope.resource = resource;
   $scope.resourceJson = JSON.stringify(resource, null, 2);
   
   $scope.validate = function() {
@@ -12,6 +13,17 @@ angular.module('vis').controller('ResourceEditorController', function ($scope, $
     } catch(err) {
       $scope.validationResult = "Invalid JSON: " + err.toString();
     }
+  }
+  
+  $scope.delete = function() {
+    if(!confirm("Are you sure you want to delete this resource?")) {
+      return;
+    }
+    
+    var resource = <Resource>$scope.resource;
+    (<any>resource).deleteFlag = true;
+    
+    $modalInstance.close(resource);
   }
   
   $scope.save = function () {

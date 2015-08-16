@@ -67,4 +67,12 @@ class ArmTemplate {
 		
 		return ret;
 	}
+        
+        deleteResource(resource:Resource) {
+                for(let i = 0; i < this.templateData.resources.length; i++) {
+                        if(this.templateData.resources[i] === resource) {
+                                arm.resources.splice(i, 1);
+                        }
+                }
+        }
 }

@@ -103,6 +103,11 @@ class Graph {
         this.graph.addCell(link);
     }
     
+    removeResourceShape(resource:Resource) {
+        let shape = this.getShapeForResource(resource);
+        shape.remove();
+    }
+    
     private getToolboxItemForResource(resource:Resource): ToolboxResource {
         var foundItem:ToolboxResource = null;
         

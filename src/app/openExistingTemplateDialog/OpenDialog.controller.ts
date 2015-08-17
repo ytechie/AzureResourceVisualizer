@@ -23,8 +23,9 @@ angular.module('vis').controller('OpenDialog.controller', function ($scope, $mod
 		var fileReader = new FileReader();
 		fileReader.onload = function(e) {
 			var json = <string>e.target.result;
-			var armTemplate = <ArmTemplateInterface>JSON.parse(json);
-			$modalInstance.close(armTemplate);
+			let template = ArmTemplate.CreateFromJson(json);
+			
+			$modalInstance.close(template);
 		}
 		fileReader.readAsText($scope.file);
 	}

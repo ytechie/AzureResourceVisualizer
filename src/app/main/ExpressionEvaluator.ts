@@ -4,7 +4,7 @@
 //Expression reference: https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-functions/
 
 class ExpressionEvaluator{
-	constructor(private armTemplate:ArmTemplateInterface) {
+	constructor(private armTemplate:ArmTemplate) {
 	}
 	
 	resolveDependsOnId(expression:Expression){

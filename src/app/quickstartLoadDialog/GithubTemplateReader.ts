@@ -48,7 +48,7 @@ class GithubTemplateReader{
 	}
 	
 	getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory,
-		callback: (armTemplate:ArmTemplateInterface, parseError:string) => void) {
+		callback: (armTemplate:ArmTemplate, parseError:string) => void) {
 		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
 			.success(function(data:any, status, headers, config) {
 				if(data.encoding !== "base64") {
@@ -63,11 +63,11 @@ class GithubTemplateReader{
 				
 				var fileContents = atob(base64);
 				
-				var armTemplate:ArmTemplateInterface = null;
+				var armTemplate:ArmTemplate = null;
 				var parseError:string;
 				try
 				{
-					armTemplate = JSON.parse(fileContents);
+					armTemplate = ArmTemplate.CreateFromJson(fileContents);
 				}
 				catch(err) {
 					parseError = err.toString();

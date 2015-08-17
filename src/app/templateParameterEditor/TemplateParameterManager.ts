@@ -2,9 +2,9 @@
 /// <reference path="../main/Parameter.ts" />
 
 class TemplateParameterManager {
-	armTemplate:ArmTemplateInterface;
+	armTemplate:ArmTemplate;
 	
-	constructor(armTemplate:ArmTemplateInterface) {
+	constructor(armTemplate:ArmTemplate) {
 		this.armTemplate = armTemplate
 	}
 	

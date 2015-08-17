@@ -17,9 +17,28 @@ class ArmTemplate {
                 this.templateData = templateData;
         }
 	
+        static CreateFromJson(json:string) {
+                var templateData = <ArmTemplateInterface>JSON.parse(json);
+                
+                if(!templateData.contentVersion) {
+                        throw new Error('Azure Resource Template JSON did not have a contentVersion property');
+                }
+                
+                var armTemplate = new ArmTemplate(templateData);
+                
+                return armTemplate;
+        }
+        
+        toJson() {
+                return JSON.stringify(this.templateData, null, 2);
+        }
         
         get resources(): Resource[] {
                 return this.templateData.resources;
+        }
+        
+        get parameters(): Parameter[] {
+                return this.templateData.parameters;
         }
         
         getDependencies(resource:Resource) {

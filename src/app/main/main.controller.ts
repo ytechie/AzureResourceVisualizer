@@ -9,9 +9,12 @@ angular.module('vis')
           
     $scope.toolboxItems = toolboxItems;
     
-    $scope.templateData = <ArmTemplateInterface>arm;
+    let templateData = <ArmTemplateInterface>arm;
+    let template = new ArmTemplate(templateData);
+    $scope.template = template;
+    
     var graph = new Graph(toolboxItems);
-    graph.applyTemplate(new ArmTemplate($scope.templateData));
+    graph.applyTemplate(template);
     $scope.graph = graph;
     
     graph.resourceSelected = function(resource:Resource, modal:boolean) {
@@ -23,7 +26,7 @@ angular.module('vis')
           //These items get passed to the chiid controller
           resolve: {
             arm: function() {
-              return <ArmTemplateInterface>$scope.templateData;
+              return <ArmTemplate>$scope.template;
             },
             resource: function () {
               return resource;
@@ -32,8 +35,7 @@ angular.module('vis')
         });
         modalInstance.result.then(function(resultResource:any) {
           if(resultResource && resultResource.deleteFlag) {
-            let templateInterface = <ArmTemplateInterface>$scope.templateData;
-            let template = new ArmTemplate(templateInterface);
+            let template= <ArmTemplate>$scope.template;
             
             template.deleteResource(<Resource>resultResource);
             graph.removeResourceShape(<Resource>resultResource);
@@ -46,9 +48,10 @@ angular.module('vis')
     }
     
     $scope.downloadArmTemplate = function() {
-      var data = JSON.stringify($scope.templateData, null, 2);
+      let armTemplate = <ArmTemplate>$scope.template;
+      let json = armTemplate.toJson();
       
-      downloadJsonInBrowser(data, 'armTemplate.json');
+      downloadJsonInBrowser(json, 'armTemplate.json');
     }
     
     $scope.openExistingTemplate = function() {
@@ -57,8 +60,8 @@ angular.module('vis')
         controller: 'OpenDialog.controller'
       });
             
-      modalInstance.result.then(function(newTemplate:ArmTemplateInterface) {
-        $scope.templateData = newTemplate;
+      modalInstance.result.then(function(newTemplate:ArmTemplate) {
+        $scope.template = newTemplate;
         var graph = <Graph>$scope.graph;
         graph.applyTemplate(new ArmTemplate(newTemplate));
         $scope.graph = graph;
@@ -71,8 +74,8 @@ angular.module('vis')
         controller: 'QuickstartLoadDialog'
       });
             
-      modalInstance.result.then(function(newTemplate:ArmTemplateInterface) {
-        $scope.templateData = newTemplate;
+      modalInstance.result.then(function(newTemplate:ArmTemplate) {
+        $scope.template = newTemplate;
         var graph = <Graph>$scope.graph;
         graph.applyTemplate(new ArmTemplate(newTemplate));
         $scope.graph = graph;
@@ -88,8 +91,8 @@ angular.module('vis')
       
       //These items get passed to the chiid controller
       resolve: {
-        templateData: function () {
-          return $scope.templateData;
+        armTemplate: function () {
+          return $scope.template;
         }
       }
       });

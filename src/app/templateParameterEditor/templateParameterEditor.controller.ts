@@ -3,9 +3,9 @@
 /// <reference path="ParameterValueManager.ts" />
 /// <reference path="../../../typings/underscore/underscore.d.ts" />
 
-angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $modalInstance, templateData:ArmTemplateInterface) {
+angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $modalInstance, armTemplate:ArmTemplate) {
 
-  var templateParameterManager = new TemplateParameterManager(templateData);
+  var templateParameterManager = new TemplateParameterManager(armTemplate);
   var paramValues = new ParameterValuesTemplate.DeploymentParameters();
 
   var parameterModel = new Array<ParameterModelItem>();

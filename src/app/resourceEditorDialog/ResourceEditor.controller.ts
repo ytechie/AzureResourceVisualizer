@@ -1,7 +1,7 @@
 /// <reference path="../main/Resource.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
-angular.module('vis').controller('ResourceEditorController', function ($scope, $modalInstance, arm:ArmTemplateInterface, resource:Resource) {
+angular.module('vis').controller('ResourceEditorController', function ($scope, $modalInstance, arm:ArmTemplate, resource:Resource) {
 	$scope.arm = arm;
   $scope.resource = resource;
   $scope.resourceJson = JSON.stringify(resource, null, 2);

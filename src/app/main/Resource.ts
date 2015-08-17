@@ -6,6 +6,13 @@ class Resource {
 	properties: any;
 	dependsOn: string | string[];
 	
+	constructor(toolboxItem?:ToolboxResource) {
+		if(toolboxItem) {
+			this.type = toolboxItem.resourceType;
+			this.name = toolboxItem.friendlyName;
+		}
+	}
+	
 	static getResourceId(resource:Resource) {
 		var id = resource.type + '/';
 		

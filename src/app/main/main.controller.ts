@@ -38,7 +38,6 @@ angular.module('vis')
             let template= <ArmTemplate>$scope.template;
             
             template.deleteResource(<Resource>resultResource);
-            graph.removeResourceShape(<Resource>resultResource);
           }
         });
       } else {
@@ -63,7 +62,7 @@ angular.module('vis')
       modalInstance.result.then(function(newTemplate:ArmTemplate) {
         $scope.template = newTemplate;
         var graph = <Graph>$scope.graph;
-        graph.applyTemplate(new ArmTemplate(newTemplate));
+        graph.applyTemplate(newTemplate);
         $scope.graph = graph;
       });
     };
@@ -77,7 +76,7 @@ angular.module('vis')
       modalInstance.result.then(function(newTemplate:ArmTemplate) {
         $scope.template = newTemplate;
         var graph = <Graph>$scope.graph;
-        graph.applyTemplate(new ArmTemplate(newTemplate));
+        graph.applyTemplate(newTemplate);
         $scope.graph = graph;
       });
     };
@@ -99,11 +98,9 @@ angular.module('vis')
     };
     
     $scope.toolboxItemClick = function(toolboxItem:ToolboxResource) {
-      var graph = <Graph>$scope.graph;
-      var resource = new Resource();
-      var shape = new ResourceShape(resource, toolboxItem);
+      var resource = new Resource(toolboxItem);
       
-      graph.addNewShape(shape);
+      template.resources.push(resource);
     }
   
     function downloadJsonInBrowser(json:string, fileName:string) {  

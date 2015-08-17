@@ -32,6 +32,23 @@ class Graph {
         this.createLinks();
         this.autoSetShapePositions();
         this.displayNodesAndLinks();
+        
+        this.watchModel();
+    }
+    
+    private watchModel() {
+        let self = this;
+        this.template.resources.subscribe<KnockoutArrayChange<Resource>[]>(function(changes) {
+            changes.forEach(function (change) {
+                    if (change.status === 'added') {
+                        let shape = self.addResource(change.value);
+                        self.addShape(shape);
+                    } else if (change.status === 'deleted') {
+                        //Remove from the array too?
+                        self.removeResourceShape(change.value);
+                    }
+                });
+            }, null, "arrayChange");
     }
     
     private reset() {
@@ -47,15 +64,21 @@ class Graph {
     }
     
     private createNodes() {
-        this.template.resources.forEach(resource => {
-            var toolboxItem: ToolboxResource = this.getToolboxItemForResource(resource);
-           
-            var shape = new ResourceShape(resource, toolboxItem);
-            shape.position(60, 60);
-            shape.resize(110, 80);
-           
-            this.resourceShapes.push(shape);
+        ko.utils.arrayForEach(this.template.resources(), resource => {
+            this.addResource(resource);
         });
+    }
+    
+    private addResource(resource:Resource) {
+        var toolboxItem: ToolboxResource = this.getToolboxItemForResource(resource);
+        
+        var shape = new ResourceShape(resource, toolboxItem);
+        shape.position(60, 60);
+        shape.resize(110, 80);
+        
+        this.resourceShapes.push(shape);
+        
+        return shape;
     }
     
     private displayNodesAndLinks() {
@@ -74,7 +97,7 @@ class Graph {
     private createLinks() {
         var self = this;
         
-        this.template.resources.forEach(resource => {
+        ko.utils.arrayForEach(this.template.resources(), resource => {
             var dependencies = self.template.getDependencies(resource);
             
             dependencies.forEach(dep => {
@@ -103,7 +126,7 @@ class Graph {
         this.graph.addCell(link);
     }
     
-    removeResourceShape(resource:Resource) {
+    private removeResourceShape(resource:Resource) {
         let shape = this.getShapeForResource(resource);
         shape.remove();
     }
@@ -181,16 +204,17 @@ class Graph {
             shape.attributes.position.y = g.node(node).y + 50;
         });
     }
-    
+    /*
     addNewShape(shape:ResourceShape) {
-        shape.position(60, 60);
-        shape.resize(110, 80);
+        //shape.position(60, 60);
+        //shape.resize(110, 80);
         
         shape.sourceResource.type = shape.sourceToolboxItem.resourceType;
        
-        this.resourceShapes.push(shape);
-        this.addShape(shape);
+        //this.resourceShapes.push(shape);
+        ///this.addShape(shape);
         
         this.template.resources.push(shape.sourceResource);
     }
+    */
 }

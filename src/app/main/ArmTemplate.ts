@@ -2,6 +2,8 @@
 /// <reference path="Parameter.ts" />
 /// <reference path="ExpressionEvaluator.ts" />
 
+/// <reference path="../../../typings/tsd.d.ts" />
+
 interface ArmTemplateInterface {
         contentVersion: string;
         //Note: The parameter elements are keyed by their name
@@ -12,6 +14,7 @@ interface ArmTemplateInterface {
 
 class ArmTemplate {
         private templateData: ArmTemplateInterface;
+        private observableResources: KnockoutObservableArray<Resource>;
         
         constructor(templateData: ArmTemplateInterface) {
                 this.templateData = templateData;
@@ -24,6 +27,10 @@ class ArmTemplate {
                         throw new Error('Azure Resource Template JSON did not have a contentVersion property');
                 }
                 
+                if(!templateData.resources) {
+                        templateData.resources = new Array<Resource>();
+                }
+                
                 var armTemplate = new ArmTemplate(templateData);
                 
                 return armTemplate;
@@ -33,8 +40,13 @@ class ArmTemplate {
                 return JSON.stringify(this.templateData, null, 2);
         }
         
-        get resources(): Resource[] {
-                return this.templateData.resources;
+        get resources() {
+                if(this.observableResources) {
+                        return this.observableResources;
+                } else {
+                        this.observableResources = ko.observableArray(this.templateData.resources);
+                        return this.observableResources;
+                }
         }
         
         get parameters(): Parameter[] {
@@ -88,10 +100,6 @@ class ArmTemplate {
 	}
         
         deleteResource(resource:Resource) {
-                for(let i = 0; i < this.templateData.resources.length; i++) {
-                        if(this.templateData.resources[i] === resource) {
-                                arm.resources.splice(i, 1);
-                        }
-                }
+                this.resources.remove(resource);
         }
 }

@@ -2,19 +2,6 @@
 /// <reference path="../main/ArmTemplate.ts" />
 
 angular.module('vis').controller('OpenDialog.controller', function ($scope, $modalInstance, $http) {
-	//$("templateFileInput").
-	/*
-	var input = document.getElementById('templateFileInput');
-	input.addEventListener('change', function(e) {
-		var reader = new FileReader();
-		reader.onload = function(e2) {
-			var text = reader.result;
-		}
-		reader.readAsText(input.files[0]);
-	});
-	*/
-	
-
 	$scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');
   	};

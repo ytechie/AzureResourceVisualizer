@@ -11,11 +11,9 @@ angular.module('vis')
     
     let templateData = <ArmTemplateInterface>arm;
     let template = new ArmTemplate(templateData);
-    $scope.template = template;
     
     var graph = new Graph(toolboxItems);
     graph.applyTemplate(template);
-    $scope.graph = graph;
     
     graph.resourceSelected = function(resource:Resource, modal:boolean) {
       if(modal) {        
@@ -26,7 +24,7 @@ angular.module('vis')
           //These items get passed to the chiid controller
           resolve: {
             arm: function() {
-              return <ArmTemplate>$scope.template;
+              return template;
             },
             resource: function () {
               return resource;
@@ -35,8 +33,6 @@ angular.module('vis')
         });
         modalInstance.result.then(function(resultResource:any) {
           if(resultResource && resultResource.deleteFlag) {
-            let template= <ArmTemplate>$scope.template;
-            
             template.deleteResource(<Resource>resultResource);
           }
         });
@@ -47,8 +43,7 @@ angular.module('vis')
     }
     
     $scope.downloadArmTemplate = function() {
-      let armTemplate = <ArmTemplate>$scope.template;
-      let json = armTemplate.toJson();
+      let json = template.toJson();
       
       downloadJsonInBrowser(json, 'armTemplate.json');
     }
@@ -60,10 +55,8 @@ angular.module('vis')
       });
             
       modalInstance.result.then(function(newTemplate:ArmTemplate) {
-        $scope.template = newTemplate;
-        var graph = <Graph>$scope.graph;
+        template = newTemplate;
         graph.applyTemplate(newTemplate);
-        $scope.graph = graph;
       });
     };
     
@@ -74,10 +67,8 @@ angular.module('vis')
       });
             
       modalInstance.result.then(function(newTemplate:ArmTemplate) {
-        $scope.template = newTemplate;
-        var graph = <Graph>$scope.graph;
+        template = newTemplate;
         graph.applyTemplate(newTemplate);
-        $scope.graph = graph;
       });
     };
     
@@ -91,7 +82,7 @@ angular.module('vis')
       //These items get passed to the chiid controller
       resolve: {
         armTemplate: function () {
-          return $scope.template;
+          return template;
         }
       }
       });

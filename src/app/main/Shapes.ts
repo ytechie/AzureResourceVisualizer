@@ -17,7 +17,7 @@ class Group extends Shape {
                'fill': '#FFFFFF',
                'fill-opacity': 0,
                'stroke-width': 3,
-               'z-index': -1;
+               'z-index': -1
            },
            text: {
             ref: 'rect',

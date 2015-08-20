@@ -81,6 +81,12 @@ class Graph {
         return shape;
     }
     
+    addInertShape(shape:Shape) {
+        shape.position(60, 60);
+        
+        this.graph.addCell(shape);
+    }
+    
     private displayNodesAndLinks() {
         this.resourceShapes.forEach(shape => {
             this.addShape(shape); 

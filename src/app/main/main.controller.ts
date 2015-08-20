@@ -2,6 +2,7 @@
 /// <reference path="graph.ts" />
 /// <reference path="sampleARM.ts" />
 /// <reference path="ToolboxItems.ts" />
+/// <reference path="Shapes.ts" />
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 angular.module('vis')
@@ -92,6 +93,14 @@ angular.module('vis')
       var resource = new Resource(toolboxItem);
       
       template.resources.push(resource);
+    }
+    
+    $scope.addShape = function(name:string) {
+      if(name === 'group') {
+        var shape = new Group();
+        graph.addInertShape(shape);
+        shape.toBack();
+      }
     }
   
     function downloadJsonInBrowser(json:string, fileName:string) {  

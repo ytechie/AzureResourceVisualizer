@@ -6,7 +6,7 @@ var assert = chai.assert;
 
 describe("ExpressionParser", () => {
 	it('should parse simple variable expression', () => {
-		var ep = new ExpressionParser(null, null);
+		var ep = new ExpressionParser();
 		var exp = ep.parse("variables('var1')")
 		
 		assert.equal(exp.operator, "variables");
@@ -15,7 +15,7 @@ describe("ExpressionParser", () => {
 	});
 	
 	it('should parse expression with multiple parameters', () => {
-		var ep = new ExpressionParser(null, null);
+		var ep = new ExpressionParser();
 		var exp = ep.parse("concat('var1', 'var2')")
 		
 		assert.equal(exp.operator, "concat");
@@ -25,7 +25,7 @@ describe("ExpressionParser", () => {
 	});
 	
 	it('should parse nested expressions', () => {
-		var ep = new ExpressionParser(null, null);
+		var ep = new ExpressionParser();
 		var exp = ep.parse("concat('var1', nest('var2', 'var3'))")
 		
 		assert.equal(exp.operator, "concat");

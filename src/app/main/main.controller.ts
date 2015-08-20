@@ -114,8 +114,19 @@ angular.module('vis')
       
         a.download = 'armTemplate.json';
         a.href = window.URL.createObjectURL(blob);
-        a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+        (<any>a.dataset).downloadurl =  ['text/json', a.download, a.href].join(':');
         e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
         a.dispatchEvent(e);
     }
   });
+
+//Avoid compiler errors  
+interface HTMLAnchorElement {
+    download: string;
+}
+
+interface Window {
+    URL: {
+        createObjectURL(x);
+    }
+}

@@ -96,8 +96,8 @@ class Graph {
            this.addShapeLink(shapeLink); 
         });
         
-        var bbox = this.paper.getContentBBox();
-        this.paper.fitToContent(bbox.width, bbox.height + 400);
+        var bbox = (<any>this.paper).getContentBBox();
+        (<any>this.paper).fitToContent(bbox.width, bbox.height + 400);
     }
     
     private createLinks() {

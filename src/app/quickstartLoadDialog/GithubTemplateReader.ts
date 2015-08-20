@@ -11,7 +11,7 @@ class GithubTemplateReader{
 	getTemplateCategories($http:angular.IHttpProvider, callback: (categories:TemplateCategory[]) => void) {
 		var reqUrl = this.GithubTemplateRoot;
 		
-		$http.get(reqUrl)
+		(<any>$http).get(reqUrl)
 			.success(function(data:any[], status, headers, config) {
 				//var dataObj = JSON.parse(data);
 				var categories = new Array<TemplateCategory>();
@@ -35,7 +35,7 @@ class GithubTemplateReader{
 	}
 	
 	getTemplateMetadata($http:angular.IHttpProvider, categoryData:TemplateCategory, callback: (metadata:TemplateMetadataInterface) => void) {
-		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'metadata.json')
+		(<any>$http).get(this.GithubTemplateRoot + categoryData.name + '/' + 'metadata.json')
 			.success(function(data:any, status, headers, config) {
 				if(data.encoding !== "base64") {
 					throw new Error("Github template reader was expecting base64 encoded file");
@@ -49,7 +49,7 @@ class GithubTemplateReader{
 	
 	getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory,
 		callback: (armTemplate:ArmTemplate, parseError:string) => void) {
-		$http.get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
+		(<any>$http).get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
 			.success(function(data:any, status, headers, config) {
 				if(data.encoding !== "base64") {
 					throw new Error("Github template reader was expecting base64 encoded file");

@@ -6,7 +6,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 angular.module('vis')
-  .controller('MainCtrl', function ($scope, $http, $modal) {
+  .controller('MainCtrl', function ($scope, $stateParams, $http, $modal) {
           
     $scope.toolboxItems = toolboxItems;
     
@@ -15,28 +15,19 @@ angular.module('vis')
     
     var graph = new Graph(toolboxItems);
     
-    //Check the referrer to see if there is a template. Not sure if
-    //there is a way to make this more generic.
-    let referrer = document.referrer;
-    //referrer = 'https://github.com/Azure/azure-quickstart-templates/tree/master/101-create-security-group'
-    if(referrer && referrer.indexOf("github.com/Azure/azure-quickstart-templates/") >= 0) {
-      let urlParts = referrer.split("/");
-      let quickStart = urlParts[urlParts.length - 1];
+    if($stateParams.load) {
+      let loadUrl = $stateParams.load;
       
-      let githubUrl = 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/'
-        + quickStart
-        + '/azuredeploy.json';
-      
-      let category = $http.get(githubUrl)
+      let category = $http.get(loadUrl)
         .success(function(data:any, status, headers, config) {
           template = new ArmTemplate(<ArmTemplateInterface>data);
           graph.applyTemplate(template);
         }).error(function(data, status, headers, config) {
 				  alert('Error loading your template from GitHub. Please go back and try again.')
 			  });
+    } else {
+      graph.applyTemplate(template);
     }
-    
-    //graph.applyTemplate(template);
     
     graph.resourceSelected = function(resource:Resource, modal:boolean) {
       if(modal) {        

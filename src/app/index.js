@@ -4,7 +4,7 @@ angular.module('vis', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRes
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/?load',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });

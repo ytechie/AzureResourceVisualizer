@@ -25,7 +25,7 @@ class ResourceShape extends joint.shapes.basic.Rect {
             this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':55,
                 'x-alignment' :'middle', 'text': toolboxItem.friendlyName, 'fill': '#000000'};
        } else {
-           this.titleText = this.sourceResource.type;
+           this.titleText = this.sourceResource.type.replace("/", "\n");
        }  
        
        this.attributes.attrs.rect.fill = '#FFFFFF';

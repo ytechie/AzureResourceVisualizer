@@ -64,5 +64,33 @@
       new ToolboxResource(
         "Key Vault.png",
         "Key Vault",
-        'Microsoft.KeyVault/vaults' )
+        'Microsoft.KeyVault/vaults' ),
+      new ToolboxResource(
+        "Azure SQL Database.png",
+        "SQL Server",
+        'Microsoft.Sql/servers'),
+      new ToolboxResource(
+        "Web App (was Websites).png",
+        "Web App",
+        'Microsoft.Web/sites'),
+      new ToolboxResource(
+        "Web App (was Websites).png",
+        "Server Farm",
+        'Microsoft.Web/serverFarms'),
+      new ToolboxResource(
+        "Autoscaling.png",
+        "Auto Scale",
+        'microsoft.insights/autoscalesettings'),
+      new ToolboxResource(
+        "Azure alert.png",
+        "Alert Rules",
+        'microsoft.insights/alertrules'),
+      new ToolboxResource(
+        "Operational Insights.png",
+        "Insights",
+        'microsoft.insights/components'),
+      new ToolboxResource(
+        "Web App (was Websites).png",
+        "Web Site",
+        'Microsoft.Web/Sites')
     ];  

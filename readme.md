@@ -1,12 +1,6 @@
 # Azure Resource Visualizer
 
-Azure provides an amazing feature called the Azure Resource Manager. The idea is that you create a JSON document that represents the resources and the relationships. You then call an API in Azure with that desired configuration, and it makes it happen.
-
-You're Captain Picard of the USS Azure.
-
-![Make it So](make-it-so.jpg)
-
-JSON is amazing, and not just because we share a name. However, I think visually (think: Visio). Since JSON is easy to work with in JavaScript, and we have a variety of diagramming libraries, let's clean this up!
+A visual way of visualizing, editing, and saving Azure Resource Manager Templates.
 
 ![Azure Resource Manager Diagram](arm-diagram.jpg)
 
@@ -14,7 +8,9 @@ Here is a quick [YouTube screencast](https://www.youtube.com/watch?v=5xP1-IrtNMU
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/5xP1-IrtNMU?rel=0" frameborder="0" allowfullscreen></iframe>
 
-## Future
+## Future / Project Status
+
+There is still much to be done. Right now, the resource relationship parser is not perfect, but there is a plan in place to support all possible ARM Template dependencies. Also, the creation experience is currently lacking.
 
 We're using a [public Trello board](https://trello.com/b/41RiUCGs/azure-resource-visualizer) for managing the features and roadmap.
 
@@ -35,10 +31,6 @@ Build the website to serve it locally:
 
 **Problem:** Old Typescript version installed. (use `tsc-v` to check)
 **Solution:** Delete TypeScript from the `C:\Program Files (x86)\Microsoft SDKs\TypeScript`
-
-### Ignore this, I'm testing:
-
-[test link](http://localhost:3000/#/)
 
 ## License
 

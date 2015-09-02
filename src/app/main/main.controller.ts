@@ -18,6 +18,8 @@ angular.module('vis')
     if($stateParams.load) {
       let loadUrl = $stateParams.load;
       
+      $scope.loadUrl = loadUrl;
+      
       let category = $http.get(loadUrl)
         .success(function(data:any, status, headers, config) {
           template = new ArmTemplate(<ArmTemplateInterface>data);

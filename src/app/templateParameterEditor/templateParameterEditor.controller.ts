@@ -92,10 +92,4 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
       }
     });
   }
-  
-  function downloadParamJsonInBrowser(json:string, fileName:string) {  
-      //Uses this file saver: https://github.com/Teleborder/FileSaver.js 
-      var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
-      (<any>window).saveAs(blob, fileName);
-    }
 });

@@ -94,18 +94,8 @@ angular.module('vis').controller('TemplatePropertiesCtrl', function ($scope, $mo
   }
   
   function downloadParamJsonInBrowser(json:string, fileName:string) {  
-      //Crazy code to download the resulting JSON file
-      //http://bgrins.github.io/devtools-snippets/#console-save
-      var blob = new Blob([json], {type: 'text/json'}),
-            e    = document.createEvent('MouseEvents'),
-            a    = document.createElement('a')
-      
-        //A typescript guru could probably figure out how to get rid of these errors
-      
-        a.download = fileName;
-        a.href = window.URL.createObjectURL(blob);
-        (<any>a.dataset).downloadurl =  ['text/json', a.download, a.href].join(':');
-        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        a.dispatchEvent(e);
+      //Uses this file saver: https://github.com/Teleborder/FileSaver.js 
+      var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
+      (<any>window).saveAs(blob, fileName);
     }
 });

@@ -115,6 +115,13 @@ IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
   popd
 )
 
+IF EXIST "%DEPLOYMENT_TARGET%\tsd.json" (
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd .\node_modules\.bin\tsd install
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+
 
 :: 5. Run gulp transformations
 IF EXIST "%DEPLOYMENT_TARGET%\gulpfile.js" (

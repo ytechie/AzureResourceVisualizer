@@ -10,11 +10,14 @@
     "test": "gulp test"
   },
   "devDependencies": {
+    "bower": "^1.5.2",
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.2",
+    "chai": "^3.2.0",
     "chalk": "~0.5.1",
     "concat-stream": "~1.4.7",
     "del": "~1.1.1",
+    "gulp": "^3.9.0",
     "gulp-angular-filesort": "~1.0.4",
     "gulp-angular-templatecache": "~1.5.0",
     "gulp-autoprefixer": "~2.1.0",
@@ -46,8 +49,11 @@
     "lodash": "~3.2.0",
     "main-bower-files": "~2.5.0",
     "merge-stream": "~0.1.7",
+    "mocha": "^2.3.0",
     "protractor": "~1.7.0",
     "require-dir": "~0.1.0",
+    "tsd": "^0.6.4",
+    "typescript": "^1.5.3",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.0",
     "wrench": "~1.5.8"

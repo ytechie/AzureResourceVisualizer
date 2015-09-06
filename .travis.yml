@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 0.10
+before_script:
+  - npm install -g gulp bower tsd typescript mocha chai
+  - bower install
+  - tsd install
+script: gulp
+branches:
+  only:
+    - master

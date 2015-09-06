@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 0.10
+  - 0.12
 before_script:
   - npm install -g gulp bower tsd typescript mocha chai
   - bower install
@@ -9,5 +9,8 @@ script: gulp
 branches:
   only:
     - master
-deploy:  
-  provider: azure_web_apps
+    
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: scripts/deploy.sh

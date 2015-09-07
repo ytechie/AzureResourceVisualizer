@@ -3,7 +3,7 @@ node_js:
   - 0.12
   
 notifications:
-  slack: armvisualizer:{slack_notification_key}
+  slack: armvisualizer:${slack_notification_key}
   
 before_script:
   - npm install -g gulp bower tsd typescript mocha chai

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ytechie/AzureResourceVisualizer.svg?branch=master)](https://travis-ci.org/ytechie/AzureResourceVisualizer)
+
 # Azure Resource Visualizer
 
 A visual way of visualizing, editing, and saving Azure Resource Manager Templates.

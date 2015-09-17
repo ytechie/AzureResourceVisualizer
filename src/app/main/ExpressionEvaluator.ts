@@ -9,7 +9,7 @@ class ExpressionEvaluator{
 	
 	resolveDependsOnId(expression:Expression){
 		if(expression.operator !== 'concat') {
-			return ''; 
+			return expression.convertToString();
 		}
 		
 		var id = '';

@@ -41,6 +41,10 @@ class ExpressionParser {
 		var expression:Expression = new Expression();
 		var state:ParserState = ParserState.NEW;
 		
+		if(expressionText.charAt(0) === '[' && expressionText.charAt(expressionText.length - 1) === ']') {
+			expressionText = expressionText.substr(1, expressionText.length - 2);
+		}
+		
 		for(var i:number = 0; i < expressionText.length; i++) {
 			var ch:string = expressionText.charAt(i);
 			

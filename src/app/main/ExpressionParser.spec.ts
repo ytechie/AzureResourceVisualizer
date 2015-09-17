@@ -39,4 +39,12 @@ describe("ExpressionParser", () => {
 		assert.equal(nested.operands[0], 'var2');
 		assert.equal(nested.operands[1], 'var3');
 	});
+	
+	it('should strip brackets', () => {
+		var ep = new ExpressionParser();
+		var exp = ep.parse("[foo()]")
+		
+		assert.equal(exp.operator, "foo");
+		assert.equal(exp.operands.length, 0);
+	});
 });

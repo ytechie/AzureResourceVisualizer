@@ -1,6 +1,7 @@
  /// <reference path="ToolboxResource.ts" />
  
- var toolboxItems:Array<ToolboxResource> = [
+ function getToolboxItems() {
+    var toolboxItems:Array<ToolboxResource> = [
       new ToolboxResource(
         "Virtual machine.png",
         "Virtual Machine",
@@ -93,4 +94,7 @@
         "Web App (was Websites).png",
         "Web Site",
         'Microsoft.Web/Sites')
-    ];  
+    ];
+    
+    return toolboxItems;
+ }

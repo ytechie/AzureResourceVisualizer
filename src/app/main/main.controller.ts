@@ -8,6 +8,7 @@
 angular.module('vis')
   .controller('MainCtrl', function ($scope, $stateParams, $http, $modal) {
           
+    var toolboxItems = getToolboxItems();
     $scope.toolboxItems = toolboxItems;
     
     let templateData = <ArmTemplateInterface>arm;

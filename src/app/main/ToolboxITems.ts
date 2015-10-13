@@ -19,7 +19,7 @@
             'Microsoft.Network/loadBalancers' ),
         new ToolboxResource(
             "Virtual Network.png",
-            "VPN",
+            "Network",
             'Microsoft.Network/virtualNetworks' ),
         new ToolboxResource(
             "NIC.png",

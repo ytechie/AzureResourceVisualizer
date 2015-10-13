@@ -1,15 +1,40 @@
 'use strict';
 
+var path = require('path');
+var conf = require('./gulp/conf');
+
+var _ = require('lodash');
+var wiredep = require('wiredep');
+
+function listFiles() {
+  var wiredepOptions = _.extend({}, conf.wiredep, {
+    dependencies: true,
+    devDependencies: true
+  });
+
+  return wiredep(wiredepOptions).js
+    .concat([
+      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
+      path.join(conf.paths.src, '/**/*.spec.js'),
+      path.join(conf.paths.src, '/**/*.mock.js'),
+      path.join(conf.paths.src, '/**/*.html')
+    ]);
+}
+
 module.exports = function(config) {
 
   var configuration = {
-    autoWatch : false,
+    files: listFiles(),
+
+    singleRun: true,
+
+    autoWatch: false,
 
     frameworks: ['jasmine'],
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
-      moduleName: 'gulpAngular'
+      moduleName: 'ArmViz'
     },
 
     browsers : ['PhantomJS'],

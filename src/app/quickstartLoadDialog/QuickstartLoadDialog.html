@@ -2,21 +2,21 @@
     <h3 class="modal-title">Quickstart Template Loader</h3>
 </div>
 <div class="modal-body">
-    <select ng-model="selectedCategory" ng-options="category.name for category in categories"
-        ng-change="categorySelected()">
+    <select ng-model="main.selectedCategory" ng-options="category.name for category in main.categories"
+        ng-change="main.categorySelected()">
     </select>
     
-    <div ng-show="templateMetadata">
+    <div ng-show="main.templateMetadata">
         <br />
-        <b>Name:</b> {{ templateMetadata.itemDisplayName }}<br />
-        <b>Description:</b> {{ templateMetadata.description }}<br />
-        <b>Summary:</b> {{ templateMetadata.summary }}<br />
-        <b>GitHub Username:</b> {{ templateMetadata.githubUsername }}<br />
-        <b>Date Updated:</b> {{ templateMetadata.dateUpdated }}<br />
+        <b>Name:</b> {{ main.templateMetadata.itemDisplayName }}<br />
+        <b>Description:</b> {{ main.templateMetadata.description }}<br />
+        <b>Summary:</b> {{ main.templateMetadata.summary }}<br />
+        <b>GitHub Username:</b> {{ main.templateMetadata.githubUsername }}<br />
+        <b>Date Updated:</b> {{ main.templateMetadata.dateUpdated }}<br />
     </div>
     
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="open()">Open</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="main.open()">Open</button>
+    <button class="btn btn-warning" ng-click="main.cancel()">Cancel</button>
 </div>

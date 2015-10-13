@@ -1,36 +1,55 @@
 /// <reference path="GithubTemplateReader.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
-angular.module('vis').controller('QuickstartLoadDialog', function ($scope, $modalInstance, $http) {
-	var github = new GithubTemplateReader();
-	
-	github.getTemplateCategories($http, categoriesReceived);
-	
-	function categoriesReceived(categories:TemplateCategory[]):void {
-		$scope.categories = categories;	
-	}
-	
-	$scope.categorySelected = function() {
-		var category = <TemplateCategory>$scope.selectedCategory
+module ArmViz {
+	export class QuickstartLoadDialog {
+		private $scope:any;
+		private $modalInstance:any;
+		private $http:any;
 		
-		github.getTemplateMetadata($http, category, metadata => {
-			$scope.templateMetadata = metadata;
-		});
-	}
-
-	$scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
-  	};
-	  
-	$scope.open = function () {
-		var category = <TemplateCategory>$scope.selectedCategory;
+		private github:GithubTemplateReader;
 		
-		github.getTemplate($http, category, (armTemplate, parseError) => {
-			if(parseError) {
-				alert('Error parsing template: ' + parseError);
-				return;
-			}
-			$modalInstance.close(armTemplate);
-		});
+		categories:TemplateCategory[];
+		templateMetadata:TemplateMetadataInterface;
+		selectedCategory:TemplateCategory;
+		
+		/** @ngInject */
+		constructor($scope, $modalInstance, $http) {
+			this.$scope = $scope;
+			this.$modalInstance = $modalInstance;
+			this.$http = $http;
+			
+			this.github = new GithubTemplateReader();
+			
+			this.github.getTemplateCategories($http, (c) => this.categoriesReceived(c));
+		}
+		
+		categoriesReceived(categories:TemplateCategory[]):void {	
+			this.categories = categories;
+		}
+		
+		categorySelected() {
+			var category = this.selectedCategory
+			
+			this.github.getTemplateMetadata(this.$http, category, metadata => {
+				this.templateMetadata = metadata;
+			});
+		}
+	
+		cancel() {
+			this.$modalInstance.dismiss('cancel');
+		};
+		
+		open() {
+			var category = this.selectedCategory;
+			
+			this.github.getTemplate(this.$http, category, (armTemplate, parseError) => {
+				if(parseError) {
+					alert('Error parsing template: ' + parseError);
+					return;
+				}
+				this.$modalInstance.close(armTemplate);
+			});
+		}
 	}
-});
+}

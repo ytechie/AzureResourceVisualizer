@@ -1,4 +1,4 @@
-module ParameterValuesTemplate {
+module TemplateParameterEditor {
 
    export class DeploymentParameters implements ParameterValuesTemplateInterface{
     	$schema: string;

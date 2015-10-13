@@ -1,5 +1,7 @@
-class Parameter {
-	type:string;
-	defaultValue:string;
-	allowedValues:string[];
+module ArmViz {
+	export class Parameter {
+		type:string;
+		defaultValue:string;
+		allowedValues:string[];
+	}
 }

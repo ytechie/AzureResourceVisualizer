@@ -2,15 +2,15 @@
     <h3 class="modal-title">Resource Properties</h3>
 </div>
 <div class="modal-body">
-    <textarea ng-model="resourceJson" spellcheck="false"
+    <textarea ng-model="main.resourceJson" spellcheck="false"
         style="height: 400px; width: 100%; max-height: 400px; resize: none;">
     </textarea>
     
-    <b>{{validationResult}}</b>
+    <b>{{main.validationResult}}</b>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-danger" ng-click="delete()">Delete</button>
-    <button class="btn btn-info" ng-click="validate()">Validate</button>
-    <button class="btn btn-primary" ng-click="save()">Save</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-danger" ng-click="main.delete()">Delete</button>
+    <button class="btn btn-info" ng-click="main.validate()">Validate</button>
+    <button class="btn btn-primary" ng-click="main.save()">Save</button>
+    <button class="btn btn-warning" ng-click="main.cancel()">Cancel</button>
 </div>

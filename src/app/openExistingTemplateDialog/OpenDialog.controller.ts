@@ -1,31 +1,35 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="../main/ArmTemplate.ts" />
 
-angular.module('vis').controller('OpenDialog.controller', function ($scope, $modalInstance, $http) {
-	$scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
-  	};
-	  
-	$scope.open = function () {
-		var fileReader = new FileReader();
-		fileReader.onload = function(e) {
-			var json = <string>(<any>e.target).result;
-			let template = ArmTemplate.CreateFromJson(json);
+module OpenDialog {	
+	export class Controller {
+		private $scope:any;
+		private $modalInstance:any;
+		private $http;
+		
+		/** @ngInject */
+		constructor($scope, $modalInstance, $http) {
+			this.$scope = $scope;
+			this.$modalInstance = $modalInstance;
+			this.$http = $http;
 			
-			$modalInstance.close(template);
+			this.$scope.blah = 'foo';
 		}
-		fileReader.readAsText($scope.file);
+		
+		cancel() {
+			this.$modalInstance.dismiss('cancel');
+		}
+		
+		//this is using the FileSelect directive
+		
+		open() {
+			var fileReader = new FileReader();
+			fileReader.onload = (e) => {
+				var json = <string>(<any>e.target).result;
+				let template = ArmViz.ArmTemplate.CreateFromJson(json);
+				
+				this.$modalInstance.close(template);
+			}
+			fileReader.readAsText(this.$scope.file);
+		}
 	}
-});
-
-angular.module("vis").directive("ngFileSelect",function(){
-  return {
-    link: function($scope,el){
-      
-      el.bind("change", function(e){
-        (<any>$scope).file = (<any>(e.srcElement || e.target)).files[0];
-		$scope.$apply();
-      });
-    } 
-  }
-});
+}

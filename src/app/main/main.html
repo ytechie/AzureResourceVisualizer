@@ -19,20 +19,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar col-md-4 toolbox">
-          <button class="btn btn-default" ng-click="openExistingTemplate()" style="width: 250px; margin-bottom: 3px;">Open Existing Template</button><br />
-          <button class="btn btn-default" ng-click="loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;" ng-hide="!!loadUrl">
+          <button class="btn btn-default" ng-click="main.openExistingTemplate()" style="width: 250px; margin-bottom: 3px;">Open Existing Template</button><br />
+          <button class="btn btn-default" ng-click="main.loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;" ng-hide="!!main.loadUrl">
             Load ARM Quickstart Template
-          </button><br ng-hide="!!loadUrl" />
-          <button class="btn btn-default" ng-click="openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
-          <button class="btn btn-default" ng-click="downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
+          </button><br ng-hide="!!main.loadUrl" />
+          <button class="btn btn-default" ng-click="main.openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
+          <button class="btn btn-default" ng-click="main.downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
           
            <h4>Toolbox</h4>
-           <a ng-repeat="toolboxItem in toolboxItems" class="itemContainer" ng-click="toolboxItemClick(toolboxItem)">
+           <a ng-repeat="toolboxItem in main.toolboxItems" class="itemContainer" ng-click="main.toolboxItemClick(toolboxItem)">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.iconName}}" />
                <span class="label">{{toolboxItem.friendlyName}}</span>
            </a>
            <h4>Other Elements</h4>
-           <a class="itemContainer" ng-click="addShape('group')">
+           <a class="itemContainer" ng-click="main.addShape('group')">
                 <span class="label">Group</span>
            </a>
            <br />

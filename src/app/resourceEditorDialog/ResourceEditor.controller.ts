@@ -1,55 +1,70 @@
 /// <reference path="../main/Resource.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
-angular.module('vis').controller('ResourceEditorController', function ($scope, $modalInstance, arm:ArmTemplate, resource:Resource) {
-	$scope.arm = arm;
-  $scope.resource = resource;
-  $scope.resourceJson = JSON.stringify(resource, null, 2);
-  
-  $scope.validate = function() {
-    try {
-       JSON.parse($scope.resourceJson);
-       $scope.validationResult = "Valid JSON!";
-    } catch(err) {
-      $scope.validationResult = "Invalid JSON: " + err.toString();
-    }
-  }
-  
-  $scope.delete = function() {
-    if(!confirm("Are you sure you want to delete this resource?")) {
-      return;
-    }
+module ArmViz {
+  export class ResourceEditorController {
+    private $modalInstance:any;
     
-    var resource = <Resource>$scope.resource;
-    (<any>resource).deleteFlag = true;
+    private arm:ArmTemplate;
+    private resource:Resource;
     
-    $modalInstance.close(resource);
-  }
-  
-  $scope.save = function () {
-    var newResource:Resource;
+    resourceJson:string;
+    validationResult:string;
     
-    try {
-      newResource = JSON.parse($scope.resourceJson);
-    } catch(err) {
-      alert('Invalid JSON: ' + err.toString());
+    /** @ngInject */
+    constructor($modalInstance:any, arm:ArmTemplate, resource:Resource) {
+      this.$modalInstance = $modalInstance;
       
-      return;
+      this.arm = arm;
+      this.resource = resource;
+      this.resourceJson = JSON.stringify(this.resource, null, 2);
     }
     
-    //Update the EXISTING resource without destroying it
-    for(var key in resource) {
-      if(resource.hasOwnProperty(key)) {
-        delete resource[key];
+    validate() {
+      try {
+        JSON.parse(this.resourceJson);
+        this.validationResult = "Valid JSON!";
+      } catch(err) {
+        this.validationResult = "Invalid JSON: " + err.toString();
       }
     }
     
-    $.extend(resource, newResource);
+    delete() {
+      if(!confirm("Are you sure you want to delete this resource?")) {
+        return;
+      }
       
-	  $modalInstance.close(resource);
-	};
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
+      let resource = this.resource;
+      (<any>resource).deleteFlag = true;
+      
+      this.$modalInstance.close(resource);
+    }
+    
+    save() {
+      var newResource:Resource;
+      
+      try {
+        newResource = JSON.parse(this.resourceJson);
+      } catch(err) {
+        alert('Invalid JSON: ' + err.toString());
+        
+        return;
+      }
+      
+      //Update the EXISTING resource without destroying it
+      for(var key in this.resource) {
+        if(this.resource.hasOwnProperty(key)) {
+          delete this.resource[key];
+        }
+      }
+      
+      $.extend(this.resource, newResource);
+        
+      this.$modalInstance.close(this.resource);
+    };
+  
+    cancel() {
+      this.$modalInstance.dismiss('cancel');
+    };
+  }
+}

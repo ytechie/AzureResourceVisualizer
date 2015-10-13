@@ -35,8 +35,17 @@
     "lodash/lodash.d.ts": {
       "commit": "66f88ec51858bb21bc375fa91a963c04bc09401e"
     },
+    "orchestrator/orchestrator.d.ts": {
+      "commit": "14ab703f435375194360cdba3abab61afc879c18"
+    },
+    "q/Q.d.ts": {
+      "commit": "14ab703f435375194360cdba3abab61afc879c18"
+    },
     "backbone/backbone.d.ts": {
-      "commit": "66f88ec51858bb21bc375fa91a963c04bc09401e"
+      "commit": "14ab703f435375194360cdba3abab61afc879c18"
+    },
+    "backbone/backbone-global.d.ts": {
+      "commit": "14ab703f435375194360cdba3abab61afc879c18"
     }
   }
 }

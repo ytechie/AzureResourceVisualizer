@@ -8,6 +8,9 @@
 
 var gutil = require('gulp-util');
 
+//Use this flag to know if the build should fail, or just error
+exports.watching = false;
+
 /**
  *  The main paths of your project handle these with care
  */
@@ -36,6 +39,12 @@ exports.errorHandler = function(title) {
 
   return function(err) {
     gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
-    this.emit('end');
+    
+    if(exports.watching) {
+      this.emit('end');
+    } else {
+      process.exit(1);
+    }
+    
   };
 };

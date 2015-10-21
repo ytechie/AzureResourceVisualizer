@@ -10,8 +10,12 @@ function isOnlyChange(event) {
   return event.type === 'changed';
 }
 
-gulp.task('watch', ['inject'], function () {
+gulp.task('setWatchFlag', function() {
+  //Don't fail on watch errors
+  conf.watching = true;
+});
 
+gulp.task('watch', ['setWatchFlag', 'inject'], function () {
   gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
 
   gulp.watch([

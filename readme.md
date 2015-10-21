@@ -19,7 +19,7 @@ We're using a [public Trello board](https://trello.com/b/41RiUCGs/azure-resource
 ## Installation
 
 	npm install
-	npm install -g gulp bower tsd typescript mocha chai
+	npm install -g gulp bower tsd typescript
 	bower install
 	tsd install
 

@@ -96,7 +96,11 @@
         new ToolboxResource(
             "API App.png",
             "API App",
-            'Microsoft.AppService/apiApps')
+            'Microsoft.AppService/apiApps'),
+        new ToolboxResource(
+            "Unidentified feature object.png",
+            "App Gateway",
+            'Microsoft.AppService/gateways')
         ];
         
         return toolboxItems;

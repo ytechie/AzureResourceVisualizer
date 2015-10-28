@@ -92,7 +92,11 @@
         new ToolboxResource(
             "Web App (was Websites).png",
             "Web Site",
-            'Microsoft.Web/Sites')
+            'Microsoft.Web/Sites'),
+        new ToolboxResource(
+            "API App.png",
+            "API App",
+            'Microsoft.AppService/apiApps')
         ];
         
         return toolboxItems;

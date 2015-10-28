@@ -137,7 +137,7 @@ module ArmViz {
             var foundItem:ToolboxResource = null;
             
             this.toolboxItems.forEach(toolboxItem => {
-            if(toolboxItem.resourceType === resource.type) {
+            if(toolboxItem.resourceType.toUpperCase() === resource.type.toUpperCase()) {
                 foundItem = toolboxItem;
             }
             });

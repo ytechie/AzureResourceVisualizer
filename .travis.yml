@@ -9,6 +9,7 @@ before_script:
   - npm install -g gulp bower tsd typescript
   - bower install
   - tsd install
+  - cat typings/backbone/backbone.d.ts
   - patch typings/backbone/backbone.d.ts backbonefix.patch
 script: gulp
 branches:

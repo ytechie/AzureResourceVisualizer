@@ -53,13 +53,12 @@
         expect(deps[1]).toEqual(gateway);
 	});
     
-    /* CURRENTLY BROKEN, no nested resource functionality
     it('should resolve workflow dependencies', function() {
 		var deps = graph.getDependencies(workflow);
         expect(deps.length).toEqual(2);
 		expect(deps[0]).toEqual(apiapp);
         expect(deps[1]).toEqual(apiapp2);
-	});*/
+	});
   });
   
   //https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-alert-to-queue-with-logic-app/azuredeploy.json

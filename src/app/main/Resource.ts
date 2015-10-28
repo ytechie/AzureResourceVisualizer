@@ -15,10 +15,10 @@ module ArmViz {
 		}
 		
 		static resourceMatchesDependency(resource:Resource, dep:DependencyId):boolean {
-			return (resource.type === dep.type)
+			return (resource.type.toUpperCase() === dep.type.toUpperCase())
 				&&
-				(resource.name === dep.name ||
-				resource.name === "[" + dep.name + "]");
+				(resource.name.toUpperCase() === dep.name.toUpperCase() ||
+				resource.name.toUpperCase() === "[" + dep.name.toUpperCase() + "]");
 		}
 	}
 }

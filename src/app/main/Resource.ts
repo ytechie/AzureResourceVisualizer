@@ -14,21 +14,11 @@ module ArmViz {
 			}
 		}
 		
-		static getResourceId(resource:Resource) {
-			var id = resource.type + '/';
-			
-			if(resource.name.charAt(0) === '[') {
-				//We have an expression
-				
-				let ep = new ExpressionParser();
-				let exp = ep.parse(resource.name);
-				let ee = new ExpressionEvaluator(null);
-				id += ee.resolveDependsOnId(exp);
-			} else {
-				id += resource.name;
-			}
-			
-			return id;
+		static resourceMatchesDependency(resource:Resource, dep:DependencyId):boolean {
+			return (resource.type === dep.type)
+				&&
+				(resource.name === dep.name ||
+				resource.name === "[" + dep.name + "]");
 		}
 	}
 }

@@ -1,12 +1,13 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 
 /// <reference path="../ArmTemplate.ts" />
+/// <reference path="../Graph.ts" />
 
 (function() {
   'use strict';
 
   describe('201-1-vm-loabalancer-2-nics', function(){
-	var graph,
+	var graph = new ArmViz.ArmTemplate(null),
 		storage,
 		ipAddresses,
 		vnets,

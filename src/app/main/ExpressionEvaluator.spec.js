@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
 /// <reference path="ExpressionParser.ts" />
+/// <reference path="ExpressionEvaluator.ts" />
 
 (function() {
   'use strict';
@@ -8,20 +9,21 @@
   describe('ExpressionEvaluator', function(){
     it('should process concat expression', function() {
 		var ep = new ArmViz.ExpressionParser();
-		var exp = ep.parse("[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'), copyindex())]");
-		var ee = new ArmViz.ExpressionEvaluator(null);
+		var exp = ep.parse("[concat('Microsoft.Network/networkInterfaces/', parameters('nicNamePrefix'))]");
 		
-		var dependsOnId = ee.resolveDependsOnId(exp);
-		//console.log(dependsOnId);
+		var dependsOn = ArmViz.ExpressionEvaluator.resolveDependsOnId(exp);
+		expect(dependsOn.type).toEqual("Microsoft.Network/networkInterfaces");
+		expect(dependsOn.name).toEqual("parameters('nicNamePrefix')")
 	});
 	
-	it('should process basic parameter expression', function() {
+	it('should process nested parameters in concat', function() {
 		var ep = new ArmViz.ExpressionParser();
-		var exp = ep.parse("parameters('storageAccountName')");
-		var ee = new ArmViz.ExpressionEvaluator(null);
+		var exp = ep.parse("resourceId('Microsoft.Web/sites', concat(parameters('endpointName'), 'gateway'))");
 		
-		var dependsOnId = ee.resolveDependsOnId(exp);
-		expect(dependsOnId).toEqual("parameters('storageAccountName')");
+		var dependsOn = ArmViz.ExpressionEvaluator.resolveDependsOnId(exp);
+		expect(dependsOn.type).toEqual("Microsoft.Web/sites");
+		expect(dependsOn.name).toEqual("concat(parameters('endpointName'),'gateway')");
 	});
+	
   });
 })();

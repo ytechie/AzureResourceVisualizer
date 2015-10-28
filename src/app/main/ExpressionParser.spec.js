@@ -45,4 +45,18 @@ describe("ExpressionParser", function() {
 		expect(exp.operator).toEqual("foo");
 		expect(exp.operands.length).toEqual(0);
 	});
+	
+	it('should parse multi-nested expressions', function() {
+		var ep = new ArmViz.ExpressionParser();
+		var exp = ep.parse("resourceId('Microsoft.Web/sites', concat(parameters('endpointName'), 'gateway'))");
+	
+		expect(exp.operator).toEqual('resourceId');
+		expect(exp.operands.length).toEqual(2);
+		expect(exp.operands[0]).toEqual('Microsoft.Web/sites');
+		expect(exp.operands[1].operator).toEqual('concat');
+		expect(exp.operands[1].operands.length).toEqual(2)
+		expect(exp.operands[1].operands[0].operator).toEqual('parameters');
+		expect(exp.operands[1].operands[0].operands[0]).toEqual('endpointName');
+		expect(exp.operands[1].operands[1]).toEqual('gateway');
+	});
 });

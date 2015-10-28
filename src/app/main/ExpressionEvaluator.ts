@@ -1,32 +1,67 @@
 //Expression reference: https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-functions/
 
+/// <reference path="DependencyId.ts" />
+
 module ArmViz {
 	export class ExpressionEvaluator{
 		constructor(private armTemplate:ArmTemplate) {
 		}
 		
-		resolveDependsOnId(expression:Expression){
-			if(expression.operator !== 'concat') {
-				return expression.convertToString();
-			}
+		//Finds the dependency ID for an expression
+		//If the expression is a resourceId, an ID and Name is returned
+		//If the expression is a concat or anything else, an ID is returned
+		static resolveDependsOnId(expression:Expression):DependencyId{
+			let ret = new DependencyId();
 			
-			var id = '';
-			
-			for(var i = 0; i < expression.operands.length; i++) {
-				var operand = expression.operands[i];
-				
-				if(operand instanceof Expression) {
-					id += operand.convertToString();
-				} else {
-					id += operand;
+			let params = new Array<string>();
+			for(let i = 0; i < expression.operands.length; i++) {
+				if(expression.operands[i] instanceof Expression) {
+					params.push((<Expression>expression.operands[i]).convertToString());
+				} else {		
+					params.push(<string>expression.operands[i]);
 				}
 			}
 			
-			return id;
-		}
-		
-		evaluateExpression(expression:Expression) {
-			throw new Error('Not supported');
+			if(expression.operator === 'resourceId') {
+				/*
+				Example:
+				[resourceId('Microsoft.AppService/gateways', concat(parameters('endpointName'),'gateway'))]
+				
+				Matches:
+				type: "Microsoft.Storage/storageAccounts"
+				name: "[concat(parameters('endpointName'),'gateway')]"
+				*/
+				
+				ret.type = params[0];
+				ret.name = params.slice(1).join(",");
+			} else if(expression.operator === 'concat') {
+				/*
+				Example:
+				[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]
+				
+				Matches:
+				type: "Microsoft.Storage/storageAccounts"
+				name: "[parameters('storageAccountName')]"
+				*/
+				
+				ret.type = params[0];
+				if(ret.type.charAt(ret.type.length-1) === '/') {
+					ret.type = ret.type.substr(0, ret.type.length - 1);
+				}
+				
+				for(let i = 1; i < params.length; i++) {
+					if(params[i].charAt(0) === "'") {
+						params[i] = params[i].substr(1, params[i].length-2);
+					}
+				}
+				ret.name = params.slice(1).join(',');
+			} else {
+				//The ID is just a string
+				//ret.id = expression.operator + "(" + params.join(",") + ")";
+				console.error("Unsupported expression type:" + expression.convertToString());
+			}
+
+			return ret;
 		}
 	}
 }

@@ -51,49 +51,32 @@ module ArmViz {
                 }
                 
                 getDependencies(resource:Resource) {
-                        var dependencyNames = this.getDependencyNames(resource.dependsOn);
                         var dependencies = new Array<Resource>();
                         
-                        dependencyNames.forEach(dependencyName => {
+                        if(!resource.dependsOn || resource.dependsOn.length === 0) {
+                                return dependencies;
+                        }
+                        
+                        let dependsOn = new Array<string>();
+                        if(Array.isArray(resource.dependsOn)) {
+                                dependsOn = dependsOn.concat(<string[]>resource.dependsOn);
+                        } else {
+                                dependsOn.push(<string>resource.dependsOn);
+                        }
+                        
+                        dependsOn.forEach(dependencyName => {
+                                let ep = new ExpressionParser();
+                                let exp = ep.parse(dependencyName);
+                                let dependency = ExpressionEvaluator.resolveDependsOnId(exp);
+
                                 this.templateData.resources.forEach(resource => {
-                                        if(resource.name === dependencyName || Resource.getResourceId(resource) === dependencyName) {
+                                        if(Resource.resourceMatchesDependency(resource, dependency)) {
                                                 dependencies.push(resource);
-                                        }     
+                                        }
                                 });
                         });
                         
                         return dependencies;
-                }
-                
-                private getDependencyNames(depends:string|string[]) {
-                        var self = this;
-                        var ret:string[] = [];
-                        
-                        //If we get multiple dependencies, make recursive calls
-                        if (depends && Array.isArray(depends)) {
-                        var dependsArray:string[] = <string[]>depends;
-                        
-                        dependsArray.forEach(function (dep) {
-                                var deps = self.getDependencyNames(dep);
-                                if (deps && deps.length > 0) {
-                                ret = ret.concat(deps);
-                                }
-                        });
-                        } else if(depends) {
-                        var dependsString = <string>depends;
-                        
-                        if (dependsString.indexOf('[') === 0) {
-                                var parser = new ExpressionParser();
-                                
-                                var expression = parser.parse(dependsString.substring(1, dependsString.length - 2));
-                                var ee = new ExpressionEvaluator(null);
-                                var dependsOnId = ee.resolveDependsOnId(expression);
-                                
-                                ret.push(dependsOnId);
-                        }
-                        }
-                        
-                        return ret;
                 }
                 
                 deleteResource(resource:Resource) {

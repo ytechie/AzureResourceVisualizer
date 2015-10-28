@@ -22,6 +22,7 @@ We're using a [public Trello board](https://trello.com/b/41RiUCGs/azure-resource
 	npm install -g gulp bower tsd typescript
 	bower install
 	tsd install
+	patch typings/backbone/backbone.d.ts backbonefix.patch
 
 ## Running
 

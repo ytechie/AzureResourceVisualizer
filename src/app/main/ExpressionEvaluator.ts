@@ -55,9 +55,14 @@ module ArmViz {
 					}
 				}
 				ret.name = params.slice(1).join(',');
+			} else if(expression.source.indexOf("/") !== expression.source.lastIndexOf("/")){
+				/*
+				Example: Microsoft.Resources/deployments/VNet
+				*/
+				
+				ret.type = expression.source.substr(0, expression.source.lastIndexOf("/"));
+				ret.name = expression.source.substr(expression.source.lastIndexOf("/") + 1);
 			} else {
-				//The ID is just a string
-				//ret.id = expression.operator + "(" + params.join(",") + ")";
 				console.error("Unsupported expression type:" + expression.source);
 			}
 

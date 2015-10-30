@@ -58,7 +58,7 @@ module ArmViz {
 			} else {
 				//The ID is just a string
 				//ret.id = expression.operator + "(" + params.join(",") + ")";
-				console.error("Unsupported expression type:" + expression.convertToString());
+				console.error("Unsupported expression type:" + expression.source);
 			}
 
 			return ret;

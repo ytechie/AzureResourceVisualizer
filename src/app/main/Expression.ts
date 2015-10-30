@@ -3,6 +3,12 @@ module ArmViz {
 		operator:string = '';
 		operands = new Array<Expression | string>();
 		
+		source:string;
+		
+		constructor(source?:string) {
+			this.source = source;
+		}
+		
 		convertToString() {
 			var s = this.operator;
 			

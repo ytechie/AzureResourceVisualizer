@@ -3,7 +3,7 @@ module ArmViz {
 		parse(expressionText:string):Expression {
 			var buffer = '';
 
-			var expression:Expression = new Expression();
+			var expression:Expression = new Expression(expressionText);
 			
 			var expressionStack = new Array<Expression>();
 			

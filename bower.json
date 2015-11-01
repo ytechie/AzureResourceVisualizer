@@ -14,7 +14,7 @@
     "dagre": "~0.7.1",
     "file-saver.js": "~1.20150507.2",
     "jointjs": "~0.9.5",
-    "jquery": "~2.1.1",
+    "jquery": "2.0.3",
     "knockout": "~3.3.0",
     "lodash": "~3.10.1",
     "underscore": "~1.8.3"

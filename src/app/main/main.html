@@ -25,6 +25,10 @@
           </button><br ng-hide="!!main.loadUrl" />
           <button class="btn btn-default" ng-click="main.openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
           <button class="btn btn-default" ng-click="main.downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
+          <button class="btn btn-default" ng-click="main.createVisualizeButton()" style="width: 250px; margin-bottom: 3px;" ng-hide="!main.loadedUrl">
+            Create Visualizer Button
+          </button>
+          </br />
           
            <h4>Toolbox</h4>
            <a ng-repeat="toolboxItem in main.toolboxItems" class="itemContainer" ng-click="main.toolboxItemClick(toolboxItem)">

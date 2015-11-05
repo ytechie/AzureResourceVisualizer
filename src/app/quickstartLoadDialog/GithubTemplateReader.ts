@@ -50,7 +50,12 @@ module ArmViz {
 		
 		public getTemplate($http:angular.IHttpProvider, categoryData:TemplateCategory,
 			callback: (armTemplate:ArmTemplate, parseError:string) => void) {
-			(<any>$http).get(this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json')
+			
+			
+			let apiTemplateLink = this.GithubTemplateRoot + categoryData.name + '/' + 'azuredeploy.json';
+			categoryData.templateLink = 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/' + categoryData.name + '/' + 'azuredeploy.json';
+				
+			(<any>$http).get(apiTemplateLink)
 				.success((data:any, status, headers, config) => {
 					if(data.encoding !== "base64") {
 						throw new Error("Github template reader was expecting base64 encoded file");
@@ -82,6 +87,7 @@ module ArmViz {
 		name:string;
 		url:string;
 		html_url:string;
+		templateLink:string;
 	}
 	
 	export interface TemplateMetadataInterface {

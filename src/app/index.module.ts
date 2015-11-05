@@ -20,6 +20,7 @@ module ArmViz.Module {
       .controller('TemplateParameterManager', TemplateParameterEditor.Controller)
       .controller('OpenDialogController', OpenDialog.Controller)
       .controller('ResourceEditorController', ArmViz.ResourceEditorController)
+      .controller('CreateVisualizerButtonController', ArmViz.CreateVisualizerButtonController)
       
       .directive('ngFileSelect', Directives.ngFileSelect)
       ; //this is intentional :-)

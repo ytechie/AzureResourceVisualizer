@@ -7,6 +7,8 @@ module ArmViz {
     private $modal:any;
     private template:ArmTemplate;
     private graph:Graph;
+    private loadUrl:string; //Url from the address bar
+    private loadedUrl:string;
     
     toolboxItems:ToolboxResource[];
     
@@ -24,11 +26,12 @@ module ArmViz {
       this.graph = new Graph(toolboxItems);
       
       if($stateParams.load) {
-        let loadUrl = $stateParams.load;
+        this.loadUrl = $stateParams.load;
+        this.loadedUrl = this.loadUrl;
         
-        $scope.loadUrl = loadUrl;
+        $scope.loadUrl = this.loadUrl;
         
-        let category = $http.get(loadUrl)
+        let category = $http.get(this.loadUrl)
           .success((data:any, status, headers, config) => {
             this.template = new ArmTemplate(<ArmTemplateInterface>data);
             this.graph.applyTemplate(this.template);
@@ -94,9 +97,10 @@ module ArmViz {
           controllerAs: 'main'
         });
               
-        modalInstance.result.then((newTemplate:ArmTemplate) => {
-          this.template = newTemplate;
-          this.graph.applyTemplate(newTemplate);
+        modalInstance.result.then((result:DialogResult) => {
+          this.template = result.armTemplate;
+          this.loadedUrl = result.templateInfo.templateLink;
+          this.graph.applyTemplate(result.armTemplate);
         });
       }
       
@@ -112,6 +116,22 @@ module ArmViz {
         resolve: {
           armTemplate: () => {
             return this.template;
+          }
+        }
+        });
+      }
+      
+      createVisualizeButton() {
+        var modalInstance = this.$modal.open({
+        templateUrl: '/app/createVisualizerButton/createVisualizerButton.html',
+        controller: 'CreateVisualizerButtonController',
+        controllerAs: 'main',
+        size: 'lg',
+        
+        //These items get passed to the chiid controller
+        resolve: {
+          loadUrl: () => {
+            return this.loadedUrl;
           }
         }
         });

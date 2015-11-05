@@ -48,7 +48,7 @@ module ArmViz {
 					alert('Error parsing template: ' + parseError);
 					return;
 				}
-				this.$modalInstance.close(armTemplate);
+				this.$modalInstance.close(new DialogResult(armTemplate, category));
 			});
 		}
 	}

@@ -29,7 +29,7 @@ module ArmViz {
 		}
 		
 		categorySelected() {
-			var category = this.selectedCategory
+			var category = this.selectedCategory;
 			
 			this.github.getTemplateMetadata(this.$http, category, metadata => {
 				this.templateMetadata = metadata;

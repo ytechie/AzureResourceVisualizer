@@ -14,8 +14,7 @@ module TemplateParameterEditor {
       this.armTemplate = armTemplate;
       
       let templateParameterManager = new TemplateParameterManager(armTemplate);
-      let paramValues = new DeploymentParameters();
-    
+          
       this.parameterModel = new Array<ParameterModelItem>();
       
       let parameterNames = templateParameterManager.getParameterNames();
@@ -41,10 +40,6 @@ module TemplateParameterEditor {
   
     cancel() {
       this.$modalInstance.dismiss('cancel');
-    }
-    
-    genParamValues(){
-      var paramValuesJSON = TemplateParameterEditor.generateJSON(this.parameterModel);
     }
     
     addParameter() {

@@ -3,14 +3,11 @@
 /// <reference path="DependencyId.ts" />
 
 module ArmViz {
-	export class ExpressionEvaluator{
-		constructor(private armTemplate:ArmTemplate) {
-		}
-		
+	export class ExpressionEvaluator {
 		//Finds the dependency ID for an expression
 		//If the expression is a resourceId, an ID and Name is returned
 		//If the expression is a concat or anything else, an ID is returned
-		static resolveDependsOnId(expression:Expression):DependencyId{
+		static resolveDependsOnId(expression:Expression):DependencyId {
 			let ret = new DependencyId();
 			
 			let params = new Array<string>();
@@ -55,7 +52,7 @@ module ArmViz {
 					}
 				}
 				ret.name = params.slice(1).join(',');
-			} else if(expression.source.indexOf("/") !== expression.source.lastIndexOf("/")){
+			} else if(expression.source.indexOf("/") !== expression.source.lastIndexOf("/")) {
 				/*
 				Example: Microsoft.Resources/deployments/VNet
 				*/

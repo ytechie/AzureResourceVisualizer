@@ -11,6 +11,6 @@ module Directives {
             	$scope.$apply();
           	});
         } 
-    }
+    };
   };
 }

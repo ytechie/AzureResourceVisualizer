@@ -255,5 +255,5 @@ module ArmViz {
 		}
 		}
 	]
-	}
+	};
 }

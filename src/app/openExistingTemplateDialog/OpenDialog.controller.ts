@@ -28,7 +28,7 @@ module OpenDialog {
 				let template = ArmViz.ArmTemplate.CreateFromJson(json);
 				
 				this.$modalInstance.close(template);
-			}
+			};
 			fileReader.readAsText(this.$scope.file);
 		}
 	}

@@ -5,8 +5,8 @@
 ///repos/:owner/:repo/contents/:path 
 
 module ArmViz {
-	export class GithubTemplateReader{
-		private GithubApiRoot:string = 'https://api.github.com/'
+	export class GithubTemplateReader {
+		private GithubApiRoot:string = 'https://api.github.com/';
 		private GithubTemplateRoot:string = this.GithubApiRoot + 'repos/Azure/azure-quickstart-templates/contents/';
 		
 		public getTemplateCategories($http:angular.IHttpProvider, callback: (categories:TemplateCategory[]) => void) {
@@ -71,11 +71,9 @@ module ArmViz {
 					
 					var armTemplate:ArmTemplate = null;
 					var parseError:string;
-					try
-					{
+					try {
 						armTemplate = ArmTemplate.CreateFromJson(fileContents);
-					}
-					catch(err) {
+					} catch(err) {
 						parseError = err.toString();
 					}
 					callback(armTemplate, parseError);

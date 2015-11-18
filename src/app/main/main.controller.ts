@@ -31,12 +31,12 @@ module ArmViz {
         
         $scope.loadUrl = this.loadUrl;
         
-        let category = $http.get(this.loadUrl)
+        $http.get(this.loadUrl)
           .success((data:any, status, headers, config) => {
             this.template = new ArmTemplate(<ArmTemplateInterface>data);
             this.graph.applyTemplate(this.template);
-          }).error((data, status, headers, config) =>{
-            alert('Error loading your template from GitHub. Please go back and try again.')
+          }).error((data, status, headers, config) => {
+            alert('Error loading your template from GitHub. Please go back and try again.');
           });
       } else {
         this.graph.applyTemplate(this.template);
@@ -68,7 +68,7 @@ module ArmViz {
           $scope.selectedResource = JSON.stringify(resource, null, 2);
           $scope.$apply();
         }
-      }
+      };
     }
        
     downloadArmTemplate() {
@@ -106,7 +106,7 @@ module ArmViz {
       
       openTemplateProperties() {
         //Documentation: http://angular-ui.github.io/bootstrap/#/modal
-        var modalInstance = this.$modal.open({
+        this.$modal.open({
         templateUrl: '/app/templateParameterEditor/TemplateProperties.html',
         controller: 'TemplateParameterManager',
         controllerAs: 'main',
@@ -122,7 +122,7 @@ module ArmViz {
       }
       
       createVisualizeButton() {
-        var modalInstance = this.$modal.open({
+        this.$modal.open({
         templateUrl: '/app/createVisualizerButton/createVisualizerButton.html',
         controller: 'CreateVisualizerButtonController',
         controllerAs: 'main',
@@ -166,6 +166,6 @@ module ArmViz {
   interface Window {
       URL: {
           createObjectURL(x);
-      }
+      };
   }
 }

@@ -1,22 +1,21 @@
 module TemplateParameterEditor {
 
-   export class DeploymentParameters implements ParameterValuesTemplateInterface{
+   export class DeploymentParameters implements ParameterValuesTemplateInterface {
     	$schema: string;
     	contentVersion: string;
     	parameters: {p: typeof Parameter};
         // todo: modify constructor with default values for properties
-        constructor(){
+        constructor() {
             // this.$schema = "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentParameters.json#";
             // this.contentVersion = "1.0.0.0";
             // this.parameters = {p: Parameter};
         }
     }
     
-    export class Parameter implements ParameterInterface{
+    export class Parameter implements ParameterInterface {
     	value: any;
     	//metadata: MetadataInterface;
-    	constructor(val: string)//, md?: Metadata)
-    	{
+    	constructor(val: string) {
     		this.value = val;
     		//this.metadata  = md;
     	}
@@ -31,7 +30,7 @@ module TemplateParameterEditor {
     // 	}
     // }
 
-    export interface ParameterValuesTemplateInterface{
+    export interface ParameterValuesTemplateInterface {
 		$schema: string;
     	contentVersion: string;
     	parameters: {p: typeof Parameter};

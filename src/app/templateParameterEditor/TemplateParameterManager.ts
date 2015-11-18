@@ -6,11 +6,11 @@ module TemplateParameterEditor {
 		armTemplate:ArmViz.ArmTemplate;
 		
 		constructor(armTemplate:ArmViz.ArmTemplate) {
-			this.armTemplate = armTemplate
+			this.armTemplate = armTemplate;
 		}
 		
 		public getParameterNames():string[] {
-			return Object.keys(this.armTemplate.parameters)
+			return Object.keys(this.armTemplate.parameters);
 		}
 		
 		public getParameterData(propertyName:string):ArmViz.Parameter {

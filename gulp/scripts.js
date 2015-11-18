@@ -20,8 +20,8 @@ var $ = require('gulp-load-plugins')();
       path.join(conf.paths.src, '/app/**/*.ts'),
       path.join('!' + conf.paths.src, '/app/**/*.spec.ts')])
     .pipe($.sourcemaps.init())
-    //.pipe($.tslint())
-    //.pipe($.tslint.report('prose', { emitError: false }))
+    .pipe($.tslint())
+    .pipe($.tslint.report('prose', { emitError: false }))
     .pipe($.typescript(tsProject)).on('error', conf.errorHandler('TypeScript'))
     .pipe($.concat('index.module.js'))
     //.pipe($.sourcemaps.write())

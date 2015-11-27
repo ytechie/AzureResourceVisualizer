@@ -38,7 +38,7 @@ module ArmViz {
                 changes.forEach((change) => {
                         if (change.status === 'added') {
                             let shape = self.addResource(change.value);
-                            self.addShape(shape);
+                            self.drawShape(shape);
                         } else if (change.status === 'deleted') {
                             //Remove from the array too?
                             self.removeResourceShape(change.value);
@@ -85,15 +85,29 @@ module ArmViz {
         
         private displayNodesAndLinks() {
             this.resourceShapes.forEach(shape => {
-                this.addShape(shape); 
+                this.drawShape(shape); 
             });
             
-            this.resourceShapeLinks.forEach(shapeLink => {
-            this.addShapeLink(shapeLink); 
-            });
+            this.refreshLinks();
             
             var bbox = (<any>this.paper).getContentBBox();
             (<any>this.paper).fitToContent(bbox.width, bbox.height + 400);
+        }
+        
+        public refreshLinks() {
+            //Remove existing links
+            this.resourceShapeLinks.forEach(shapeLink => {
+                shapeLink.remove();
+            });
+            this.resourceShapeLinks = new Array<ResourceShapeLink>();
+            
+            //Create new links from the model
+            this.createLinks();
+            
+            //Draw the links
+            this.resourceShapeLinks.forEach(shapeLink => {
+                this.drawShapeLink(shapeLink); 
+            });
         }
         
         private createLinks() {
@@ -120,11 +134,11 @@ module ArmViz {
             });
         }
         
-        private addShape(shape:ResourceShape) {
+        private drawShape(shape:ResourceShape) {
             this.graph.addCell(shape);
         }
         
-        private addShapeLink(link:ResourceShapeLink) {
+        private drawShapeLink(link:ResourceShapeLink) {
             this.graph.addCell(link);
         }
         

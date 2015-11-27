@@ -63,6 +63,8 @@ module ArmViz {
             if(resultResource && resultResource.deleteFlag) {
               this.template.deleteResource(<Resource>resultResource);
             }
+            
+            this.graph.refreshLinks();
           });
         } else {
           $scope.selectedResource = JSON.stringify(resource, null, 2);

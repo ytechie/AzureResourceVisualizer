@@ -29,19 +29,16 @@ module PortalUIEditor {
     };
     
     getEncodedEchoUrl() {
-      return "https%3A%2F%2Fgist.githubusercontent.com%2Fytechie%2Ffc14095fb7d08c140933%2Fraw%2F5f5e96e593eb8e0d1f01da845156acd145489473%2Ftest.json";
-      
       let obj = JSON.parse(this.json);
       let cleanJson = JSON.stringify(obj);
       
-      //temp
-      cleanJson = this.json;
+      const portalUiUrl = 'https://portal.azure.com/?clientOptimizations=false#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';
       
-      let encodedJson = btoa(cleanJson);
-      
-      let echoUrl = "http://urlecho.azurewebsites.net/?echo64=" + encodedJson;
-      
-      return encodeURIComponent(echoUrl);
+      let redirectorUrl = 'http://armportaluiredirector.azurewebsites.net/?json=';
+      redirectorUrl += encodeURIComponent(cleanJson);
+      redirectorUrl += '&redir=' + encodeURIComponent(portalUiUrl);
+ 
+      return redirectorUrl;
     }
     
   }

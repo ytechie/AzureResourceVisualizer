@@ -11,7 +11,7 @@
 <div class="modal-footer">
     <button class="btn btn-info" ng-click="main.validate()">Validate</button>
     <a
-        ng-href="https://portal.azure.com/?clientOptimizations=false#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{&quot;initialData&quot;:{},&quot;providerConfig&quot;:{&quot;createUiDefinition&quot;:&quot;{{main.getEncodedEchoUrl()}}&quot;}}"
+        ng-href="{{main.getEncodedEchoUrl()}}"
         class="btn btn-primary" target="_blank">Preview</a>
     <button class="btn btn-warning" ng-click="main.close()">Close</button>
 </div>

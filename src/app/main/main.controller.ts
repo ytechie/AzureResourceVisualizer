@@ -139,6 +139,15 @@ module ArmViz {
         });
       }
       
+      openPortalUIEditor() {
+        this.$modal.open({
+          templateUrl: '/app/portalUIEditor/PortalUIEditorDialog.html',
+          controller: 'PortalUIEditorController',
+          controllerAs: 'main',
+          size: 'lg'
+        });
+      }
+      
       toolboxItemClick(toolboxItem:ToolboxResource) {
         var resource = new Resource(toolboxItem);
         

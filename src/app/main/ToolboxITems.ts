@@ -100,7 +100,11 @@
         new ToolboxResource(
             "Unidentified feature object.png",
             "App Gateway",
-            'Microsoft.AppService/gateways')
+            'Microsoft.AppService/gateways'),
+        new ToolboxResource(
+            "Availability Set.png",
+            "VM Scale Set",
+            'Microsoft.Compute/virtualMachineScaleSets')
         ];
         
         return toolboxItems;

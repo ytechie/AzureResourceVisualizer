@@ -50,7 +50,7 @@
             "Workflow",
             'Microsoft.Logic/workflows' ),
         new ToolboxResource(
-            "Unidentified feature object.png",
+            "Deployment.png",
             "Deployment",
             'Microsoft.Resources/deployments' ),
         new ToolboxResource(

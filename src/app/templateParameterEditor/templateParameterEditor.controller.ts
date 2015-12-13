@@ -52,6 +52,17 @@ module TemplateParameterEditor {
       this.parameterModel.splice(index, 1);
     }
     
+    genParamValues(){
+        var paramValuesJSON = TemplateParameterEditor.generateJSON(this.parameterModel);
+        this.downloadJsonInBrowser(paramValuesJSON, "parameters.json");
+    }
+    
+    private downloadJsonInBrowser(json:string, fileName:string) {  
+        //Uses this file saver: https://github.com/Teleborder/FileSaver.js 
+        var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
+        (<any>window).saveAs(blob, fileName);
+      }
+    
     private synchronizeModelToTemplate(modelParameters:ParameterModelItem[],
       templateParameterManager:TemplateParameterManager) {
         

@@ -10,8 +10,6 @@ module TemplateParameterEditor {
 		
 		var json = JSON.stringify(template, null, 2);
 		
-		//Uses this file saver: https://github.com/Teleborder/FileSaver.js 
-      	var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
-      	(<any>window).saveAs(blob, 'ARMTemplate.params.json');
+		return json;
 	}
 }

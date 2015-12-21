@@ -52,7 +52,7 @@ module TemplateParameterEditor {
       this.parameterModel.splice(index, 1);
     }
     
-    genParamValues(){
+    genParamValues() {
         var paramValuesJSON = TemplateParameterEditor.generateJSON(this.parameterModel);
         this.downloadJsonInBrowser(paramValuesJSON, "parameters.json");
     }

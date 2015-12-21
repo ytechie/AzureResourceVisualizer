@@ -5,6 +5,7 @@ module ArmViz {
   export class MainCtrl {
     private $scope:any;
     private $modal:any;
+    private $http:any; //ng.IHttpProvider causes errors
     private template:ArmTemplate;
     private graph:Graph;
     private loadUrl:string; //Url from the address bar
@@ -16,6 +17,7 @@ module ArmViz {
     constructor($scope, $stateParams, $http, $modal) {
       this.$scope = $scope;
       this.$modal = $modal;
+      this.$http = $http;
       
       var toolboxItems = getToolboxItems();
       this.toolboxItems = toolboxItems;
@@ -149,9 +151,33 @@ module ArmViz {
       }
       
       toolboxItemClick(toolboxItem:ToolboxResource) {
-        var resource = new Resource(toolboxItem);
-        
-        this.template.resources.push(resource);
+        let jsonFileName = toolboxItem.getDefaultJsonFileName();
+        var resource:Resource;
+
+        if(jsonFileName) {
+            if(toolboxItem.defaultJson) {
+                //Used the cached JSON and avoid a server trip
+                resource = <Resource>JSON.parse(toolboxItem.defaultJson); //$http returns JSON as an object
+                this.template.resources.push(resource);
+                return;
+            }
+            
+            //This is the first time getting this resource type
+            this.$http.get('/assets/toolbox-data/' + jsonFileName)
+            .success((data:any, status, headers, config) => {
+                resource = <Resource>data; //$http returns JSON as an object
+                toolboxItem.defaultJson = JSON.stringify(data);
+                this.template.resources.push(resource);
+            }).error((data, status, headers, config) => {
+                //Fall back to using a primitive resource default JSON
+                resource = new Resource(toolboxItem);
+                this.template.resources.push(resource);
+            });
+        } else {
+            //No default JSON, use something really basic
+            resource = new Resource(toolboxItem);
+            this.template.resources.push(resource);
+        }
       }
       
       addShape(name:string) {

@@ -4,7 +4,8 @@
         new ToolboxResource(
             "Virtual machine.png",
             "Virtual Machine",
-            'Microsoft.Compute/virtualMachines' ),
+            'Microsoft.Compute/virtualMachines',
+            true),
         new ToolboxResource(
             "Unidentified feature object.png",
             "VM Extension",

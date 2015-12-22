@@ -11,6 +11,15 @@ describe("ExpressionParser", function() {
 		expect(exp.operands.length).toEqual(1);
 		expect(exp.operands[0]).toEqual('var1');
 	});
+    
+    it('should parse string', function() {
+		var ep = new ArmViz.ExpressionParser();
+		var exp = ep.parse("storageLoop")
+		
+		expect(exp.operator).toEqual("");
+		expect(exp.operands.length).toEqual(1);
+		expect(exp.operands[0]).toEqual('storageLoop');
+	});
 	
 	it('should parse expression with multiple parameters', function() {
 		var ep = new ArmViz.ExpressionParser();

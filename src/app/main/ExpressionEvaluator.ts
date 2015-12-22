@@ -59,7 +59,13 @@ module ArmViz {
 				
 				ret.type = expression.source.substr(0, expression.source.lastIndexOf("/"));
 				ret.name = expression.source.substr(expression.source.lastIndexOf("/") + 1);
-			} else {
+			} else if(!expression.operator && expression.operands.length === 1 && expression.operands[0] instanceof String) {
+                /*
+                Example: storageLoop
+                */
+                
+                ret.name = <string>expression.operands[0];
+            } else {
 				console.error("Unsupported expression type:" + expression.source);
 			}
 

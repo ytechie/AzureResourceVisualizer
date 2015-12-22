@@ -10,6 +10,12 @@ module ArmViz {
 			if(expressionText.charAt(0) === '[' && expressionText.charAt(expressionText.length - 1) === ']') {
 				expressionText = expressionText.substr(1, expressionText.length - 2);
 			}
+            
+            //An expression could just be a string
+            if(expressionText.indexOf('(') < 0) {
+                expression.operands.push(expressionText);
+                return expression;
+            }
 			
 			for(var i:number = 0; i < expressionText.length; i++) {
 				var ch:string = expressionText.charAt(i);

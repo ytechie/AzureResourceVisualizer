@@ -1,0 +1,21 @@
+{
+  "apiVersion": "2015-05-01-preview",
+  "type": "Microsoft.Network/virtualNetworks",
+  "name": "[variables('virtualNetworkName')]",
+  "location": "[variables('location')]",
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "[variables('addressPrefix')]"
+      ]
+    },
+    "subnets": [
+      {
+        "name": "[variables('subnetName')]",
+        "properties": {
+          "addressPrefix": "[variables('subnetPrefix')]"
+        }
+      }
+    ]
+  }
+}

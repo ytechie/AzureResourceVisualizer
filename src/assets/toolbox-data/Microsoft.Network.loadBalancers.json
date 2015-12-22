@@ -1,0 +1,40 @@
+{
+  "apiVersion": "2015-05-01-preview",
+  "name": "[variables('lbName')]",
+  "type": "Microsoft.Network/loadBalancers",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
+  ],
+  "properties": {
+    "frontendIPConfigurations": [
+      {
+        "name": "LoadBalancerFrontEnd",
+        "properties": {
+          "publicIPAddress": {
+            "id": "[variables('publicIPAddressID')]"
+          }
+        }
+      }
+    ],
+    "backendAddressPools": [
+      {
+        "name": "BackendPool1"
+      }
+    ],
+    "inboundNatRules": [
+      {
+        "name": "RDP-VM0",
+        "properties": {
+          "frontendIPConfiguration": {
+            "id": "[variables('frontEndIPConfigID')]"
+          },
+          "protocol": "tcp",
+          "frontendPort": 50001,
+          "backendPort": 3389,
+          "enableFloatingIP": false
+        }
+      }
+    ]
+  }
+}

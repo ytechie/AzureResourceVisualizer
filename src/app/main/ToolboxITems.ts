@@ -17,19 +17,23 @@
         new ToolboxResource(
             "Azure load balancer.png",
             "Load Balancer",
-            'Microsoft.Network/loadBalancers' ),
+            'Microsoft.Network/loadBalancers',
+            true ),
         new ToolboxResource(
             "Virtual Network.png",
             "Network",
-            'Microsoft.Network/virtualNetworks' ),
+            'Microsoft.Network/virtualNetworks',
+            true ),
         new ToolboxResource(
             "NIC.png",
             "NIC",
-            'Microsoft.Network/networkInterfaces' ),
+            'Microsoft.Network/networkInterfaces',
+            true ),
         new ToolboxResource(
             "Service Endpoint.png",
             "Public IP",
-            'Microsoft.Network/publicIPAddresses' ),
+            'Microsoft.Network/publicIPAddresses',
+            true ),
         new ToolboxResource(
             "Unidentified feature object.png",
             "NSG",
@@ -41,7 +45,8 @@
         new ToolboxResource(
             "Storage (Azure).png",
             "Storage Acct",
-            'Microsoft.Storage/storageAccounts' ),
+            'Microsoft.Storage/storageAccounts',
+            true ),
         new ToolboxResource(
             "Unidentified feature object.png",
             "Automation",

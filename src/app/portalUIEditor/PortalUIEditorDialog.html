@@ -2,9 +2,9 @@
     <h3 class="modal-title">Portal UI Editor</h3>
 </div>
 <div class="modal-body">
-    <textarea ng-model="main.json" spellcheck="false"
+    <div ui-ace="{ mode: 'json' }" ng-model="main.json"
         style="height: 400px; width: 100%; max-height: 400px; resize: none;">
-    </textarea>
+    </div>
     
     <b>{{main.validationResult}}</b>
 </div>

@@ -29,7 +29,12 @@ module PortalUIEditor {
     };
     
     getEncodedEchoUrl() {
-      let obj = JSON.parse(this.json);
+      var obj:any;
+      try {
+        obj = JSON.parse(this.json);
+      } catch(err) {
+          return null;
+      }
       let cleanJson = JSON.stringify(obj);
       
       const portalUiUrl = 'https://portal.azure.com/?clientOptimizations=false#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';

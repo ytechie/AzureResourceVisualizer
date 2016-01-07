@@ -28,7 +28,8 @@
     "ace-builds": {
       "main": [
         "src-noconflict/ace.js",
-        "src-noconflict/mode-javascript.js"
+        "src-noconflict/mode-json.js",
+        "src-noconflict/worker-json.js"
       ]
     }
   },

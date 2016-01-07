@@ -2,7 +2,7 @@
 
 module ArmViz {
     export class ResourceShape extends joint.shapes.basic.Rect {
-        markup:string = '<a><g class="rotatable"><g class="scalable"><rect/></g><image/><text/></g></a>';
+        markup:string = '<a><g class="rotatable"><g class="scalable"><rect/></g><image/><text/><title/></g></a>';
         PNGRef: string;
         
         sourceResource:Resource;
@@ -35,6 +35,8 @@ module ArmViz {
             this.attributes.attrs.rect.fill = '#FFFFFF';
             this.attributes.attrs.rect.stroke = '#0079D6';
             this.attributes.attrs.rect['stroke-width'] = 2;
+            
+            this.attributes.attrs.title = {'text': 'Double-click to edit'};
         }
         
         

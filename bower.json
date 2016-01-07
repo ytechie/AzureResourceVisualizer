@@ -28,10 +28,7 @@
     },
     "ace-builds": {
       "main": [
-        "src-noconflict/ace.js",
-        "src-noconflict/mode-json.js",
-        "src-noconflict/worker-json.js",
-        "src-noconflict/theme-idle_fingers.js"
+        "src-noconflict/ace.js"
       ]
     }
   },

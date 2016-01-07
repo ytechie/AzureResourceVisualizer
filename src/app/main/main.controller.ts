@@ -50,6 +50,7 @@ module ArmViz {
             templateUrl: '/app/resourceEditorDialog/ResourceEditor.html',
             controller: 'ResourceEditorController',
             controllerAs: 'main',
+            size: 'lg',
             
             //These items get passed to the child controller
             resolve: {

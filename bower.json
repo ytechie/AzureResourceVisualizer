@@ -17,11 +17,19 @@
     "jquery": "2.0.3",
     "knockout": "~3.3.0",
     "lodash": "~3.10.1",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "ace-builds": "~1.2.2",
+    "angular-ui-ace": "~0.2.3"
   },
   "overrides": {
     "underscore": {
       "main": []
+    },
+    "ace-builds": {
+      "main": [
+        "src-noconflict/ace.js",
+        "src-noconflict/mode-javascript.js"
+      ]
     }
   },
   "devDependencies": {

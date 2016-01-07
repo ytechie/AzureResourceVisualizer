@@ -46,6 +46,9 @@
     },
     "backbone/backbone-global.d.ts": {
       "commit": "62eedc3121a5e28c50473d2e4a9cefbcb9c3957f"
+    },
+    "ace/ace.d.ts": {
+      "commit": "81b951f1ac437d1eb5ff5171a0bfa6c467634b13"
     }
   }
 }

@@ -33,6 +33,7 @@ Build the website to serve it locally:
 ### Troubleshooting
 
 **Problem:** Old Typescript version installed. (use `tsc-v` to check)
+
 **Solution:** Delete TypeScript from the `C:\Program Files (x86)\Microsoft SDKs\TypeScript`
 
 ## License

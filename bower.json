@@ -19,7 +19,8 @@
     "lodash": "~3.10.1",
     "underscore": "~1.8.3",
     "ace-builds": "~1.2.2",
-    "angular-ui-ace": "~0.2.3"
+    "angular-ui-ace": "~0.2.3",
+    "requirejs": "~2.1.22"
   },
   "overrides": {
     "underscore": {

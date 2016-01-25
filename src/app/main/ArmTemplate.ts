@@ -68,12 +68,18 @@ module ArmViz {
                                 let ep = new ExpressionParser();
                                 let exp = ep.parse(dependencyName);
                                 let dependency = ExpressionEvaluator.resolveDependsOnId(exp);
+                                let dependencyFound = false;
 
                                 this.templateData.resources.forEach(resource => {
                                         if(Resource.resourceMatchesDependency(resource, dependency)) {
                                                 dependencies.push(resource);
+                                                dependencyFound = true;
                                         }
                                 });
+                                
+                                if(!dependencyFound) {
+                                    console.warn("Coundn't find a matching dependency for '" + dependencyName + "'");
+                                }
                         });
                         
                         return dependencies;

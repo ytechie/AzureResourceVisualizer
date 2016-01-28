@@ -18,7 +18,7 @@ module ArmViz {
 					var categories = new Array<TemplateCategory>();
 					
 					data.forEach(item => {
-						if(item.type === 'dir') {
+						if(item.type === 'dir' && item.name !== '1-CONTRIBUTION-GUIDE') {
 							var newCategory = new TemplateCategory();
 							newCategory.name = item.name;
 							newCategory.url = item.url;

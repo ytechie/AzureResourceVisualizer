@@ -23,38 +23,38 @@
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar toolbox">
-          <button class="btn btn-default" ng-click="main.openExistingTemplate()" style="width: 250px; margin-bottom: 3px;">Open Existing Template</button><br />
-          <span ng-hide="!!main.loadedUrl">
-            <button class="btn btn-default" ng-click="main.loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;">
+          <button class="btn btn-default" data-ng-click="main.openExistingTemplate()" style="width: 250px; margin-bottom: 3px;">Open Existing Template</button><br />
+          <span data-ng-hide="!!main.loadedUrl">
+            <button class="btn btn-default" data-ng-click="main.loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;">
               Load ARM Quickstart Template
-            </button><br ng-hide="!!main.loadUrl" />
+            </button><br data-ng-hide="!!main.loadUrl" />
           </span>
-          <button class="btn btn-default" ng-click="main.openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
-          <button class="btn btn-default" ng-click="main.downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
-          <span ng-hide="!main.loadedUrl">
-            <button class="btn btn-default" ng-click="main.createVisualizeButton()" style="width: 250px; margin-bottom: 3px;">
+          <button class="btn btn-default" data-ng-click="main.openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
+          <button class="btn btn-default" data-ng-click="main.downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
+          <span data-ng-hide="!main.loadedUrl">
+            <button class="btn btn-default" data-ng-click="main.createVisualizeButton()" style="width: 250px; margin-bottom: 3px;">
               Create Visualizer Button
             </button><br />
           </span>
-          <button class="btn btn-default" ng-click="main.openPortalUIEditor()" style="width: 250px; margin-bottom: 3px;">Portal UI Editor</button><br />
+          <button class="btn btn-default" data-ng-click="main.openPortalUIEditor()" style="width: 250px; margin-bottom: 3px;">Portal UI Editor</button><br />
           </br />
           
            <h4>Toolbox</h4>
-           <a ng-repeat="toolboxItem in main.toolboxItems" class="itemContainer" ng-click="main.toolboxItemClick(toolboxItem)">
+           <a data-ng-repeat="toolboxItem in main.toolboxItems" class="itemContainer" data-ng-click="main.toolboxItemClick(toolboxItem)">
                <img class="icon" src="/assets/toolbox-icons/{{toolboxItem.iconName}}" />
                <span class="label">{{toolboxItem.friendlyName}}</span>
            </a>
            <!--
            <h4>Other Elements</h4>
-           <a class="itemContainer" ng-click="main.addShape('group')">
+           <a class="itemContainer" data-ng-click="main.addShape('group')">
                 <span class="label">Group</span>
            </a>
            <br />
            -->
            <!--
-           <span ng-show="selectedResource">
+           <span data-ng-show="selectedResource">
              <h4>Selected Node Properties</h4>
-             <textarea ng-model="selectedResource" readonly
+             <textarea data-ng-model="selectedResource" readonly
                style="width: 100%; height: 200px; max-height: 200px; resize: none;">
              </textarea>
            </span>

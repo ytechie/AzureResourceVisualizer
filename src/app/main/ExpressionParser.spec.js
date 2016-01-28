@@ -31,7 +31,17 @@ describe("ExpressionParser", function() {
 		expect(exp.operands[1]).toEqual('var2');
 	});
 	
-	it('should parse nested expressions', function() {
+	it('should parse expression with multiple parameters', function () {
+	    var ep = new ArmViz.ExpressionParser();
+	    var exp = ep.parse("resourceId('var1', 'var2')")
+
+	    expect(exp.operator).toEqual("resourceId");
+	    expect(exp.operands.length).toEqual(2);
+	    expect(exp.operands[0]).toEqual('var1');
+	    expect(exp.operands[1]).toEqual('var2');
+	});
+
+	it('should parse nested expressions', function () {
 		var ep = new ArmViz.ExpressionParser();
 		var exp = ep.parse("concat('var1', nest('var2', 'var3'))")
 		

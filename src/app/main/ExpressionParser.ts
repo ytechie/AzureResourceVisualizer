@@ -8,7 +8,7 @@ module ArmViz {
 			var expressionStack = new Array<Expression>();
 			
 			if(expressionText.charAt(0) === '[' && expressionText.charAt(expressionText.length - 1) === ']') {
-				expressionText = expressionText.substr(1, expressionText.length - 2);
+                expressionText = expressionText.substr(1, expressionText.length - 2);
 			}
             
             //An expression could just be a string

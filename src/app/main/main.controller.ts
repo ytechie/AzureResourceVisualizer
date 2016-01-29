@@ -163,6 +163,7 @@ module ArmViz {
                 //Used the cached JSON and avoid a server trip
                 resource = <Resource>JSON.parse(toolboxItem.defaultJson); //$http returns JSON as an object
                 this.template.resources.push(resource);
+                this.template.parseParametersFromTemplate();
                 return;
             }
             
@@ -172,15 +173,18 @@ module ArmViz {
                 resource = <Resource>data; //$http returns JSON as an object
                 toolboxItem.defaultJson = JSON.stringify(data);
                 this.template.resources.push(resource);
+                this.template.parseParametersFromTemplate();
             }).error((data, status, headers, config) => {
                 //Fall back to using a primitive resource default JSON
                 resource = new Resource(toolboxItem);
                 this.template.resources.push(resource);
+                this.template.parseParametersFromTemplate();
             });
         } else {
             //No default JSON, use something really basic
             resource = new Resource(toolboxItem);
             this.template.resources.push(resource);
+            this.template.parseParametersFromTemplate();
         }
       }
       

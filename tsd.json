@@ -49,6 +49,9 @@
     },
     "ace/ace.d.ts": {
       "commit": "81b951f1ac437d1eb5ff5171a0bfa6c467634b13"
+    },
+    "google.analytics/ga.d.ts": {
+      "commit": "5c0a2a138ac67c1b1c13dafc5837bfcbff6a00e2"
     }
   }
 }

@@ -1,22 +1,22 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
-module TemplateParameterEditor {  
+module TemplateParameterEditor {
   export class Controller {
-    private $modalInstance:any;
-    private armTemplate:ArmViz.ArmTemplate;
-    private templateParameterManager:TemplateParameterManager;
-    
-    parameterModel:Array<ParameterModelItem>;
+    private $modalInstance: any;
+    private armTemplate: ArmViz.ArmTemplate;
+    private templateParameterManager: TemplateParameterManager;
+
+    parameterModel: Array<ParameterModelItem>;
     
     /** @ngInject */
-    constructor($modalInstance:any, armTemplate:ArmViz.ArmTemplate) {
+    constructor($modalInstance: any, armTemplate: ArmViz.ArmTemplate) {
       this.$modalInstance = $modalInstance;
       this.armTemplate = armTemplate;
-      
+
       let templateParameterManager = new TemplateParameterManager(armTemplate);
-          
+
       this.parameterModel = new Array<ParameterModelItem>();
-      
+
       let parameterNames = templateParameterManager.getParameterNames();
       parameterNames.forEach(parameterName => {
         let parameterData = templateParameterManager.getParameterData(parameterName);
@@ -28,50 +28,55 @@ module TemplateParameterEditor {
           value: '' // get from values JSON, but we will need to create the UI to load a params json file first
         });
       });
-      
+
       this.templateParameterManager = templateParameterManager;
+
+      ArmViz.Telemetry.sendEvent('ParametersEditor', 'Open');
     }
-      
-    save() {      
+
+    save() {
       this.synchronizeModelToTemplate(this.parameterModel, this.templateParameterManager);
-      
+
       this.$modalInstance.close();
+      ArmViz.Telemetry.sendEvent('ParametersEditor', 'Save');
     }
-  
+
     cancel() {
       this.$modalInstance.dismiss('cancel');
     }
-    
+
     addParameter() {
       var newModelItem = new ParameterModelItem();
       this.parameterModel.push(newModelItem);
+      ArmViz.Telemetry.sendEvent('ParametersEditor', 'AddParameter');
     }
-    
+
     deleteParameter(parameter) {
       var index = this.parameterModel.indexOf(parameter);
       this.parameterModel.splice(index, 1);
+      ArmViz.Telemetry.sendEvent('ParametersEditor', 'DeleteParameter');
     }
-    
+
     genParamValues() {
-        var paramValuesJSON = TemplateParameterEditor.generateJSON(this.parameterModel);
-        this.downloadJsonInBrowser(paramValuesJSON, "parameters.json");
+      var paramValuesJSON = TemplateParameterEditor.generateJSON(this.parameterModel);
+      this.downloadJsonInBrowser(paramValuesJSON, "parameters.json");
     }
-    
-    private downloadJsonInBrowser(json:string, fileName:string) {  
-        //Uses this file saver: https://github.com/Teleborder/FileSaver.js 
-        var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
-        (<any>window).saveAs(blob, fileName);
-      }
-    
-    private synchronizeModelToTemplate(modelParameters:ParameterModelItem[],
-      templateParameterManager:TemplateParameterManager) {
-        
+
+    private downloadJsonInBrowser(json: string, fileName: string) {
+      //Uses this file saver: https://github.com/Teleborder/FileSaver.js
+      var blob = new Blob([json], { type: "text/plain;charset=utf-8" });
+      (<any>window).saveAs(blob, fileName);
+    }
+
+    private synchronizeModelToTemplate(modelParameters: ParameterModelItem[],
+      templateParameterManager: TemplateParameterManager) {
+
       var templateParameters = templateParameterManager.armTemplate.parameters;
-        
+
       modelParameters.forEach(modelItem => {
         var foundParameter = templateParameters[modelItem.name];
-        
-        if(foundParameter) {
+
+        if (foundParameter) {
           //Item is in both src and dest
           foundParameter.type = modelItem.type;
           foundParameter.defaultValue = modelItem.defaultValue;
@@ -81,7 +86,7 @@ module TemplateParameterEditor {
           var newParameter = new ArmViz.Parameter(modelItem.name, modelItem.type);
           newParameter.defaultValue = modelItem.defaultValue;
           newParameter.allowedValues = modelItem.allowedValues;
-          
+
           templateParameterManager.armTemplate.parameters[modelItem.name] = newParameter;
         }
       });
@@ -92,8 +97,8 @@ module TemplateParameterEditor {
         var match = _.find(modelParameters, val => {
           return val.name === templateParameterName;
         });
-        
-        if(!match) {
+
+        if (!match) {
           delete templateParameterManager.armTemplate.parameters[templateParameterName];
         }
       });

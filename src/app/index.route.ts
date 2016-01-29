@@ -10,7 +10,7 @@ module ArmViz {
     constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
       $stateProvider
         .state('home', {
-          url: '/?load',
+          url: '/?load&hideChrome',
           templateUrl: 'app/main/main.html',
           controller: 'MainCtrl',
           controllerAs: 'main'

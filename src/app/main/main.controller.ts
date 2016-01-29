@@ -12,6 +12,7 @@ module ArmViz {
     private loadedUrl:string;
     
     toolboxItems:ToolboxResource[];
+    hideChrome = false;
     
     /** @ngInject */
     constructor($scope, $stateParams, $http, $modal) {
@@ -26,6 +27,8 @@ module ArmViz {
       this.template = new ArmTemplate(templateData);
       
       this.graph = new Graph(toolboxItems);
+      
+      this.hideChrome = !!$stateParams.hideChrome;
       
       if($stateParams.load) {
         this.loadUrl = $stateParams.load;

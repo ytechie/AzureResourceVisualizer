@@ -13,14 +13,18 @@ module PortalUIEditor {
     constructor($modalInstance:any, $http:any) {
       this.$modalInstance = $modalInstance;
       this.$http = $http;
+
+      ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Open');
     }
     
     validate() {
       try {
         JSON.parse(this.json);
         this.validationResult = "Valid JSON!";
+        ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Validate', 'Passed');
       } catch(err) {
         this.validationResult = "Invalid JSON: " + err.toString();
+        ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Validate', 'Failed');
       }
     }
   

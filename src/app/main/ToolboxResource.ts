@@ -20,7 +20,7 @@ module ArmViz {
             if(!this.hasDefaultJson) {
                 return null;
             }
-            return this.resourceType.replace("/", ".") + '.json';
+            return this.resourceType.replace(new RegExp("/", 'g'), ".") + '.json';
         }
 	}
 }

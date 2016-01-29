@@ -12,6 +12,7 @@ module ArmViz {
     private loadedUrl: string;
 
     toolboxItems: ToolboxResource[];
+    hideChrome = false;
     
     /** @ngInject */
     constructor($scope, $stateParams, $http, $modal) {
@@ -26,6 +27,8 @@ module ArmViz {
       this.template = new ArmTemplate(templateData);
 
       this.graph = new Graph(toolboxItems);
+
+      this.hideChrome = !!$stateParams.hideChrome;
 
       if ($stateParams.load) {
         this.loadUrl = $stateParams.load;
@@ -162,20 +165,24 @@ module ArmViz {
         if (toolboxItem.defaultJson) {
           //Used the cached JSON and avoid a server trip
           resource = <Resource>JSON.parse(toolboxItem.defaultJson); //$http returns JSON as an object
+          this.template.parseParametersFromTemplate();
         } else {
           //This is the first time getting this resource type
           this.$http.get('/assets/toolbox-data/' + jsonFileName)
             .success((data: any, status, headers, config) => {
               resource = <Resource>data; //$http returns JSON as an object
               toolboxItem.defaultJson = JSON.stringify(data);
+              this.template.parseParametersFromTemplate();
             }).error((data, status, headers, config) => {
               //Fall back to using a primitive resource default JSON
               resource = new Resource(toolboxItem);
+              this.template.parseParametersFromTemplate();
             });
         }
       } else {
         //No default JSON, use something really basic
         resource = new Resource(toolboxItem);
+        this.template.parseParametersFromTemplate();
       }
 
       this.template.resources.push(resource);

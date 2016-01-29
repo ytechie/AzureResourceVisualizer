@@ -83,8 +83,7 @@ module TemplateParameterEditor {
           foundParameter.allowedValues = modelItem.allowedValues;
         } else {
           //Item is only in src
-          var newParameter = new ArmViz.Parameter();
-          newParameter.type = modelItem.type;
+          var newParameter = new ArmViz.Parameter(modelItem.name, modelItem.type);
           newParameter.defaultValue = modelItem.defaultValue;
           newParameter.allowedValues = modelItem.allowedValues;
 

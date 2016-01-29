@@ -1,0 +1,26 @@
+ {
+      "apiVersion": "2015-06-01",
+      "dependsOn": [
+        "[concat('Microsoft.Cdn/profiles/', parameters('profileName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[concat(parameters('profileName'),'/',parameters('endpointName'))]",
+      "type": "Microsoft.Cdn/profiles/endpoints",
+      "properties": {
+        "originHostHeader": "[replace(replace(reference(resourceId('Microsoft.Storage/storageAccounts', parameters('newStorageAccountName')),'2015-06-15' ).primaryEndpoints.blob,'https://',''),'/','')]",
+        "isHttpAllowed": true,
+        "isHttpsAllowed": true,
+        "queryStringCachingBehavior": "IgnoreQueryString",
+        "contentTypesToCompress": [ "text/plain", "text/html", "text/css", "application/x-javascript", "text/javascript" ],
+        "isCompressionEnabled": "True",
+        "origins": [
+          {
+            "name": "origin1",
+            "properties": {
+              "hostName": "[replace(replace(reference(resourceId('Microsoft.Storage/storageAccounts', parameters('newStorageAccountName')),'2015-06-15' ).primaryEndpoints.blob,'https://',''),'/','')]"
+            }
+          }
+        ]
+      }
+    }

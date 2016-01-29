@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-hide="main.hideChrome">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -22,13 +22,11 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar toolbox">
+        <div class="sidebar toolbox" ng-hide="main.hideChrome">
           <button class="btn btn-default" ng-click="main.openExistingTemplate()" style="width: 250px; margin-bottom: 3px;">Open Existing Template</button><br />
-          <span ng-hide="!!main.loadedUrl">
-            <button class="btn btn-default" ng-click="main.loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;">
-              Load ARM Quickstart Template
-            </button><br ng-hide="!!main.loadUrl" />
-          </span>
+          <button class="btn btn-default" ng-click="main.loadArmQuickstartTemplate()" style="width: 250px; margin-bottom: 3px;">
+            Load ARM Quickstart Template
+          </button><br ng-hide="!!main.loadUrl" />
           <button class="btn btn-default" ng-click="main.openTemplateProperties()" style="width: 250px; margin-bottom: 3px;">Edit Parameter Definitions</button><br />
           <button class="btn btn-default" ng-click="main.downloadArmTemplate()" style="width: 250px; margin-bottom: 3px;">Download ARM Template</button><br />
           <span ng-hide="!main.loadedUrl">

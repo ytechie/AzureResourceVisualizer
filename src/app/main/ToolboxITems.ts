@@ -110,7 +110,17 @@
         new ToolboxResource(
             "Availability Set.png",
             "VM Scale Set",
-            'Microsoft.Compute/virtualMachineScaleSets')
+            'Microsoft.Compute/virtualMachineScaleSets'),
+        new ToolboxResource(
+            "cdn.png",
+            "CDN Profile",
+            'Microsoft.Cdn/Profiles',
+            true ),
+        new ToolboxResource(
+            "cdn.png",
+            "CDN Endpoint",
+            'Microsoft.Cdn/Profiles/Endpoints',
+            true )
         ];
         
         return toolboxItems;

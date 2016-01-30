@@ -24,7 +24,7 @@ module PortalUIEditor {
         ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Validate', 'Passed');
       } catch(err) {
         this.validationResult = "Invalid JSON: " + err.toString();
-        ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Validate', 'Failed');
+        ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Validate', 'Failed: ' + err.toString());
       }
     }
   

@@ -29,7 +29,7 @@ module ArmViz {
         Telemetry.sendEvent('ResourceEditor', 'Validate', 'Passed');
       } catch (err) {
         this.validationResult = "Invalid JSON: " + err.toString();
-        Telemetry.sendEvent('ResourceEditor', 'Validate', 'Failed');
+        Telemetry.sendEvent('ResourceEditor', 'Validate', 'Failed: ' + this.resource.type + ": " + err.toString());
       }
     }
 
@@ -53,7 +53,7 @@ module ArmViz {
         newResource = JSON.parse(this.resourceJson);
       } catch (err) {
         alert('Invalid JSON: ' + err.toString());
-
+        Telemetry.sendEvent('ResourceEditor', 'SaveFailed-InvalidJSON', this.resource.type + ": " + err.toString());
         return;
       }
       

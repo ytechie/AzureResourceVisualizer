@@ -40,8 +40,10 @@ module ArmViz {
           .success((data: any, status, headers, config) => {
             this.template = new ArmTemplate(<ArmTemplateInterface>data);
             this.graph.applyTemplate(this.template);
+            Telemetry.sendEvent('Template', 'LoadFromUrl', this.loadUrl);
           }).error((data, status, headers, config) => {
             alert('Error loading your template from GitHub. Please go back and try again.');
+            Telemetry.sendEvent('Error', 'LoadTemplateFromUrlFailed', this.loadUrl + ': ' + status + ': ' + data);
           });
       } else {
         this.graph.applyTemplate(this.template);
@@ -177,6 +179,7 @@ module ArmViz {
               //Fall back to using a primitive resource default JSON
               resource = new Resource(toolboxItem);
               this.template.parseParametersFromTemplate();
+              Telemetry.sendEvent('Error', 'RequestForToolboxJSONFailed', jsonFileName + ': ' + status + ': ' + data);
             });
         }
       } else {

@@ -32,6 +32,7 @@ module ArmViz {
       var templateData = <ArmTemplateInterface>JSON.parse(json);
 
       if (!templateData.contentVersion) {
+        Telemetry.sendEvent('Error', 'TemplateMissingContentVersion');
         throw new Error('Azure Resource Template JSON did not have a contentVersion property');
       }
 

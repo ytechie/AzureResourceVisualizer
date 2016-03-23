@@ -177,7 +177,7 @@ module ArmViz {
       var match;
       while (match = regex.exec(templateJson)) {
         this.templateData.parameters[match[1]] = new Parameter(match[1], "string");
-        console.log(match[1])
+        console.log(match[1]);
       }
       console.log(templateJson);
     }

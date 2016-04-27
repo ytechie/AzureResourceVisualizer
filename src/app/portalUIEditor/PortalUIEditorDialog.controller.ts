@@ -41,7 +41,7 @@ module PortalUIEditor {
       }
       let cleanJson = JSON.stringify(obj);
       
-      const portalUiUrl = 'https://portal.azure.com/?clientOptimizations=false#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';
+      const portalUiUrl = 'https://portal.azure.com/#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';
       
       let redirectorUrl = 'http://armportaluiredirector.azurewebsites.net/?json=';
       redirectorUrl += encodeURIComponent(cleanJson);

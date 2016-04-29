@@ -5,14 +5,16 @@ module PortalUIEditor {
   export class ResourceEditorController {
     private $modalInstance:any;
     private $http:any;
+    private $window:any;
     
     json:string;
     validationResult:string;
     
     /** @ngInject */
-    constructor($modalInstance:any, $http:any) {
+    constructor($modalInstance:any, $http:any, $window:any) {
       this.$modalInstance = $modalInstance;
       this.$http = $http;
+      this.$window = $window;
 
       ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Open');
     }
@@ -32,22 +34,28 @@ module PortalUIEditor {
       this.$modalInstance.dismiss('cancel');
     };
     
-    getEncodedEchoUrl() {
+    preview() {
+      console.log('preview!');
       var obj:any;
       try {
         obj = JSON.parse(this.json);
       } catch(err) {
           return null;
       }
-      let cleanJson = JSON.stringify(obj);
       
-      const portalUiUrl = 'https://portal.azure.com/#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';
+      let url = 'http://armportaluiredirector.azurewebsites.net/?json=POST';
       
-      let redirectorUrl = 'http://armportaluiredirector.azurewebsites.net/?json=';
-      redirectorUrl += encodeURIComponent(cleanJson);
-      redirectorUrl += '&redir=' + encodeURIComponent(portalUiUrl);
- 
-      return redirectorUrl;
+      this.$http.post(url, obj).then((response) => {
+        //console.log('Got response: ' + response);
+        let cacheUrl = response.data;
+        
+        let portalUiUrl = 'https://portal.azure.com/#blade/Microsoft_Azure_Compute/CreateMultiVmWizardBlade/internal_bladeCallId/anything/internal_bladeCallerParams/{"initialData":{},"providerConfig":{"createUiDefinition":"{jsonUrl}"}}';
+        portalUiUrl = portalUiUrl.replace('{jsonUrl}', cacheUrl);
+        
+        this.$window.open(portalUiUrl);
+      }, (response) => {
+         console.error('Not sure what to do: ' + response);
+      });
     }
     
   }

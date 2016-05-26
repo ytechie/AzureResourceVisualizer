@@ -40,7 +40,10 @@ module PortalUIEditor {
       try {
         obj = JSON.parse(this.json);
       } catch(err) {
-          return null;
+        this.validationResult = "Invalid JSON: " + err.toString();
+        ArmViz.Telemetry.sendEvent('PortalUIEditor', 'Preview', 'Failed: ' + err.toString());
+        
+        return null;
       }
       
       let url = 'http://armportaluiredirector.azurewebsites.net/?json=POST';

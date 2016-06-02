@@ -13,19 +13,16 @@ module ArmViz {
             
             this.sourceResource = resource;
             this.sourceToolboxItem = toolboxItem;
-                    
-            if(toolboxItem) {
-                    this.titleText = toolboxItem.friendlyName;
-                
-                    this.attributes.attrs.image = { 'ref-x': 25, 'ref-y':5, ref: 'rect', width:60, height:60};
-                    this.PNGRef = "/assets/toolbox-icons/" + toolboxItem.iconName;
-                    this.attributes.attrs.image['xlink:href'] = this.PNGRef;
-                    
-                    this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':55,
-                        'x-alignment' :'middle', 'text': toolboxItem.friendlyName, 'fill': '#000000'};
-            } else {
-                this.titleText = this.sourceResource.type.replace("/", "\n");
-            }
+            
+            let title = toolboxItem ? toolboxItem.friendlyName : resource.name.split('/').pop();
+            let iconName = toolboxItem ? toolboxItem.iconName : 'Default Resource.png';
+            
+            this.titleText = title;
+            this.attributes.attrs.image = { 'ref-x': 25, 'ref-y':5, ref: 'rect', width:60, height:60};
+            this.PNGRef = "/assets/toolbox-icons/" + iconName;
+            this.attributes.attrs.image['xlink:href'] = this.PNGRef;
+            this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':55,
+                'x-alignment' :'middle', 'text': title, 'fill': '#000000'};
             
             //Override the title if it's a deployment
             if(this.sourceResource.type === "Microsoft.Resources/deployments") {

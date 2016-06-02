@@ -12,20 +12,13 @@ module ArmViz {
   export class ArmTemplate {
     private templateData: ArmTemplateInterface;
     private observableResources: KnockoutObservableArray<Resource>;
+    private resolvedNames: { [name: string]: string };
+    private resolveErrors: any[];
 
     constructor(templateData: ArmTemplateInterface) {
       this.templateData = templateData;
-
-      if (this.templateData) {
-        // if we have resources, evaluate their names
-        if (this.templateData.resources) {
-          for (let i = 0; i < this.templateData.resources.length; i++) {
-            let ep = new ExpressionParser();
-            let exp = ep.parse(this.templateData.resources[i].name);
-            this.templateData.resources[i].name = this.resolveExpression(exp);
-          }
-        }
-      }
+      this.resolvedNames = {};
+      this.resolveErrors = [];
     }
 
     static CreateFromJson(json: string) {
@@ -60,6 +53,30 @@ module ArmViz {
 
     get parameters(): Parameter[] {
       return this.templateData.parameters;
+    }
+    
+    checkResolveErrors() {
+      if (this.resolveErrors.length > 0) {
+        alert('Sorry we are having trouble parsing this template.\nYou may ignore this and continue editing.')
+        this.resolveErrors = [];
+      }
+    }
+
+    resolveName(name: string): string {
+      if (this.resolvedNames[name]) {
+        return this.resolvedNames[name];
+      }
+
+      try {
+        let ep = new ExpressionParser();
+        let exp = ep.parse(name);
+        this.resolvedNames[name] = this.resolveExpression(exp);
+      } catch (error) {
+        this.resolveErrors.push(error);
+        return name;
+      }
+
+      return this.resolvedNames[name];
     }
 
     resolveExpression(expression: Expression): string {
@@ -135,13 +152,19 @@ module ArmViz {
       }
 
       dependsOn.forEach(dependencyName => {
-        let ep = new ExpressionParser();
-        let exp = ep.parse(dependencyName);
-        let dependency = this.resolveDependsOnId(exp);
+        let dependency: DependencyId;
         let dependencyFound = false;
-
+        
+        try {
+          let ep = new ExpressionParser();
+          let exp = ep.parse(dependencyName);
+          dependency = this.resolveDependsOnId(exp);
+        } catch (error) {
+          this.resolveErrors.push(error);
+        }
+        
         this.templateData.resources.forEach(resource => {
-          if (Resource.resourceMatchesDependency(resource, dependency)) {
+          if (dependency && this.resourceMatchesDependency(resource, dependency)) {
             dependencies.push(resource);
             dependencyFound = true;
           }
@@ -168,6 +191,19 @@ module ArmViz {
       ret.name = resolvedExpression.substr(resolvedExpression.lastIndexOf("/") + 1);
 
       return ret;
+    }
+
+    resourceMatchesDependency(resource: Resource, depId: DependencyId): boolean {
+      if (!resource || !resource.type || !depId || !depId.type) {
+        console.error('Avoided *undefined* in Resource.resourceMatchesDependency');
+        return false;
+      }
+
+      let typesMatch = resource.type.toUpperCase() === depId.type.toUpperCase();
+      let namesMatch = this.resolveName(resource.name).toUpperCase() === depId.name.toUpperCase()
+        || this.resolveName(resource.name).toUpperCase() === '[' + depId.name.toUpperCase() + ']';
+
+      return typesMatch && namesMatch;
     }
 
     parseParametersFromTemplate() {

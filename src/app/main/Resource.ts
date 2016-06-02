@@ -13,17 +13,5 @@ module ArmViz {
 				this.name = toolboxItem.friendlyName;
 			}
 		}
-		
-		static resourceMatchesDependency(resource:Resource, dep:DependencyId):boolean {
-            if(!resource || !resource.type || !dep || !dep.type) {
-                console.error('Avoided *undefined* in Resource.resourceMatchesDependency');
-                return false;
-            }
-            
-			return (resource.type.toUpperCase() === dep.type.toUpperCase())
-				&&
-				(resource.name.toUpperCase() === dep.name.toUpperCase() ||
-				resource.name.toUpperCase() === "[" + dep.name.toUpperCase() + "]");
-		}
 	}
 }

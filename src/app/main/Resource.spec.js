@@ -2,9 +2,11 @@
 
 /// <reference path="Resource.ts" />
 /// <reference path="DependencyId.ts" />
-	
+
 describe("Resource", function() {
 	it('should match when the id and name match', function() {
+		var template = new ArmViz.ArmTemplate(null);
+		
 		var r = new ArmViz.Resource(null);
 		r.type = 'type';
 		r.name = 'name'
@@ -13,7 +15,7 @@ describe("Resource", function() {
 		dep.type = 'type';
 		dep.name = 'name';
 		
-		var result = ArmViz.Resource.resourceMatchesDependency(r, dep);
+		var result = template.resourceMatchesDependency(r, dep);
 		
 		expect(result).toBe(true);
 	});

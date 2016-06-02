@@ -30,6 +30,8 @@ module ArmViz {
             this.displayNodesAndLinks();
             
             this.watchModel();
+            
+            template.checkResolveErrors();
         }
         
         private watchModel() {
@@ -68,7 +70,7 @@ module ArmViz {
         private addResource(resource:Resource) {
             var toolboxItem: ToolboxResource = this.getToolboxItemForResource(resource);
             
-            var shape = new ResourceShape(resource, toolboxItem);
+            var shape = new ResourceShape(this.template, resource, toolboxItem);
             shape.position(60, 60);
             shape.resize(110, 80);
             

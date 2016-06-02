@@ -5,28 +5,29 @@ module ArmViz {
         markup:string = '<a><g class="rotatable"><g class="scalable"><rect/></g><image/><text/><title/></g></a>';
         PNGRef: string;
         
+        sourceTemplate:ArmTemplate;
         sourceResource:Resource;
         sourceToolboxItem:ToolboxResource;
         
-        constructor(resource:Resource, toolboxItem:ToolboxResource) {
+        constructor(template:ArmTemplate, resource:Resource, toolboxItem:ToolboxResource) {
             super();
             
+            this.sourceTemplate = template;
             this.sourceResource = resource;
             this.sourceToolboxItem = toolboxItem;
             
-            let title = toolboxItem ? toolboxItem.friendlyName : resource.name.split('/').pop();
+            let titleText = toolboxItem ? toolboxItem.friendlyName : resource.name.split('/').pop();
             let iconName = toolboxItem ? toolboxItem.iconName : 'Default Resource.png';
             
-            this.titleText = title;
             this.attributes.attrs.image = { 'ref-x': 25, 'ref-y':5, ref: 'rect', width:60, height:60};
             this.PNGRef = "/assets/toolbox-icons/" + iconName;
             this.attributes.attrs.image['xlink:href'] = this.PNGRef;
             this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':55,
-                'x-alignment' :'middle', 'text': title, 'fill': '#000000'};
+                'x-alignment' :'middle', 'text': titleText, 'fill': '#000000'};
             
             //Override the title if it's a deployment
             if(this.sourceResource.type === "Microsoft.Resources/deployments") {
-                this.titleText = this.sourceResource.name;
+                this.attributes.attrs.text.text = template.resolveName(resource.name);
             }
             
             this.attributes.attrs.rect.fill = '#FFFFFF';
@@ -34,11 +35,6 @@ module ArmViz {
             this.attributes.attrs.rect['stroke-width'] = 2;
             
             this.attributes.attrs.title = {'text': 'Double-click to edit'};
-        }
-        
-        
-        set titleText(titleText:string) {
-            this.attributes.attrs.text.text = titleText;
         }
     }
 }

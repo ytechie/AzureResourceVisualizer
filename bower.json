@@ -13,7 +13,7 @@
     "bootstrap-sass-official": "~3.3.1",
     "dagre": "~0.7.1",
     "file-saver.js": "~1.20150507.2",
-    "jointjs": "~0.9.5",
+    "jointjs": "0.9.6",
     "jquery": "2.0.3",
     "knockout": "~3.3.0",
     "lodash": "~3.10.1",

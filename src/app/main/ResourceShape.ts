@@ -1,9 +1,19 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 
 module ArmViz {
-    export class ResourceShape extends joint.shapes.basic.Rect {
-        markup:string = '<a><g class="rotatable"><g class="scalable"><rect/></g><image/><text/><title/></g></a>';
-        PNGRef: string;
+    export class ResourceShape extends joint.shapes.basic.Generic {
+        markup: string = [
+            '<g class="rotatable">',
+            '<g class="scalable">',
+            '<rect class="shape root-layout"/>',
+            '<rect class="shape title-bar"/>',
+            '</g>',
+            '<text class="shape title"/>',
+            '<image class="shape icon"/>',
+            '<text class="shape name"/>',
+            '<title class="shape tooltip"/>',
+            '</g>'
+        ].join('');
         
         sourceTemplate:ArmTemplate;
         sourceResource:Resource;
@@ -14,27 +24,72 @@ module ArmViz {
             
             this.sourceTemplate = template;
             this.sourceResource = resource;
-            this.sourceToolboxItem = toolboxItem;
+            this.sourceToolboxItem = toolboxItem? toolboxItem : new ToolboxResource(
+                'Default Resource.png',
+                this.sourceResource.type.split('/').pop(),
+                this.sourceTemplate.resolveName(this.sourceResource.name)
+            );
+
+            this.initializeContent();
+            this.resize(120, 90);
+        }
+        
+        private initializeContent() {
+            let title = this.sourceToolboxItem.friendlyName;
+            let name = this.sourceTemplate.resolveName(this.sourceResource.name);
+            let icon = '/assets/toolbox-icons/' + this.sourceToolboxItem.iconName;
             
-            let titleText = toolboxItem ? toolboxItem.friendlyName : resource.name.split('/').pop();
-            let iconName = toolboxItem ? toolboxItem.iconName : 'Default Resource.png';
+            this.attributes.attrs['.shape.root-layout'] = {
+                'follow-scale': true,
+                'stroke': '#0079D6',
+                'stroke-width': 2,
+                'width': 120,   // Need to set size explicitly for IE and Edge
+                'height': 90 
+            };
             
-            this.attributes.attrs.image = { 'ref-x': 25, 'ref-y':5, ref: 'rect', width:60, height:60};
-            this.PNGRef = "/assets/toolbox-icons/" + iconName;
-            this.attributes.attrs.image['xlink:href'] = this.PNGRef;
-            this.attributes.attrs.text = {'ref-dy' :-15, ref: 'rect', 'ref-x':55,
-                'x-alignment' :'middle', 'text': titleText, 'fill': '#000000'};
+            this.attributes.attrs['.shape.title-bar'] = {
+                'follow-scale': true,
+                'fill': '#0079D6',
+                'stroke-width': 0,
+                'width': 120,
+                'height': 15
+            };
             
-            //Override the title if it's a deployment
-            if(this.sourceResource.type === "Microsoft.Resources/deployments") {
-                this.attributes.attrs.text.text = template.resolveName(resource.name);
-            }
+            this.attributes.attrs['.shape.title'] = {
+                'ref': '.shape.root-layout',
+                'ref-x': 4,
+                'ref-y': 2,
+                'fill': 'white',
+                'stroke-width': 0,
+                'font-size': 10,
+                'font-weight': 'bold',
+                'text': title
+            };
             
-            this.attributes.attrs.rect.fill = '#FFFFFF';
-            this.attributes.attrs.rect.stroke = '#0079D6';
-            this.attributes.attrs.rect['stroke-width'] = 2;
+            this.attributes.attrs['.shape.icon'] = {
+                'ref': '.shape.root-layout',
+                'ref-x': .5,
+                'ref-y': .5,
+                'x-alignment': 'middle',
+                'y-alignment': 'middle',
+                'width': 48,
+                'height': 48,
+                'xlink:href': icon
+            }; 
             
-            this.attributes.attrs.title = {'text': 'Double-click to edit'};
+            this.attributes.attrs['.shape.name'] = {
+                'ref': '.shape.root-layout',
+                'ref-x': 4,
+                'ref-y': 75,
+                'font-size': 10,
+                'fill': 'black',
+                'stroke-width': 0,
+                'text': name
+            };
+            
+            this.attributes.attrs['.shape.tooltip'] = {
+                'text': 'Double-click to edit'
+            };
         }
     }
 }

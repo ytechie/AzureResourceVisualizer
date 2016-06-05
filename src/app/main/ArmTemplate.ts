@@ -57,7 +57,7 @@ module ArmViz {
     
     checkResolveErrors() {
       if (this.resolveErrors.length > 0) {
-        alert('Sorry we are having trouble parsing this template.\nYou may ignore this and continue editing.')
+        alert('Sorry we are having trouble parsing this template.\nYou may ignore this and continue editing.');
         this.resolveErrors = [];
       }
     }

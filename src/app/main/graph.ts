@@ -72,7 +72,6 @@ module ArmViz {
             
             var shape = new ResourceShape(this.template, resource, toolboxItem);
             shape.position(60, 60);
-            shape.resize(110, 80);
             
             this.resourceShapes.push(shape);
             
@@ -126,8 +125,8 @@ module ArmViz {
                         source: { id: sourceNode.id },
                         target: { id: destNode.id },
                         attrs: {
-                            '.connection': { 'stroke-width': 3, stroke: '#34495E' },
-                            '.marker-target': { fill: 'black', d: 'M 10 0 L 0 5 L 10 10 z' }
+                            '.connection': { 'stroke-width': 1.5, stroke: '#34495E' },
+                            '.marker-target': { fill: '#34495E', stroke: '#34495E', d: 'M 6 0 L 0 3 L 6 6 z' }
                         }
                     });
         

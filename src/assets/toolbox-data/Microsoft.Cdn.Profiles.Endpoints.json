@@ -1,9 +1,5 @@
  {
       "apiVersion": "2015-06-01",
-      "dependsOn": [
-        "[concat('Microsoft.Cdn/profiles/', parameters('profileName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]"
-      ],
       "location": "[variables('location')]",
       "name": "[concat(parameters('profileName'),'/',parameters('endpointName'))]",
       "type": "Microsoft.Cdn/profiles/endpoints",

@@ -3,9 +3,6 @@
   "name": "[variables('lbName')]",
   "type": "Microsoft.Network/loadBalancers",
   "location": "[resourceGroup().location]",
-  "dependsOn": [
-    "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
-  ],
   "properties": {
     "frontendIPConfigurations": [
       {

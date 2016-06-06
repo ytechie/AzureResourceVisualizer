@@ -31,6 +31,14 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
   font-size: 30px;
 }
 
+.link-tools .tool-remove {
+  display: none
+}
+
+.link .marker-arrowheads {
+  display: none;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

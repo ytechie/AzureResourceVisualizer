@@ -15,7 +15,7 @@ module ArmViz {
           controller: 'MainCtrl',
           controllerAs: 'main'
         });
-  
+
       $urlRouterProvider.otherwise('/');
     }
   }

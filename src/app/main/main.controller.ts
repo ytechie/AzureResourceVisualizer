@@ -13,7 +13,7 @@ module ArmViz {
 
     toolboxItems: ToolboxResource[];
     hideChrome = false;
-    
+
     /** @ngInject */
     constructor($scope, $stateParams, $http, $modal) {
       this.$scope = $scope;
@@ -56,7 +56,7 @@ module ArmViz {
             controller: 'ResourceEditorController',
             controllerAs: 'main',
             size: 'lg',
-            
+
             //These items get passed to the child controller
             resolve: {
               arm: () => {
@@ -124,7 +124,7 @@ module ArmViz {
         controller: 'TemplateParameterManager',
         controllerAs: 'main',
         size: 'lg',
-        
+
         //These items get passed to the child controller
         resolve: {
           armTemplate: () => {
@@ -140,7 +140,7 @@ module ArmViz {
         controller: 'CreateVisualizerButtonController',
         controllerAs: 'main',
         size: 'lg',
-        
+
         //These items get passed to the child controller
         resolve: {
           loadUrl: () => {
@@ -192,22 +192,14 @@ module ArmViz {
       Telemetry.sendEvent('Toolbox', 'AddResource', toolboxItem.resourceType);
     }
 
-    addShape(name: string) {
-      if (name === 'group') {
-        var shape = new Group();
-        this.graph.addInertShape(shape);
-        shape.toBack();
-      }
-    }
-
     private downloadJsonInBrowser(json: string, fileName: string) {
       //Uses this file saver: https://github.com/Teleborder/FileSaver.js
       var blob = new Blob([json], { type: "text/plain;charset=utf-8" });
       (<any>window).saveAs(blob, fileName);
     }
   }
-  
-  //Avoid compiler errors  
+
+  //Avoid compiler errors
   interface HTMLAnchorElement {
     download: string;
   }

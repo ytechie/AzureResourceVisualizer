@@ -1,5 +1,5 @@
 {
-"compilerOptions": {
+  "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
@@ -7,4 +7,5 @@
     "removeComments": true,
     "noLib": false,
     "sourceMap": true
-}}
+  }
+}

@@ -7,14 +7,14 @@
 
 module ArmViz.Module {
   var module = angular.module('ArmViz', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'ui.ace']);
-  
+
   export function start() {
     module
       .config(ArmViz.RouterConfig)
-      
+
       //These names much match apparently
       .controller('MainCtrl', ArmViz.MainCtrl)
-      
+
       .controller('OpenDialogController', OpenDialog.Controller)
       .controller('QuickstartLoadDialog', ArmViz.QuickstartLoadDialog)
       .controller('TemplateParameterManager', TemplateParameterEditor.Controller)
@@ -22,8 +22,8 @@ module ArmViz.Module {
       .controller('ResourceEditorController', ArmViz.ResourceEditorController)
       .controller('CreateVisualizerButtonController', ArmViz.CreateVisualizerButtonController)
       .controller('PortalUIEditorController', PortalUIEditor.ResourceEditorController)
-      
+
       .directive('ngFileSelect', Directives.ngFileSelect)
       ; //this is intentional :-)
-  } 
+  }
 }

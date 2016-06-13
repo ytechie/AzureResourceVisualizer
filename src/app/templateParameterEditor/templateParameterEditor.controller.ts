@@ -7,7 +7,7 @@ module TemplateParameterEditor {
     private templateParameterManager: TemplateParameterManager;
 
     parameterModel: Array<ParameterModelItem>;
-    
+
     /** @ngInject */
     constructor($modalInstance: any, armTemplate: ArmViz.ArmTemplate) {
       this.$modalInstance = $modalInstance;
@@ -90,7 +90,7 @@ module TemplateParameterEditor {
           templateParameterManager.armTemplate.parameters[modelItem.name] = newParameter;
         }
       });
-      
+
       //Handle item only in dest
       var templateParameterNames = templateParameterManager.getParameterNames();
       templateParameterNames.forEach(templateParameterName => {

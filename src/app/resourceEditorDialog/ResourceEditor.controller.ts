@@ -10,7 +10,7 @@ module ArmViz {
 
     resourceJson: string;
     validationResult: string;
-    
+
     /** @ngInject */
     constructor($modalInstance: any, arm: ArmTemplate, resource: Resource) {
       this.$modalInstance = $modalInstance;
@@ -56,7 +56,7 @@ module ArmViz {
         Telemetry.sendEvent('ResourceEditor', 'SaveFailed-InvalidJSON', this.resource.type + ": " + err.toString());
         return;
       }
-      
+
       //Update the EXISTING resource without destroying it
       for (var key in this.resource) {
         if (this.resource.hasOwnProperty(key)) {

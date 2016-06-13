@@ -1,15 +1,14 @@
 <div class="modal-header">
-    <h3 class="modal-title">Portal UI Editor</h3>
+  <h3 class="modal-title">Portal UI Editor</h3>
 </div>
 <div class="modal-body">
-    <div ui-ace="{ mode: 'json' }" ng-model="main.json"
-        style="height: 400px; width: 100%; max-height: 400px; resize: none;">
-    </div>
-    
-    <b>{{main.validationResult}}</b>
+  <div ui-ace="{ mode: 'json' }" ng-model="main.json" style="height: 400px; width: 100%; max-height: 400px; resize: none;">
+  </div>
+
+  <b>{{main.validationResult}}</b>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-info" ng-click="main.validate()">Validate</button>
-    <button class="btn btn-primary" ng-click="main.preview()">Preview</button>
-    <button class="btn btn-warning" ng-click="main.close()">Close</button>
+  <button class="btn btn-info" ng-click="main.validate()">Validate</button>
+  <button class="btn btn-primary" ng-click="main.preview()">Preview</button>
+  <button class="btn btn-warning" ng-click="main.close()">Close</button>
 </div>

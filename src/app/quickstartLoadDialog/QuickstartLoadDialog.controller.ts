@@ -12,7 +12,7 @@ module ArmViz {
     categories: TemplateCategory[];
     templateMetadata: TemplateMetadataInterface;
     selectedCategory: TemplateCategory;
-		
+
     /** @ngInject */
     constructor($scope, $modalInstance, $http) {
       this.$scope = $scope;

@@ -54,7 +54,7 @@ module ArmViz {
     get parameters(): Parameter[] {
       return this.templateData.parameters;
     }
-    
+
     checkResolveErrors() {
       if (this.resolveErrors.length > 0) {
         alert('Sorry we are having trouble parsing this template.\nYou may ignore this and continue editing.');
@@ -154,7 +154,7 @@ module ArmViz {
       dependsOn.forEach(dependencyName => {
         let dependency: DependencyId;
         let dependencyFound = false;
-        
+
         try {
           let ep = new ExpressionParser();
           let exp = ep.parse(dependencyName);
@@ -162,7 +162,7 @@ module ArmViz {
         } catch (error) {
           this.resolveErrors.push(error);
         }
-        
+
         this.templateData.resources.forEach(resource => {
           if (dependency && this.resourceMatchesDependency(resource, dependency)) {
             dependencies.push(resource);

@@ -1,31 +1,31 @@
 <div class="modal-header">
-    <h3 class="modal-title">Parameter Editor</h3>
+  <h3 class="modal-title">Parameter Editor</h3>
 </div>
 <div class="modal-body">
-    <table>
-        <thead>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Default Value</td>
-            <td>Allowed Values</td>
-            <td>Deployment Value</td>
-            <td></td>
-        </thead>
-        <tbody>
-            <tr ng-repeat="parameter in main.parameterModel">
-                <td><input type="text" ng-model="parameter.name" /></td>
-                <td><input type="text" ng-model="parameter.type" style="width: 120px;" /></td>
-                <td><input type="text" ng-model="parameter.defaultValue" /></td>
-                <td><input type="text" ng-model="parameter.allowedValues" /></td>
-                <td><input type="text" ng-model="parameter.value" /></td>
-                <td><button ng-click="main.deleteParameter(parameter)">Delete</button></td>
-            </tr>
-        </tbody>
-    </table>
-    <button ng-click="main.addParameter()">Add</button>
+  <table>
+    <thead>
+      <td>Name</td>
+      <td>Type</td>
+      <td>Default Value</td>
+      <td>Allowed Values</td>
+      <td>Deployment Value</td>
+      <td></td>
+    </thead>
+    <tbody>
+      <tr ng-repeat="parameter in main.parameterModel">
+        <td><input type="text" ng-model="parameter.name" /></td>
+        <td><input type="text" ng-model="parameter.type" style="width: 120px;" /></td>
+        <td><input type="text" ng-model="parameter.defaultValue" /></td>
+        <td><input type="text" ng-model="parameter.allowedValues" /></td>
+        <td><input type="text" ng-model="parameter.value" /></td>
+        <td><button ng-click="main.deleteParameter(parameter)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button ng-click="main.addParameter()">Add</button>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="main.save()">Save</button>
-    <button class="btn btn-warning" ng-click="main.cancel()">Cancel</button>
-    <button class="btn btn-info" ng-click="main.genParamValues()">Download Parameter Values JSON</button>
+  <button class="btn btn-primary" ng-click="main.save()">Save</button>
+  <button class="btn btn-warning" ng-click="main.cancel()">Cancel</button>
+  <button class="btn btn-info" ng-click="main.genParamValues()">Download Parameter Values JSON</button>
 </div>

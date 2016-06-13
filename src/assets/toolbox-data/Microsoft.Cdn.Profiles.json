@@ -1,12 +1,11 @@
 {
-    "apiVersion": "2015-06-01",
-    "name": "[parameters('profileName')]",
-    "type": "Microsoft.Cdn/profiles",
-    "location": "[variables('location')]",
-    "properties": {
-        "sku": 
-        {
-            "name": "Standard"
-        }
+  "apiVersion": "2015-06-01",
+  "name": "[parameters('profileName')]",
+  "type": "Microsoft.Cdn/profiles",
+  "location": "[variables('location')]",
+  "properties": {
+    "sku": {
+      "name": "Standard"
     }
+  }
 }

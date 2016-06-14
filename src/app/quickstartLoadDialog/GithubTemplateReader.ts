@@ -1,8 +1,8 @@
 /// <reference path="../main/ArmTemplate.ts" />
 
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
-///repos/:owner/:repo/contents/:path 
+///repos/:owner/:repo/contents/:path
 
 module ArmViz {
   export class GithubTemplateReader {

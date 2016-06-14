@@ -1,0 +1,21 @@
+{
+  "name": "AzureResourceVisualizer",
+  "globalDependencies": {
+    "ace": "registry:dt/ace#0.0.0+20160317120654",
+    "angular": "registry:dt/angular#1.5.0+20160613151008",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
+    "backbone": "registry:dt/backbone#1.0.0+20160316155526",
+    "backbone-global": "registry:dt/backbone-global#1.0.0+20160509145756",
+    "dagre": "registry:dt/dagre#0.7.0+20160505164908",
+    "google.analytics/ga": "registry:dt/google.analytics/ga#0.0.0+20160317120654",
+    "gulp": "registry:dt/gulp#3.8.0+20160316155526",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
+    "jointjs": "registry:dt/jointjs#0.9.3+20160323123346",
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "knockout": "registry:dt/knockout#0.0.0+20160428162840",
+    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
+    "node": "registry:dt/node#6.0.0+20160613154055",
+    "orchestrator": "registry:dt/orchestrator#0.0.0+20160316155526",
+    "q": "registry:dt/q#0.0.0+20160613154756"
+  }
+}

@@ -1,5 +1,5 @@
 /// <reference path="GithubTemplateReader.ts" />
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 module ArmViz {
   export class QuickstartLoadDialog {

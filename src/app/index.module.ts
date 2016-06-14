@@ -1,4 +1,4 @@
-/// <reference path="../../typings/tsd.d.ts" />
+/// <reference path="../../typings/index.d.ts" />
 
 /// <reference path="index.route.ts" />
 /// <reference path="main/main.controller.ts" />

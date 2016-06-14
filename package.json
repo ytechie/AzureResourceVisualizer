@@ -50,7 +50,7 @@
     "merge-stream": "~0.1.7",
     "protractor": "~1.7.0",
     "require-dir": "~0.1.0",
-    "tsd": "^0.6.4",
+    "typings": "^1.1.0",
     "tslint": "^2.5.1",
     "typescript": "^1.6.0",
     "uglify-save-license": "~0.4.1",

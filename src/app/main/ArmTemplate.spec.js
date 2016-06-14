@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 /// <reference path="ArmTemplate.ts" />
 /// <reference path="Resource.ts" />

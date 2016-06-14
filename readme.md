@@ -19,10 +19,9 @@ We're using a [public Trello board](https://trello.com/b/41RiUCGs/azure-resource
 ## Installation
 
 	npm install
-	npm install -g gulp bower tsd typescript
+	npm install -g gulp bower typings typescript
 	bower install
-	tsd install
-	patch typings/backbone/backbone.d.ts backbonefix.patch
+	typings install
 
 ## Running
 

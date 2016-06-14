@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - 4.1
-  
+
 env:
     - CXX=g++-4.8
 addons:
@@ -10,20 +10,19 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
-  
+
 notifications:
   slack: armvisualizer:${slack_notification_key}
-  
+
 before_script:
-  - npm install -g gulp bower tsd typescript
+  - npm install -g gulp bower typings typescript
   - bower install
-  - tsd install
-  - patch typings/backbone/backbone.d.ts backbonefix.patch
+  - typings install
 script: gulp
 branches:
   only:
     - master
-    
+
 deploy:
   skip_cleanup: true
   provider: script

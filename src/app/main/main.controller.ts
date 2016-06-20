@@ -6,6 +6,7 @@ module ArmViz {
     private $scope: any;
     private $modal: any;
     private $http: any; //ng.IHttpProvider causes errors
+    private $window: any;
     private template: ArmTemplate;
     private graph: Graph;
     private loadUrl: string; //Url from the address bar
@@ -15,10 +16,11 @@ module ArmViz {
     hideChrome = false;
 
     /** @ngInject */
-    constructor($scope, $stateParams, $http, $modal) {
+    constructor($scope, $stateParams, $http, $window, $modal) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
+      this.$window = $window;
 
       var toolboxItems = getToolboxItems();
       this.toolboxItems = toolboxItems;
@@ -157,6 +159,10 @@ module ArmViz {
         controllerAs: 'main',
         size: 'lg'
       });
+    }
+
+    deployToAzure() {
+      this.$window.open('https://ms.portal.azure.com/');
     }
 
     toolboxItemClick(toolboxItem: ToolboxResource) {

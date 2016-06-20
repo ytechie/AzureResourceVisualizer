@@ -162,7 +162,17 @@ module ArmViz {
     }
 
     deployToAzure() {
-      this.$window.open('https://ms.portal.azure.com/');
+      let url = 'http://armportaluiredirector.azurewebsites.net/?json=POST';
+
+      this.$http.post(url, this.template.templateDataObj).then((response) => {
+        let cacheUrl = response.data;
+        let portalUiUrl = 'https://portal.azure.com/#create/Microsoft.Template/uri/' + cacheUrl;
+
+        this.$window.open(portalUiUrl);
+        Telemetry.sendEvent('Template', 'DeployToAzure');
+      }, (response) => {
+        console.error('Not sure what to do: ' + response);
+      });
     }
 
     toolboxItemClick(toolboxItem: ToolboxResource) {

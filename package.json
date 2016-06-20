@@ -13,6 +13,7 @@
     "concat-stream": "~1.4.7",
     "del": "~1.2.0",
     "gulp": "~3.9.0",
+    "gulp-header": "1.8.2",
     "gulp-angular-templatecache": "~1.6.0",
     "gulp-autoprefixer": "~2.3.1",
     "gulp-concat": "~2.5.2",

@@ -6,6 +6,7 @@ module ArmViz {
     private $scope: any;
     private $modal: any;
     private $http: any; //ng.IHttpProvider causes errors
+    private $window: any;
     private template: ArmTemplate;
     private graph: Graph;
     private loadUrl: string; //Url from the address bar
@@ -15,10 +16,11 @@ module ArmViz {
     hideChrome = false;
 
     /** @ngInject */
-    constructor($scope, $stateParams, $http, $modal) {
+    constructor($scope, $stateParams, $http, $window, $modal) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
+      this.$window = $window;
 
       var toolboxItems = getToolboxItems();
       this.toolboxItems = toolboxItems;
@@ -156,6 +158,20 @@ module ArmViz {
         controller: 'PortalUIEditorController',
         controllerAs: 'main',
         size: 'lg'
+      });
+    }
+
+    deployToAzure() {
+      let url = 'http://armportaluiredirector.azurewebsites.net/?json=POST';
+
+      this.$http.post(url, this.template.templateDataObj).then((response) => {
+        let cacheUrl = response.data;
+        let portalUiUrl = 'https://portal.azure.com/#create/Microsoft.Template/uri/' + cacheUrl;
+
+        this.$window.open(portalUiUrl);
+        Telemetry.sendEvent('Template', 'DeployToAzure');
+      }, (response) => {
+        console.error('Not sure what to do: ' + response);
       });
     }
 

@@ -55,6 +55,10 @@ module ArmViz {
       return this.templateData.parameters;
     }
 
+    get templateDataObj(): ArmTemplateInterface {
+      return this.templateData;
+    }
+
     checkResolveErrors() {
       if (this.resolveErrors.length > 0) {
         alert('Sorry we are having trouble parsing this template.\nYou may ignore this and continue editing.');

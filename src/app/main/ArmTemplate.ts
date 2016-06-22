@@ -87,8 +87,11 @@ module ArmViz {
       let ret = "";
 
       if (expression.operator === 'concat') {
-        if (expression.operands.length <= 1) {
-          console.error("invalid operation. At least two values required for operation" + expression.operator);
+        if (expression.operands.length < 1) {
+          // Note: there might only be one operand. The following two expressions are identical:
+          // [concat('Microsoft.Network/networkInterfaces/Nic0')]
+          // [concat('Microsoft.Network/networkInterfaces', 'Nic0')]
+          console.error("Invalid operation. At least one value required for operation: " + expression.operator);
         }
 
         for (let i = 0; i < expression.operands.length; i++) {
@@ -99,8 +102,8 @@ module ArmViz {
           }
         }
       } else if (expression.operator === 'resourceId') {
-        if (expression.operands.length <= 1) {
-          console.error("invalid operation. At least two values required for operation" + expression.operator);
+        if (expression.operands.length < 1) {
+          console.error("Invalid operation. At least one value required for operation: " + expression.operator);
         }
 
         for (let i = 0; i < expression.operands.length; i++) {

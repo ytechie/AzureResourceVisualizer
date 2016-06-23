@@ -123,14 +123,20 @@ module ArmViz {
           }
         }
       } else if (expression.operator === 'variables') {
-        if (expression.operands.length <= 0) {
+        if (expression.operands.length === 0) {
           console.error("no variable name specified");
         }
-        // return value of requested variable, should probably make sure it exists
-        let templateVar = this.templateData.variables[<string>expression.operands[0]];
-        if (templateVar && !(templateVar instanceof Array)) { //TODO: need ot handle varible that's an array
+        if (expression.operands.length > 1) {
+          console.error("too many variable names specified");
+        }
+
+        let templateVar: Object = this.templateData.variables[<string>expression.operands[0]];
+        if (templateVar) {
+          for (let property of expression.properties) {
+            templateVar = templateVar[property];
+          }
           let ep = new ExpressionParser();
-          let exp = ep.parse(this.templateData.variables[<string>expression.operands[0]]);
+          let exp = ep.parse(<string>templateVar);
           ret += this.resolveExpression(exp);
         }
       } else if (expression.operator === 'parameters') {

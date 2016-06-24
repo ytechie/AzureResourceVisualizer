@@ -16,7 +16,7 @@ module ArmViz {
     hideChrome = false;
 
     /** @ngInject */
-    constructor($scope, $stateParams, $http, $window, $modal) {
+    constructor($scope, $stateParams, $http, $window, $modal, growl: angular.growl.IGrowlService) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
@@ -81,6 +81,11 @@ module ArmViz {
           $scope.$apply();
         }
       };
+
+      let feedbackNotify = `
+        <a href="http://www.instant.ly/s/DDMwi/" ng-click="" target="_blank">Survey</a>
+      `;
+      growl.info(feedbackNotify, { title: "Hello!", ttl: 10000 });
     }
 
     downloadArmTemplate() {

@@ -7,6 +7,7 @@ module ArmViz {
     private $modal: any;
     private $http: any; //ng.IHttpProvider causes errors
     private $window: any;
+    private $cookies: any;
     private template: ArmTemplate;
     private graph: Graph;
     private loadUrl: string; //Url from the address bar
@@ -16,11 +17,12 @@ module ArmViz {
     hideChrome = false;
 
     /** @ngInject */
-    constructor($scope, $stateParams, $http, $window, $modal, growl: angular.growl.IGrowlService) {
+    constructor($scope, $stateParams, $http, $window, $modal, $cookies, growl: angular.growl.IGrowlService) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
       this.$window = $window;
+      this.$cookies = $cookies;
 
       var toolboxItems = getToolboxItems();
       this.toolboxItems = toolboxItems;
@@ -82,10 +84,14 @@ module ArmViz {
         }
       };
 
-      let feedbackNotify = `
-        <a href="http://www.instant.ly/s/DDMwi/" ng-click="" target="_blank">Survey</a>
-      `;
-      growl.info(feedbackNotify, { title: "Hello!", ttl: 10000 });
+      let feedbackCookie = this.$cookies.get('feedback');
+      if (!feedbackCookie) {
+        this.$cookies.put('feedback', true);
+        let feedbackNotify = `
+          Do you like this tool? Help us improve ArmViz by taking our 2 minutes
+          <a href="http://www.instant.ly/s/DDMwi/" target="_blank">survey</a>`;
+        growl.info(feedbackNotify, { ttl: 15000, disableCountDown: true });
+      }
     }
 
     downloadArmTemplate() {

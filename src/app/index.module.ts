@@ -12,6 +12,7 @@ module ArmViz.Module {
     'ngTouch',
     'ngSanitize',
     'ngResource',
+    'ngCookies',
     'ui.router',
     'ui.bootstrap',
     'ui.ace',

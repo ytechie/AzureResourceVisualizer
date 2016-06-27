@@ -3,6 +3,7 @@
   "globalDependencies": {
     "ace": "registry:dt/ace#0.0.0+20160317120654",
     "angular": "registry:dt/angular#1.5.0+20160613151008",
+    "angular-growl-v2": "registry:dt/angular-growl-v2#0.7.5+20160317120654",
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
     "backbone": "registry:dt/backbone#1.0.0+20160316155526",
     "backbone-global": "registry:dt/backbone-global#1.0.0+20160509145756",

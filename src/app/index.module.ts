@@ -6,7 +6,18 @@
 /// <reference path="openExistingTemplateDialog/OpenDialog.controller.ts" />
 
 module ArmViz.Module {
-  var module = angular.module('ArmViz', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'ui.ace']);
+  var module = angular.module('ArmViz', [
+    'ngAnimate',
+    'ngCookies',
+    'ngTouch',
+    'ngSanitize',
+    'ngResource',
+    'ngCookies',
+    'ui.router',
+    'ui.bootstrap',
+    'ui.ace',
+    'angular-growl'
+  ]);
 
   export function start() {
     module

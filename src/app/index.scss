@@ -12,6 +12,16 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 // bower:scss
 // endbower
 
+.growl-container.growl-fixed.top-right {
+  top: 60px;
+  right: 20px;
+}
+
+.growl-title {
+  font-weight: bold;
+  padding-bottom: 6px;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

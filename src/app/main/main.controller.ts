@@ -7,6 +7,9 @@ module ArmViz {
     private $modal: any;
     private $http: any; //ng.IHttpProvider causes errors
     private $window: any;
+    private $cookies: any;
+    private $timeout: any;
+    private growl: angular.growl.IGrowlService;
     private template: ArmTemplate;
     private graph: Graph;
     private loadUrl: string; //Url from the address bar
@@ -16,11 +19,14 @@ module ArmViz {
     hideChrome = false;
 
     /** @ngInject */
-    constructor($scope, $stateParams, $http, $window, $modal) {
+    constructor($scope, $stateParams, $http, $window, $modal, $cookies, $timeout, growl: angular.growl.IGrowlService) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
       this.$window = $window;
+      this.$cookies = $cookies;
+      this.$timeout = $timeout;
+      this.growl = growl;
 
       var toolboxItems = getToolboxItems();
       this.toolboxItems = toolboxItems;
@@ -81,6 +87,8 @@ module ArmViz {
           $scope.$apply();
         }
       };
+
+      this.showFeedbackPopup();
     }
 
     downloadArmTemplate() {
@@ -212,6 +220,28 @@ module ArmViz {
       //Uses this file saver: https://github.com/Teleborder/FileSaver.js
       var blob = new Blob([json], { type: "text/plain;charset=utf-8" });
       (<any>window).saveAs(blob, fileName);
+    }
+
+    private showFeedbackPopup() {
+      let userCount = this.$cookies.get('userCount');
+
+      if (!userCount) {
+        this.$cookies.put('userCount', 1);
+      } else {
+        if (userCount < 3) {
+          userCount++;
+          this.$cookies.put('userCount', userCount);
+        }
+
+        if (userCount === 2) {
+          this.$timeout(() => {
+            let feedbackNotify = `
+              Do you like this tool? Help us improve ArmViz by taking our 2 minutes
+              <a href="http://www.instant.ly/s/DDMwi/" target="_blank">survey</a>`;
+            this.growl.info(feedbackNotify);
+          }, 10000);
+        }
+      }
     }
   }
 

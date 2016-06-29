@@ -84,7 +84,8 @@ module ArmViz {
         'font-size': 10,
         'fill': 'black',
         'stroke-width': 0,
-        'text': name
+        'text': name,
+        'id': 'shape-name-' + this.cid
       };
 
       this.attributes.attrs['.shape.tooltip'] = {
@@ -92,4 +93,28 @@ module ArmViz {
       };
     }
   }
+
+  export class ResourceShapeView extends joint.dia.ElementView {
+    constructor(options?: any) {
+      super(options);
+    }
+
+    render(): Backbone.View<joint.dia.Cell> {
+      super.render();
+
+      let $text: any = $('#shape-name-' + this.model.cid)[0];
+      console.log($text.getBBox().width);
+
+      return this;
+    }
+  }
+
+  class Expression {
+    operand: Expression[];
+
+    execute() {
+      return null;
+    }
+  }
+
 }

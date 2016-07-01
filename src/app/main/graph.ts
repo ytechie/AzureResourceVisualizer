@@ -26,6 +26,8 @@ module ArmViz {
 
       this.createNodes();
       this.createLinks();
+      this.displayNodesAndLinks();
+      this.graph.clear();
       this.autoSetShapePositions();
       this.displayNodesAndLinks();
 
@@ -58,7 +60,14 @@ module ArmViz {
 
     private initJointJs() {
       this.graph = new joint.dia.Graph();
-      this.paper = new joint.dia.Paper(<any>{ el: $('#paper'), gridSize: 1, model: this.graph, height: '100%', width: '100%' });
+      this.paper = new joint.dia.Paper(<any>{
+        el: $('#paper'),
+        gridSize: 1,
+        model: this.graph,
+        height: '100%',
+        width: '100%',
+        elementView: ResourceShapeView
+      });
     }
 
     private createNodes() {

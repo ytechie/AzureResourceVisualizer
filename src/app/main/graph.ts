@@ -26,6 +26,8 @@ module ArmViz {
 
       this.createNodes();
       this.createLinks();
+      this.displayNodesAndLinks();
+      this.graph.clear();
       this.autoSetShapePositions();
       this.displayNodesAndLinks();
 
